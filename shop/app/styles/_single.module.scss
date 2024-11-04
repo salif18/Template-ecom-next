@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: center;
     padding: 16px;
+
     .row1 {
         display: flex;
         align-items: start;
@@ -25,24 +26,26 @@
             }
 
             .galleries {
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                gap: 16px;
+                ul {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    gap: 16px;
 
-                span {
-                    width: 80px;
-                    height: 80px;
-                    background-color: #ffff;
-                    border-radius: 10px;
-                    transition: all 0.3s ease-in-out;
+                    img {
+                        width: 80px;
+                        height: 80px;
+                        background-color: #ffff;
+                        border-radius: 10px;
+                        transition: all 0.3s ease-in-out;
 
-                    &:hover {
-                        border: 1px solid #151822;
-                        cursor: pointer;
-                        transform: scale(1.08);
+                        &:hover {
+                            border: 1px solid #151822;
+                            cursor: pointer;
+                            transform: scale(1.08);
+                        }
                     }
                 }
 
@@ -50,22 +53,24 @@
 
 
             .colory {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                gap: 16px;
 
-                span {
-                    width: 80px;
-                    height: 80px;
-                   
-                    background-color: #ffff;
-                    transition: all 0.3s ease-in-out;
+                ul {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
 
-                    &:hover {
-                        border: 1px solid #7b8ed8;
-                        cursor: pointer;
-                        transform: scale(1.08);
+                    .colorSwatch {
+                        width: 80px;
+                        height: 80px;
+                        border-radius: 10px;
+                        transition: all 0.3s ease-in-out;
+
+                        &:hover {
+                            border: 1px solid #151822;
+                            cursor: pointer;
+                            transform: scale(1.08);
+                        }
                     }
                 }
             }
@@ -104,7 +109,55 @@
                 line-height: 2em;
             }
 
-            .rating{
+            .selectedOptions {
+                width: 100%;
+
+                .options {
+                    width: 100%;
+                    margin: 20px 0;
+
+                    label {
+                        font-size: 1em;
+                        font-family: "Montserrat";
+                        margin-right: 20px;
+                    }
+
+                    .colorContainer {
+                        display: flex;
+                        gap: 8px;
+                        flex-wrap: wrap;
+                        margin: 20px 0;
+                    }
+
+                    .colorSwatch {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        cursor: pointer;
+                        transition: transform 0.3s ease;
+                        position: relative;
+                    }
+
+                    .colorSwatch:hover {
+                        transform: scale(1.1);
+                    }
+
+                    .selected {
+                        border: 2px solid #7b8ed8;
+                    }
+
+                    .checkmark {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        color: white;
+                        font-size: 18px;
+                    }
+                }
+            }
+
+            .rating {
                 font-size: 2em;
             }
 
@@ -132,6 +185,7 @@
     .row2 {
         width: 100%;
         padding: 5%;
+
         nav {
             display: flex;
             align-items: center;
@@ -165,43 +219,78 @@
                 // width: 100%;
                 display: flex;
                 flex-direction: column;
-                .formCommenter{
+
+                .formCommenter {
                     padding: 20px;
                     border: 1px solid #d4d4d4;
                     display: flex;
                     flex-direction: column;
                     gap: 16px;
-                    h1{
+
+                    h1 {
                         font-size: 1.4em;
                         font-family: "Montserrat";
                         color: #3d3d3d;
                     }
-                    p{
+
+                    p {
                         font-size: 1.2em;
                         font-family: "Montserrat";
                         color: #3d3d3d;
                     }
 
-                    h2{
+                    h2 {
                         font-size: 1.1em;
-                         font-family: "Montserrat";
-                         color: #3d3d3d;
+                        font-family: "Montserrat";
+                        color: #3d3d3d;
                     }
 
-                    input{
+                    .ratingSection {
+                        display: flex;
+                        flex-direction: column;
+
+                        margin-bottom: 16px;
+
+                        .stars {
+                            display: flex;
+                            gap: 8px;
+                            font-size: 2rem;
+                            cursor: pointer;
+                        }
+
+                        .star {
+                            color: #ccc;
+                            transition: color 0.2s ease-in-out;
+                        }
+
+                        .star.active {
+                            color: orangered;
+                        }
+
+                        .ratingMessage {
+                            margin-top: 8px;
+                            font-size: 1rem;
+                            color: #555;
+                        }
+                    }
+
+
+
+                    input {
                         padding: 10px;
                         border: 1px solid #d4d4d4;
                         outline: none;
                         height: 50px;
                     }
 
-                    textarea{
+                    textarea {
                         padding: 10px;
                         border: 1px solid #d4d4d4;
                         outline: none;
                         height: 100px;
                     }
-                    .btnCommenter{
+
+                    .btnCommenter {
                         margin: 2% 0;
                         border: none;
                         width: 25%;
@@ -214,20 +303,22 @@
                         cursor: pointer;
                     }
                 }
-              
+
             }
 
         }
     }
-    .row3{
+
+    .row3 {
         width: 100%;
         padding: 5%;
-        h2{
+
+        h2 {
             font-size: 1.5em;
             font-family: "Montserrat";
         }
 
-        .productList{
+        .productList {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -235,15 +326,17 @@
         }
 
     }
-    .row4{
+
+    .row4 {
         width: 100%;
         padding: 5%;
-        h2{
+
+        h2 {
             font-size: 1.5em;
             font-family: "Montserrat";
         }
 
-        .productList{
+        .productList {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -254,62 +347,69 @@
 }
 
 @media (max-width:768px) {
-    .singlePage{
+    .singlePage {
         width: 100%;
-        .row1{
+
+        .row1 {
             width: 100%;
             flex-direction: column;
             align-items: center;
-            .left{
+
+            .left {
                 width: 100%;
                 flex-direction: column;
-                .galleries,
-                .colory{
+
+                .galleries ul,
+                .colory ul {
                     align-items: center;
                     justify-content: center;
                     width: 100%;
                     flex-direction: row;
                 }
 
-                img{
+                img {
                     width: 100%;
                     height: 40vh;
                 }
             }
-            .right{
+
+            .right {
                 width: 100%;
-                p{
+
+                p {
                     width: 100%;
                 }
-                .btnContainer{
-                    .btnAdd{
-                    width: 100%;
+
+                .btnContainer {
+                    .btnAdd {
+                        width: 100%;
+                    }
                 }
-                }
-                
+
             }
         }
-        .row2{
-            .drops{
 
-                .dropdowncontent{
-                    .formCommenter{
-                        .btnCommenter{
+        .row2 {
+            .drops {
+
+                .dropdowncontent {
+                    .formCommenter {
+                        .btnCommenter {
                             width: 100%;
                         }
                     }
                 }
-            
+
             }
         }
 
         .row3,
-        .row4{
-            .productList{
+        .row4 {
+            .productList {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-        
+
     }
 }

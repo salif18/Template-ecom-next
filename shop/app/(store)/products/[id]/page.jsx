@@ -4,7 +4,6 @@ import LayoutPage from '@/app/layouts/Layout'
 import { useParams } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import styles from "../../../styles/_single.module.scss"
-import Image from 'next/image'
 import data from "../../../lib/fakedata"
 import GeneredStarRating from '@/app/utils/generatedStars'
 import ProductCard from '@/app/components/ProductCard'
@@ -12,12 +11,26 @@ import ProductCard from '@/app/components/ProductCard'
 const SingleProduct = () => {
     const { id } = useParams()
 
-    const product = data.find(item => item.id == id)
 
+    const product = data.find(item => item.id == id);
+    const productGallery = product.gallery ? product.gallery : [];
+    const otherColors = product.otherColors ? product.otherColors : []
     const recommandations = data.filter(item => item.name.includes(product.name))
     const relatedCategory = data.filter(item => item.category.includes(product.category))
 
-    // États pour les menus
+    const [mainImage, setMainImage] = useState(product.img);
+
+    // Fonction pour changer l'image principale
+    const changeImage = (imgSrc) => {
+        setMainImage(imgSrc);
+    };
+
+    // Etat de choix de size et color
+    const [selectedColor, setSelectedColor] = useState('');
+    const [selectedSize, setSelectedSize] = useState('');
+
+
+    // États pour les menudrop cacher
     const [isCommentsOpen, setIsCommentsOpen] = useState(false);
     const [isReviewsOpen, setIsReviewsOpen] = useState(false);
 
@@ -35,6 +48,25 @@ const SingleProduct = () => {
         setIsCommentsOpen(false); // Ferme le menu Commentaires si ouvert
     };
 
+    // etat pour la notation
+    const [rating, setRating] = useState(0);
+    const [hoveredRating, setHoveredRating] = useState(0);
+
+    // quand le souris survol
+    const handleMouseEnter = (value) => {
+        setHoveredRating(value);
+    };
+
+    const handleMouseLeave = () => {
+        setHoveredRating(0);
+    };
+
+    // quand on clik
+    const handleClick = (value) => {
+        setRating(value);
+    };
+
+
 
     return (
         <LayoutPage>
@@ -43,19 +75,30 @@ const SingleProduct = () => {
                     <div className={styles.left}>
 
                         <div className={styles.galleries}>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                            <ul>
+                                {
+                                    productGallery.map(photo =>
+                                        <li key={photo}>
+                                            <img src={photo} onClick={() => changeImage(photo)} />
+                                        </li>
+                                    )
+                                }</ul>
                         </div>
-                        <img src={product.img} alt='' />
+
+                        <img src={mainImage} alt='' />
 
                         <div className={styles.colory}>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                            <ul>
+                                {otherColors.map(other => (
+                                    <li key={other.color}>
+                                        <div
+                                            style={{ backgroundColor: other.color }}
+                                            onClick={() => changeImage(other.image)}
+                                            className={styles.colorSwatch}
+                                        ></div>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
                     <div className={styles.right}>
@@ -63,7 +106,66 @@ const SingleProduct = () => {
                         <h1>{product.name}</h1>
                         <h2>{product.price} fcfa</h2>
                         <p>{product.description}</p>
-                        <div></div>
+
+                        <div className={styles.selectedOptions}>
+                            {/* Options de couleur */}
+                            {product.otherColors.length > 0 && (
+                                <div className={styles.options}>
+                                    <label>Couleur </label>
+                                    <div className={styles.colorContainer}>
+                                        {otherColors.map((element, index) => (
+                                            <div
+                                                key={index}
+                                                className={`${styles.colorSwatch} ${selectedColor === element.color ? styles.selected : ''
+                                                    }`}
+                                                style={{ backgroundColor: element.color }}
+                                                onClick={() => setSelectedColor(element.color)}
+                                            >
+                                                {/* Optionnel : Ajoutez un indicateur pour la couleur sélectionnée */}
+                                                {selectedColor === element.color && <span className={styles.checkmark}>✔</span>}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                            {/* Options de taille */}
+                            <div className={styles.options}>
+                                {product.category === "Vetements" && (
+                                    <>
+                                        <label htmlFor="vetement-size">Taille</label>
+                                        <select
+                                            id="vetement-size"
+                                            value={selectedSize}
+                                            onChange={(e) => setSelectedSize(e.target.value)}
+                                        >
+                                            {product.sizes.map((size, index) => (
+                                                <option key={index} value={size}>
+                                                    {size}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </>
+                                )}
+
+                                {product.category === "Chaussures" && (
+                                    <>
+                                        <label htmlFor="chaussure-size">Pointure</label>
+                                        <select
+                                            id="chaussure-size"
+                                            value={selectedSize}
+                                            onChange={(e) => setSelectedSize(e.target.value)}
+                                        >
+                                            {product.sizes.map((size, index) => (
+                                                <option key={index} value={size}>
+                                                    {size}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+
                         <div className={styles.btnContainer}>
                             <button className={styles.btnAdd}>Ajouter au panier</button>
                         </div>
@@ -87,7 +189,26 @@ const SingleProduct = () => {
                                     <h1>Soyez le premier à laisser votre avis </h1>
                                     <p>Votre adresse e-mail ne sera pas publiée. Les champs obligatoires sont marqués d’un *</p>
 
-                                    <h2>Votre évaluation *</h2>
+                                    <section className={styles.ratingSection}>
+                                        <h2>Votre évaluation *</h2>
+                                        <section className={styles.stars} id="stars">
+                                            {[1, 2, 3, 4, 5].map((value) => (
+                                                <span
+                                                    key={value}
+                                                    className={`${styles.star} ${value <= (hoveredRating || rating) ? styles.active : ''}`}
+                                                    data-value={value}
+                                                    onMouseEnter={() => handleMouseEnter(value)}
+                                                    onMouseLeave={handleMouseLeave}
+                                                    onClick={() => handleClick(value)}
+                                                >
+                                                    ★
+                                                </span>
+                                            ))}
+                                        </section>
+                                        <span className={styles.ratingMessage}>
+                                            {rating > 0 ? `Vous avez donné une note de ${rating} étoile(s).` : 'Sélectionnez une note.'}
+                                        </span>
+                                    </section>
                                     <h2>Votre nom*</h2>
                                     <input type='text' placeholder='Nom' />
                                     <h2>Votre avis *</h2>
