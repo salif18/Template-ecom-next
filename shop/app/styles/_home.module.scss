@@ -6,7 +6,6 @@
     align-items: center;
     width: 100%;
     justify-content: center;
-    padding: 16px;
 
     .banner1 {
         position: relative;
@@ -57,6 +56,7 @@
                 display: flex;
                 align-items: center;
                 gap: 15px;
+                z-index: 11;
 
                 .btnBuy {
                     width: 250px;
@@ -68,6 +68,11 @@
                     text-transform: uppercase;
                     padding: 10px;
                     cursor: pointer;
+                    transition: all 0.3s ease-in-out;
+                    &:hover{
+                        background: #222222;
+                        color: #fff;
+                    }
 
                 }
 
@@ -81,6 +86,12 @@
                     font-family: "Montserrat";
                     padding: 10px;
                     cursor: pointer;
+                    color: #fff;
+                    transition: all 0.3s ease-in-out;
+                    &:hover{
+                        background: #fff;
+                        color: #222222;
+                    }
                 }
             }
         }

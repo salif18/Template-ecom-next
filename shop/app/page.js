@@ -16,13 +16,23 @@ export default function Home() {
         <section className={styles.banner1}>
           <div className={styles.backColor}></div>
           <div className={styles.left}>
-            <h2>Offres de pluie pour un été chaud !</h2>
+            <h2>Spécial offre de la semaine !</h2>
             <p>25% de réduction sur tous les produits</p>
             <section className={styles.btnOptions}>
               <button className={styles.btnBuy}>Achetez maintenant</button>
               <button className={styles.btnMore}>En savoir plus</button>
             </section>
           </div>
+        </section>
+        <section className={styles.newArrival}>
+          <h2 className={styles.title}>Nos catégories</h2>
+          <ul className={styles.productList}>
+            {
+              data.slice(0, 5).map((product) =>
+                <li key={product.id}><ProductCard product={product} /></li>
+              )
+            }
+          </ul>
         </section>
         <section className={styles.newArrival}>
           <h2 className={styles.title}>Les nouveaux arrivages</h2>
@@ -55,7 +65,7 @@ export default function Home() {
           </ul>
         </section>
         <section className={styles.newArrival}>
-          <h2 className={styles.title}>Nos catégories de marques vendues</h2>
+          <h2 className={styles.title}>Nos marques vendues</h2>
           <ul className={styles.productList}>
             {
               marques.map((product) =>
