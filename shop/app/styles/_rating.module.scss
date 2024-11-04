@@ -1,0 +1,12 @@
+.rating {
+    display: inline-flex;
+  }
+  .star {
+    font-size: 1.3rem;
+    color: lightgray;
+  }
+  .star.filled {
+    color: orangered;
+  }
+
+  

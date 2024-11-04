@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Roboto:wght@100;300;700&family=PT+Sans+Caption&family=Montserrat:wght@300;400&display=swap');
+
+:root {
+  --backgroundPrimary: #f0f1f5; /* Couleur de fond principale */
+  --backgroundSecondary: #f5f7f9; /* Couleur de fond secondaire */
+  --backgroundTertiary:#ffffff;
+  --bacgroundCard:#BFD1FF;
+  --btnPrimary: #6EC1E4; /* Couleur principale pour les boutons */
+  --btnSecondary: #222222; /* Couleur secondaire pour les boutons */
+  --banerColorPrimary:#0084d6;
+  --banerColorSecondary:#0075be;
+  --textColorPrimary:#ffffff;
+  --textColorSecondary:#121212;
+  --textColorTertiary:#5e5e5e;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+  background: var(--backgroundPrimary); /* Utilisation de la variable définie */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  font-size: 0.9em;
+}
+
+h1 {
+  font-size: 2em;
+  color: inherit;
+}
+
+h2 {
+  font-size: 1.5em;
+   color: inherit;
+}
+
+p {
+  font-size: 1em;
+}
+
+
+@media (max-width: 768px) {
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  h2 {
+    font-size: 1em;
+  }
+
+  p {
+    font-size: 1em;
+  }
+}

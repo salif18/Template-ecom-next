@@ -1,0 +1,132 @@
+.header {
+    position: sticky;
+    width: 100%;
+    height: 15vh;
+    background-color: var(--backgroundTertiary);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    // logo
+    .logo {
+        display: flex;
+        align-items: center;
+
+        h1 {
+            font-family: "Montserrat";
+            font-style: oblique;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: var(--textColorSecondary);
+        }
+    }
+
+    .headerLeft {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .icon {
+            font-size: 2em;
+            color: var(--textColorSecondary);
+            cursor: pointer;
+        }
+
+        // navbar
+        .nav {
+            display: flex;
+
+            ul {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+
+                a {
+                    // position: relative;
+                    font-family: "Roboto";
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    color: var(--textColorSecondary);
+                    padding: 8px;
+
+                }
+
+
+                .menuClose {
+                    font-size: 2em;
+                    margin: 16px;
+                    display: none;
+                    color: var(--textColorPrimary);
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    // menu
+    .menuToggle {
+        font-size: 2em;
+        margin: 16px;
+        display: none;
+        color: var(--textColorSecondary);
+        cursor: pointer;
+    }
+}
+
+// Responsive Styles
+// Responsive Styles
+@media (max-width: 920px) {
+    .header {
+        .menuToggle {
+            display: block; // Affiche l'icône du menu hamburger
+        }
+
+        .logo h1 {
+            font-size: 1.2em; // Réduire la taille pour s'adapter à l'écran
+        }
+
+        .headerLeft {
+            .nav {
+                display: none; // Cache la liste au départ
+            }
+
+            // Styles pour le menu déroulant responsive
+            .nav.menuOpen {
+                display: flex; // Affiche le menu
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 80%;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(10px);
+                z-index: 1000;
+
+                ul {
+                    width: 100%;
+                    display: flex; // Force l'affichage de la liste
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                    gap: 10px;
+                    padding: 20px; // Ajout d'un padding pour un espacement intérieur
+
+                    a {
+                        font-family: "Roboto";
+                        text-transform: uppercase;
+                        color: #ffffff;
+                        padding: 10px 0;
+                        font-size: 0.8em;
+                    }
+
+                    .menuClose {
+                        display: block;
+                        align-self: flex-end;
+                    }
+                }
+            }
+        }
+    }
+}

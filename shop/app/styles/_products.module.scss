@@ -1,0 +1,315 @@
+ // navbar
+ .nav {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 20px;
+     height: 5vh;
+     background: #222222;
+     border-top: 1px solid #222222;
+
+     ul {
+         display: flex;
+         align-items: center;
+         //  gap: 16px;
+
+         a {
+             // position: relative;
+             height: 100%;
+             width: 100%;
+             font-family: "Roboto";
+             font-weight: 600;
+             text-transform: uppercase;
+             color: var(--textColorPrimary);
+             padding: 8px;
+         }
+
+         li {
+             padding: 16px;
+         }
+
+
+
+         li:hover .menuDropdown {
+             display: flex;
+         }
+
+         .menuDropdown {
+             position: absolute;
+             top: 20%;
+             width: 100%;
+             left: 0;
+             display: none;
+             flex-direction: column;
+             align-items: flex-start;
+             justify-content: flex-start;
+             background-color: #000000c7;
+             backdrop-filter: blur(5px);
+            //  border: 1px solid #f9f9f9;
+             padding: 10px;
+             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+             z-index: 1000;
+             /* Assurez-vous qu'il est au-dessus des autres éléments */
+             height: auto;
+
+             /* Pour que la hauteur s'ajuste au contenu */
+             a {
+                 width: 100%;
+                 color: #ffffff;
+                 font-weight: 600;
+                 text-transform: capitalize;
+
+                 &:hover {
+                     background-color: #f0f1f5;
+                     color: #222222;
+                 }
+             }
+         }
+
+     }
+ }
+
+ .container {
+     display: flex;
+     align-items: flex-start;
+     gap: 40px;
+     width: 100%;
+     background: var(--backgroundSecondary);
+     padding: 20px;
+     .actionFilter {
+         display: flex;
+         align-items: center;
+
+         span {
+             font-size: 1em;
+             font-family: "Roboto";
+             display: none;
+         }
+
+         // menu
+         .menuToggle {
+             font-size: 2em;
+             margin: 16px;
+             display: none;
+             color: #222222;
+             cursor: pointer;
+         }
+     }
+
+     // ASIDE
+     .aside {
+         flex: 1;
+         padding: 16px;
+         //  box-shadow: 5px 5px 5px #f0f1f567;
+
+         form {
+             display: flex;
+             align-items: center;
+             margin: 10px;
+             width: 100%;
+
+             label {
+                 width: 100%;
+                 position: relative;
+                 display: flex;
+                 align-items: center;
+                 gap: 20px;
+                 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+                 .icon {
+                     position: absolute;
+                     top: 8px;
+                     right: 5px;
+                 }
+
+             }
+
+             input {
+                 width: 100%;
+                 padding: 10px;
+                 background: #ffffff;
+                 border: 1px solid #f0f1f5;
+                 outline: none;
+             }
+
+             .menuClose {
+                 font-size: 1.5em;
+                 margin: 16px;
+                 display: none;
+                 color: #121212;
+                 cursor: pointer;
+             }
+
+         }
+
+         .asideMenu {
+             padding: 10px;
+             display: block;
+             align-items: center;
+             justify-content: flex-start;
+
+             h3 {
+                 width: 100%;
+                 font-family: "Roboto";
+                 margin-bottom: 20px;
+             }
+
+             p {
+                 width: 100%;
+                 font-size: 1em;
+                 font-family: "Roboto";
+                 margin-bottom: 10px;
+             }
+
+             ul li {
+                 margin-bottom: 10px;
+                 font-size: 1em;
+                 font-family: "Roboto";
+                 font-weight: 500;
+             }
+
+             input {
+                 margin-bottom: 15px;
+             }
+         }
+     }
+
+     .main {
+         margin-top: 25px;
+          margin-bottom: 40px;
+         padding: 10px;
+         flex: 4;
+         display: flex;
+         flex-direction: column;
+         width: 100%;
+         background: var(--backgroundTertiary);
+         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+
+         h1 {
+             margin: 8% 8% 2%;
+             font-family: "Montserrat";
+             font-size: 1em;
+         }
+
+         .productContainer {
+             width: 100%;
+             margin: 0 5%;
+
+             .productList {
+                 width: 100%;
+                 display: flex;
+                 gap: 5px;
+                 flex-wrap: wrap;
+
+             }
+
+         }
+     }
+ }
+
+ @media (max-width:768px) {
+
+     // nav
+     .nav {
+         overflow-x: scroll;
+         scrollbar-width: none;
+         /* Firefox */
+         padding: 20px;
+
+         ul {
+             gap: 1px;
+
+             li {
+                 padding: 0;
+             }
+
+             a {
+                 font-size: 0.8em;
+             }
+
+             .menuDropdown {
+                 position: absolute;
+                 left: 0;
+                 width: 100%;
+             }
+         }
+     }
+
+     // container
+     .container {
+         flex-direction: column;
+         height: auto;
+
+         .actionFilter {
+                background-color: #ffffff;
+                width: 100%;
+             span {
+
+                 display: flex;
+             }
+
+             .menuToggle {
+                 display: block; // Affiche l'icône du menu hamburger
+             }
+         }
+
+
+         .aside {
+             display: none;
+
+             form {
+                 .menuClose {
+                     display: block;
+                     align-self: flex-end;
+                 }
+             }
+         }
+
+         .aside.open {
+             display: block; // Affiche le menu
+             position: absolute;
+             top: 0;
+             left: 0;
+             width: 80%;
+             height: 100vh;
+             background: #ffff;
+             backdrop-filter: blur(10px);
+             z-index: 1;
+
+             .asideMenu {
+
+                 h3 {
+                     width: 100%;
+                     font-size: 1em;
+                 }
+
+                 p {
+
+                     font-size: 1em;
+
+                 }
+
+                 ul li {
+
+                     font-size: 0.8em;
+
+                 }
+
+             }
+         }
+
+         .main {
+             width: 100%;
+
+             .productContainer {
+                 width: 100%;
+                 margin: 0;
+
+                 .productList {
+                     display: grid;
+                     grid-template-columns: repeat(2, 1fr);
+
+                 }
+             }
+         }
+     }
+ }

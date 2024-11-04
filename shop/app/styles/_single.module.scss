@@ -1,0 +1,275 @@
+.singlePage {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    .row1 {
+        display: flex;
+        align-items: start;
+        justify-content: center;
+        gap: 16px;
+
+        .left {
+            display: flex;
+            align-items: flex-start;
+            width: 50%;
+            margin: 16px;
+            padding: 10px;
+            gap: 20px;
+
+            img {
+                width: 30vw;
+                height: 70vh;
+            }
+
+            .galleries {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 16px;
+
+                span {
+                    width: 80px;
+                    height: 80px;
+                    background-color: #ffff;
+                    border-radius: 10px;
+                    transition: all 0.3s ease-in-out;
+
+                    &:hover {
+                        border: 1px solid #151822;
+                        cursor: pointer;
+                        transform: scale(1.08);
+                    }
+                }
+
+            }
+
+
+            .colory {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+
+                span {
+                    width: 80px;
+                    height: 80px;
+                   
+                    background-color: #ffff;
+                    transition: all 0.3s ease-in-out;
+
+                    &:hover {
+                        border: 1px solid #7b8ed8;
+                        cursor: pointer;
+                        transform: scale(1.08);
+                    }
+                }
+            }
+        }
+
+        .right {
+            width: 100%;
+            margin: 16px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+
+            span {
+                font-size: 1em;
+                font-family: "Roboto";
+
+            }
+
+            h1 {
+                font-size: 2em;
+                font-family: "Montserrat";
+                font-weight: 600;
+            }
+
+            h2 {
+                font-family: "Montserrat";
+                font-size: 1.4em;
+            }
+
+            p {
+                width: 70%;
+                font-size: 1.1em;
+                font-family: "Montserrat";
+                line-height: 2em;
+            }
+
+            .rating{
+                font-size: 2em;
+            }
+
+            .btnContainer {
+                width: 100%;
+                border-bottom: 1px solid #d4d4d4;
+                padding-bottom: 15px;
+
+                .btnAdd {
+                    width: 40%;
+                    padding: 10px;
+                    border: none;
+                    font-size: 1.1em;
+                    text-transform: uppercase;
+                    color: #ffff;
+                    background-color: var(--btnPrimary);
+                    cursor: pointer;
+                }
+            }
+
+
+        }
+    }
+
+    .row2 {
+        width: 100%;
+        padding: 5%;
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+            border-top: 1px solid #d4d4d4;
+
+            h2 {
+                padding: 10px;
+                color: #222222;
+                cursor: pointer;
+                font-size: 1em;
+                font-family: "Montserrat";
+            }
+
+        }
+
+        .drops {
+            width: 100%;
+            display: flex;
+            align-items: center;
+
+            .dropdown {
+                width: 100%;
+                position: relative;
+                display: inline-block;
+            }
+
+
+            .dropdowncontent {
+                // width: 100%;
+                display: flex;
+                flex-direction: column;
+                .formCommenter{
+                    padding: 20px;
+                    border: 1px solid #d4d4d4;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                    h1{
+                        font-size: 1.4em;
+                        font-family: "Montserrat";
+                        color: #3d3d3d;
+                    }
+                    p{
+                        font-size: 1.2em;
+                        font-family: "Montserrat";
+                        color: #3d3d3d;
+                    }
+
+                    h2{
+                        font-size: 1.1em;
+                         font-family: "Montserrat";
+                         color: #3d3d3d;
+                    }
+
+                    input{
+                        padding: 10px;
+                        border: 1px solid #d4d4d4;
+                        outline: none;
+                        height: 50px;
+                    }
+
+                    textarea{
+                        padding: 10px;
+                        border: 1px solid #d4d4d4;
+                        outline: none;
+                        height: 100px;
+                    }
+                    .btnCommenter{
+                        margin: 2% 0;
+                        border: none;
+                        width: 25%;
+                        background: var(--banerColorPrimary);
+                        font-family: "Roboto";
+                        text-transform: uppercase;
+                        padding: 10px;
+                        color: #ffff;
+                        font-weight: 600;
+                        cursor: pointer;
+                    }
+                }
+              
+            }
+
+        }
+    }
+}
+
+@media (max-width:768px) {
+    .singlePage{
+        width: 100%;
+        .row1{
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            .left{
+                width: 100%;
+                flex-direction: column;
+                .galleries,
+                .colory{
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                    flex-direction: row;
+                }
+
+                img{
+                    width: 100%;
+                    height: 40vh;
+                }
+            }
+            .right{
+                width: 100%;
+                p{
+                    width: 100%;
+                }
+                .btnContainer{
+                    .btnAdd{
+                    width: 100%;
+                }
+                }
+                
+            }
+        }
+        .row2{
+            .drops{
+
+                .dropdowncontent{
+                    .formCommenter{
+                        .btnCommenter{
+                            width: 100%;
+                        }
+                    }
+                }
+            
+            }
+        }
+        
+    }
+}
