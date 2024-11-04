@@ -7,17 +7,20 @@ import styles from "../../../styles/_single.module.scss"
 import Image from 'next/image'
 import data from "../../../lib/fakedata"
 import GeneredStarRating from '@/app/utils/generatedStars'
+import ProductCard from '@/app/components/ProductCard'
 
 const SingleProduct = () => {
     const { id } = useParams()
 
     const product = data.find(item => item.id == id)
 
-   
+    const recommandations = data.filter(item => item.name.includes(product.name))
+    const relatedCategory = data.filter(item => item.category.includes(product.category))
+
     // États pour les menus
     const [isCommentsOpen, setIsCommentsOpen] = useState(false);
     const [isReviewsOpen, setIsReviewsOpen] = useState(false);
-    
+
     const commentsRef = useRef(null);
     const reviewsRef = useRef(null);
 
@@ -72,25 +75,25 @@ const SingleProduct = () => {
                 <div className={styles.row2}>
 
                     <nav>
-                    <h2 onClick={toggleCommentsMenu}>Commentaires</h2>
-                    <h2 onClick={toggleReviewsMenu}>Avis</h2>
+                        <h2 onClick={toggleCommentsMenu}>Commentaires</h2>
+                        <h2 onClick={toggleReviewsMenu}>Avis</h2>
                     </nav>
 
                     <div className={styles.drops}>
 
                         {isCommentsOpen && (
                             <div className={styles.dropdowncontent} ref={commentsRef}>
-                            <div className={styles.formCommenter}>
-                               <h1>Soyez le premier à laisser votre avis </h1>
-                                <p>Votre adresse e-mail ne sera pas publiée. Les champs obligatoires sont marqués d’un *</p>
+                                <div className={styles.formCommenter}>
+                                    <h1>Soyez le premier à laisser votre avis </h1>
+                                    <p>Votre adresse e-mail ne sera pas publiée. Les champs obligatoires sont marqués d’un *</p>
 
-                                <h2>Votre évaluation *</h2>
-                                <h2>Votre nom*</h2>
-                                <input type='text' placeholder='Nom' />
-                                <h2>Votre avis *</h2>
-                                <textarea type='text' placeholder='votre commentaaire'></textarea>
-                                <button className={styles.btnCommenter}>Commenter</button>
-                               </div>
+                                    <h2>Votre évaluation *</h2>
+                                    <h2>Votre nom*</h2>
+                                    <input type='text' placeholder='Nom' />
+                                    <h2>Votre avis *</h2>
+                                    <textarea type='text' placeholder='votre commentaaire'></textarea>
+                                    <button className={styles.btnCommenter}>Commenter</button>
+                                </div>
                             </div>
                         )}
 
@@ -101,14 +104,28 @@ const SingleProduct = () => {
                                 <a href="#">Avis 3</a>
                             </div>
                         )}
-                       
+
                     </div>
                 </div>
-                <div>
+                <div className={styles.row3}>
                     <h2>Autres recommandations du produit</h2>
+                    <ul className={styles.productList}>
+                        {
+                            recommandations.map((product) =>
+                                <li key={product.id}><ProductCard product={product} /></li>
+                            )
+                        }
+                    </ul>
                 </div>
-                <div>
+                <div className={styles.row4}>
                     <h2>Les produits liés à cette catégorie</h2>
+                    <ul className={styles.productList}>
+                        {
+                            relatedCategory.map((product) =>
+                                <li key={product.id}><ProductCard product={product} /></li>
+                            )
+                        }
+                    </ul>
                 </div>
             </main>
         </LayoutPage>

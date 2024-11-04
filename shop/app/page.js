@@ -25,7 +25,7 @@ export default function Home() {
           </div>
         </section>
         <section className={styles.newArrival}>
-          <h2>Les nouveaux arrivages</h2>
+          <h2 className={styles.title}>Les nouveaux arrivages</h2>
           <ul className={styles.productList}>
             {
               data.slice(0, 5).map((product) =>
@@ -35,7 +35,7 @@ export default function Home() {
           </ul>
         </section>
         <section className={styles.newArrival}>
-          <h2>Les plus populaires</h2>
+          <h2 className={styles.title}>Les plus populaires</h2>
           <ul className={styles.productList}>
             {
               data.slice(0, 5).map((product) =>
@@ -45,7 +45,7 @@ export default function Home() {
           </ul>
         </section>
         <section className={styles.newArrival}>
-          <h2>Nos meilleurs offres</h2>
+          <h2 className={styles.title}>Nos meilleurs offres</h2>
           <ul className={styles.productList}>
             {
               data.slice(0, 3).map((product) =>
@@ -55,7 +55,7 @@ export default function Home() {
           </ul>
         </section>
         <section className={styles.newArrival}>
-          <h2>Nos catégories de marques vendues</h2>
+          <h2 className={styles.title}>Nos catégories de marques vendues</h2>
           <ul className={styles.productList}>
             {
               marques.map((product) =>

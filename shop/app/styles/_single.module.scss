@@ -219,6 +219,38 @@
 
         }
     }
+    .row3{
+        width: 100%;
+        padding: 5%;
+        h2{
+            font-size: 1.5em;
+            font-family: "Montserrat";
+        }
+
+        .productList{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px;
+        }
+
+    }
+    .row4{
+        width: 100%;
+        padding: 5%;
+        h2{
+            font-size: 1.5em;
+            font-family: "Montserrat";
+        }
+
+        .productList{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px;
+        }
+
+    }
 }
 
 @media (max-width:768px) {
@@ -268,6 +300,14 @@
                     }
                 }
             
+            }
+        }
+
+        .row3,
+        .row4{
+            .productList{
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
             }
         }
         
