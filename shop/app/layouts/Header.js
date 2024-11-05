@@ -17,7 +17,7 @@ const Header = () => {
     return (
         <header className={styles.header}>
             <section className={styles.logo}>
-                <h1>Hadja-Store</h1>
+                <h1>Hadja-Fashion</h1>
             </section>
             <div className={styles.headerLeft}>
                 <nav className={`${styles.nav} ${isMenuOpen ? styles.menuOpen : ""}`}>
