@@ -8,6 +8,7 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ProductCard from '@/app/components/ProductCard';
 import data from "../../lib/fakedata";
+import Floatingbtn from '@/app/components/floatingbtn';
 
 const Boutique = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -200,6 +201,7 @@ const Boutique = () => {
            </ul>
           </section>
         </main>
+        <Floatingbtn/>
       </div>
     </LayoutPage>
   )

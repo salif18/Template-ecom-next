@@ -8,6 +8,7 @@ import globe from "./assets/images/globe-free-img.png";
 import lock from "./assets/images/lock-free-img.png"
 import quality from "./assets/images/quality-free-img.png"
 import tag from "./assets/images/tag-free-img.png"
+import Floatingbtn from "./components/floatingbtn";
 
 export default function Home() {
  
@@ -100,6 +101,7 @@ export default function Home() {
           </div>
         </section>
       </main>
+      <Floatingbtn/>
     </LayoutPage>
   );
 }

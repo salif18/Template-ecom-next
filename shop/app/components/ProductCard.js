@@ -24,7 +24,7 @@ const ProductCard = ({ product }) => {
         <p className={styles.categoName}>{product.category}</p>
         <p className={styles.subCategoName}>{product.sousCategory}</p>
         <h2 className={styles.price}>{product.price} FCFA</h2>
-        <GeneredStarRating rating={product.rating} />
+        {/* <GeneredStarRating rating={product.rating} /> */}
       </section>
     </article>
   )
