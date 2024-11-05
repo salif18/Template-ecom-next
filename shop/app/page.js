@@ -10,7 +10,7 @@ import quality from "./assets/images/quality-free-img.png"
 import tag from "./assets/images/tag-free-img.png"
 
 export default function Home() {
-  const urlImg ="https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/39/883838/1.jpg?0341";
+ 
   return (
     <LayoutPage>
       <main className={styles.page}>
@@ -71,9 +71,7 @@ export default function Home() {
             {
               marques.map((product) =>
                 <li key={product.id}>
-
                   <img className={styles.markImg} src={product.img} />
-
                 </li>
               )
             }

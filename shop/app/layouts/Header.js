@@ -25,7 +25,7 @@ const Header = () => {
                         <CloseOutlinedIcon className={styles.menuClose} onClick={handleView} />
                         <li><Link href="/">Home</Link></li>
                         <li><Link href="/products">Boutique</Link></li>
-                        <li><Link href="/a-propos">A propos</Link></li>
+                        <li><Link href="/about">A propos</Link></li>
                         <li><Link href="/contact">Nous contacter</Link></li>
                     </ul>
                 </nav>
