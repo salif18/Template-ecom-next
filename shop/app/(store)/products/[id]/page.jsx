@@ -111,7 +111,7 @@ const SingleProduct = () => {
                             {/* Options de couleur */}
                             {product.otherColors.length > 0 && (
                                 <div className={styles.options}>
-                                    <label>Couleur </label>
+                                    <label>Couleurs disponibles </label>
                                     <div className={styles.colorContainer}>
                                         {otherColors.map((element, index) => (
                                             <div
@@ -132,7 +132,7 @@ const SingleProduct = () => {
                             <div className={styles.options}>
                                 {product.category === "Vetements" && (
                                     <>
-                                        <label htmlFor="vetement-size">Taille</label>
+                                        <label htmlFor="vetement-size">Tailles disponibles</label>
                                         <select
                                             id="vetement-size"
                                             value={selectedSize}
