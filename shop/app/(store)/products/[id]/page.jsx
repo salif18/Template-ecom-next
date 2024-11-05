@@ -149,7 +149,7 @@ const SingleProduct = () => {
 
                                 {product.category === "Chaussures" && (
                                     <>
-                                        <label htmlFor="chaussure-size">Pointure</label>
+                                        <label htmlFor="chaussure-size">Pointures disponibles</label>
                                         <select
                                             id="chaussure-size"
                                             value={selectedSize}

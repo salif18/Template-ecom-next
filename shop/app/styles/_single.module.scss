@@ -29,6 +29,7 @@
                 ul {
                     width: 100%;
                     display: flex;
+                    flex-wrap: wrap;
                     align-items: center;
                     justify-content: center;
                     flex-direction: column;
@@ -57,15 +58,16 @@
                 ul {
                     width: 100%;
                     display: flex;
+                    flex-wrap: wrap;
                     flex-direction: column;
                     gap: 16px;
 
                     .colorSwatch {
-                        width: 70px;
-                        height: 70px;
-                        border-radius: 100px;
+                        width: 50px;
+                        height: 40px;
+                        border-radius: 10px;
                         transition: all 0.3s ease-in-out;
-
+                        border: 2px solid #e3e3e6;
                         &:hover {
                             border: 1px solid #151822;
                             cursor: pointer;
@@ -104,7 +106,7 @@
 
             p {
                 width: 70%;
-                font-size: 1.1em;
+                font-size: 1em;
                 font-family: "Montserrat";
                 line-height: 2em;
             }
@@ -390,6 +392,10 @@
         }
 
         .row2 {
+            nav{
+                align-items: flex-start;
+                flex-direction: column;
+            }
             .drops {
 
                 .dropdowncontent {

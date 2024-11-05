@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 import LayoutPage from '../../layouts/Layout';
 import styles from "../../styles/_products.module.scss"
@@ -9,6 +9,8 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ProductCard from '@/app/components/ProductCard';
 import data from "../../lib/fakedata";
 import Floatingbtn from '@/app/components/floatingbtn';
+
+const PRODUCTS_PER_PAGE = 12; // Nombre de produits par page
 
 const Boutique = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -41,16 +43,31 @@ const Boutique = () => {
     }
   };
 
-  const filteredProducts = data.filter((product) => {
-    const matchesCategory = filters.selectedCategories.length === 0 || 
-      filters.selectedCategories.includes(product.category) || 
+ 
+  //CREATION DE LA PAGINATION
+  const [currentPage, setCurrentPage] = useState(1);
+  const [displayedProducts, setDisplayedProducts] = useState([]);
+
+  // Mettre à jour les produits affichés à chaque changement de page
+  useEffect(() => {
+    const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
+    const endIndex = startIndex + PRODUCTS_PER_PAGE;
+    setDisplayedProducts(data.slice(startIndex, endIndex));
+  }, [currentPage, data]);
+
+  const totalPages = Math.ceil(data.length / PRODUCTS_PER_PAGE);
+
+  const filteredProducts = displayedProducts.filter((product) => {
+    const matchesCategory = filters.selectedCategories.length === 0 ||
+      filters.selectedCategories.includes(product.category) ||
       filters.selectedCategories.includes(product.sousCategory);
     const matchesPrice = product.price <= filters.maxPrice;
     const matchesRating = filters.selectedRating === '' || product.rating >= filters.selectedRating;
-    const matchesSearch = product.name.toLowerCase().includes(filters.searchQuery.toLowerCase()) ||product.category.toLowerCase().includes(filters.searchQuery.toLowerCase()) || product.sousCategory.toLowerCase().includes(filters.searchQuery.toLowerCase()) ;
-    
+    const matchesSearch = product.name.toLowerCase().includes(filters.searchQuery.toLowerCase()) || product.category.toLowerCase().includes(filters.searchQuery.toLowerCase()) || product.sousCategory.toLowerCase().includes(filters.searchQuery.toLowerCase());
+
     return matchesCategory && matchesPrice && matchesRating && matchesSearch;
   });
+
 
 
   return (
@@ -114,9 +131,9 @@ const Boutique = () => {
         <div className={styles.actionFilter}><FilterListOutlinedIcon className={styles.menuToggle} onClick={handleView} /> <span>Filtrer</span></div>
         <aside className={`${styles.aside} ${isMenuOpen ? styles.open : ""}`}>
           <form>
-          <label>
-            <input type='text' name='searchQuery' value={filters.searchQuery} onChange={handleFilterChange} placeholder='Que voulez-vous ?' />
-            <SearchOutlinedIcon className={styles.icon} />
+            <label>
+              <input type='text' name='searchQuery' value={filters.searchQuery} onChange={handleFilterChange} placeholder='Que voulez-vous ?' />
+              <SearchOutlinedIcon className={styles.icon} />
             </label>
             <CloseOutlinedIcon className={styles.menuClose} onClick={handleView} />
           </form>
@@ -192,16 +209,37 @@ const Boutique = () => {
         <main className={styles.main}>
           <h1>Store gallerie</h1>
           <section className={styles.productContainer}>
-           <ul className={styles.productList}>
-           {
-            filteredProducts.map((product)=>
-              <li key={product.id}><ProductCard  product={product} /></li>
-            )
-           }
-           </ul>
+            <ul className={styles.productList}>
+              {
+                filteredProducts.map((product) =>
+                  <li key={product.id}><ProductCard product={product} /></li>
+                )
+              }
+            </ul>
           </section>
+          {/* Pagination */}
+          <div className={styles.paginationContainer}>
+            <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage <= 1}>
+              &#8592;
+            </button>
+
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentPage(i + 1)}
+                className={currentPage === i + 1 ? styles.actives : ''}
+                disabled={currentPage === i + 1}
+              >
+                {i + 1}
+              </button>
+            ))}
+
+            <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage >= totalPages}>
+              &#8594;
+            </button>
+          </div>
         </main>
-        <Floatingbtn/>
+        <Floatingbtn />
       </div>
     </LayoutPage>
   )
