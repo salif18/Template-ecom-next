@@ -258,20 +258,18 @@
 
      // nav
      .nav {
-         overflow-x: scroll;
-         scrollbar-width: none;
          /* Firefox */
          padding: 20px;
 
          ul {
-             gap: 1px;
+             gap: 0px;
 
              li {
                  padding: 0;
              }
 
              a {
-                 font-size: 0.8em;
+                 font-size: 0.7em;
              }
 
              .menuDropdown {
