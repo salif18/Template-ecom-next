@@ -12,7 +12,6 @@ const ProductCard = ({ product }) => {
   }
   const [mainImage, setMainImage] = useState(product.img);
   const otherColors = product.otherColors ? product.otherColors : []
-
   // Fonction pour changer l'image principale
   const changeImage = (imgSrc) => {
     setMainImage(imgSrc);
