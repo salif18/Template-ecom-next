@@ -1,0 +1,270 @@
+.cart {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    .title {
+        padding: 16px;
+        width: 100%;
+        height: 15vh;
+        display: flex;
+        align-items: center;
+        border: 1px solid #d6d6d6;
+
+        h2 {
+            font-family: "Roboto";
+        }
+    }
+
+    .cartContainer {
+        width: 80%;
+        display: flex;
+        align-items: start;
+        gap: 16px;
+        border: 1px solid #dbdbdb;
+        padding: 16px;
+
+        .left {
+            width: 70%;
+            display: flex;
+            gap: 5px;
+            flex-direction: column;
+
+            .cartItems {
+                width: 100%;
+                height: 110px;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                border-bottom: 1px solid #2222;
+                // background: var(--bacgroundCard);
+                gap: 10px;
+
+                .itemsInfos {
+                    display: flex;
+                    align-items: start;
+                    gap: 16px;
+
+                    figure {
+                        width: 100px;
+                        height: 100px;
+
+                        img {
+                            width: 80px;
+                            height: 80px;
+                        }
+                    }
+
+                    .details {
+                        display: flex;
+                        align-items: flex-start;
+                        flex-direction: column;
+
+                        h2 {
+                            font-family: "Roboto";
+                            font-size: 1em;
+                            margin-bottom: 5px;
+                        }
+
+                        p {
+                            font-size: 1em;
+                            font-family: "Roboto";
+                        }
+                    }
+                }
+
+                .btns {
+                    display: flex;
+                    gap: 20px;
+                    align-items: center;
+                    background: #fff;
+                    border: 1px solid #f0f1f5;
+                    padding: 16px;
+                    border-radius: 10px;
+
+                    button {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 100%;
+                        font-size: 1em;
+                        font-weight: bold;
+                        cursor: pointer;
+                        border: none;
+                        transition: all 0.3s ease-in-out;
+                        &:hover{
+                            color: #fff;
+                            background: rgb(52, 106, 255);
+                        }
+                    }
+
+                    span {
+                        font-size: 1em;
+                        font-weight: bold;
+                        font-family: "Roboto";
+                    }
+                }
+
+            }
+        }
+
+        .right {
+            width: 60%;
+            display: flex;
+            align-items: start;
+            flex-direction: column;
+            padding: 16px;
+            gap: 16px;
+            box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.13);
+            .title{
+                background: #fff;
+            h2{
+               
+                font-size: 1.2em;
+                font-family: "Montserrat";
+                padding-bottom: 16px;
+                border-bottom: 2px solid var(--banerColorSecondary);
+            }
+        }
+            .infos {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                h1{
+                    font-family: "Roboto";
+                    font-size: 1em;
+                }
+                span{
+                    font-family: "Roboto";
+                    font-size: 1em;
+                }
+            }
+
+            .btnCheckout {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 16px;
+                margin: 20px 0;
+                font-family: "Roboto";
+                font-size: 1em;
+                text-transform: uppercase;
+                font-weight: bold;
+                color: #fff;
+                border: none;
+                background: var(--banerColorSecondary);
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+                &:hover{
+                    background: rgb(70, 150, 255);
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:768px) {
+    .cart {
+        width: 100%;
+        height: auto;
+    
+        .title {
+      
+            width: 100%;
+    
+            h2 {
+                font-family: "Roboto";
+            }
+        }
+    
+        .cartContainer {
+           width: 100%;
+           flex-direction: column;
+           height: auto;
+            .left {
+                width: 100%;
+    
+                .cartItems {
+                    width: 100%;
+                    height: auto;
+                    margin: 5px;
+                    flex-direction: column;
+                    .itemsInfos {
+                        display: flex;
+                        align-items: start;
+                        gap: 16px;
+    
+                        figure {
+                            width: 80px;
+                            height: 80px;
+    
+                            img {
+                                width: 80px;
+                                height: 80px;
+                            }
+                        }
+    
+                        .details {
+                            width: 100px;
+    
+                            h2 {
+                              
+                                font-size: 1em;
+                               
+                            }
+    
+                            p {
+                                font-size: 1em;
+                                
+                            }
+                        }
+                    }
+    
+                    .btns {
+                       width: 100%;
+                       justify-content: center;
+    
+                        span {
+                            font-size: 1em;
+                           
+                        }
+                    }
+    
+                }
+            }
+    
+            .right {
+                width: 100%;
+               
+                .title{
+                    background: #fff;
+                h2{
+                   
+                    font-size: 1.2em;
+                    
+                }
+            }
+                .infos {
+                    width: 100%;
+    
+                    h1{
+                        
+                        font-size: 1em;
+                    }
+                    span{
+                     
+                        font-size: 1em;
+                    }
+                }
+    
+                .btnCheckout {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

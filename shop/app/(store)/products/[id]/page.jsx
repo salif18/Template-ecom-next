@@ -2,13 +2,15 @@
 
 import LayoutPage from '@/app/layouts/Layout'
 import { useParams } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import styles from "../../../styles/_single.module.scss"
 import data from "../../../lib/fakedata"
 import GeneredStarRating from '@/app/utils/generatedStars'
 import ProductCard from '@/app/components/ProductCard'
+import { MyStore } from '@/app/context/MyContext'
 
 const SingleProduct = () => {
+    const { addToCart } = useContext(MyStore);
     const { id } = useParams()
 
 
@@ -167,7 +169,7 @@ const SingleProduct = () => {
                         </div>
 
                         <div className={styles.btnContainer}>
-                            <button className={styles.btnAdd}>Ajouter au panier</button>
+                            <button className={styles.btnAdd} onClick={()=>addToCart(product ,selectedSize ,selectedColor)}>Ajouter au panier</button>
                         </div>
 
                         <p>categorie: <span>{product.category}</span></p>

@@ -20,7 +20,7 @@ const ProductCard = ({ product }) => {
     <article className={styles.productCard} >
       <figure>
         <img src={mainImage} alt={product.name} onClick={() => handleGoToSingleProduct(product.id)} />
-        <div>
+        <div onClick={() => handleGoToSingleProduct(product.id)}>
           <LocalMallOutlinedIcon className={styles.icon} />
           <span>Ajouter au panier</span>
         </div>

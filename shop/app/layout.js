@@ -2,6 +2,7 @@ import './styles/globals.scss';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false;
+import {MyStoreProvider} from "@/app/context/MyContext"
 
 export const metadata = {
   title: 'Hadja-fashion.vercel',
@@ -11,7 +12,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <MyStoreProvider>
+        <body>{children}</body>
+      </MyStoreProvider>
     </html>
   )
 }

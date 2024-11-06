@@ -30,7 +30,7 @@ const Header = () => {
                     </ul>
                 </nav>
 
-                <li><Link href="/panier"><LocalMallOutlinedIcon className={styles.icon} ></LocalMallOutlinedIcon></Link></li>
+                <li><Link href="/cart"><LocalMallOutlinedIcon className={styles.icon} ></LocalMallOutlinedIcon></Link></li>
                 <li><Link href="/profil"><PersonOutlineOutlinedIcon className={styles.icon}></PersonOutlineOutlinedIcon></Link></li>
                 <MenuOutlinedIcon className={styles.menuToggle} onClick={handleView} />
             </div>
