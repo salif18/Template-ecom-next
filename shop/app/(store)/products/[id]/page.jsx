@@ -7,10 +7,10 @@ import styles from "../../../styles/_single.module.scss"
 import data from "../../../lib/fakedata"
 import GeneredStarRating from '@/app/utils/generatedStars'
 import ProductCard from '@/app/components/ProductCard'
-import { MyStore } from '@/app/context/MyContext'
+import { CartContext} from '@/app/context/CartContext'
 
 const SingleProduct = () => {
-    const { addToCart } = useContext(MyStore);
+    const { addToCart } = useContext(CartContext);
     const { id } = useParams()
 
 
