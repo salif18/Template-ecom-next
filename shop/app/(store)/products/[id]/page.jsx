@@ -169,7 +169,7 @@ const SingleProduct = () => {
                         </div>
 
                         <div className={styles.btnContainer}>
-                            <button className={styles.btnAdd} onClick={()=>addToCart(product ,selectedSize ,selectedColor)}>Ajouter au panier</button>
+                            <button className={styles.btnAdd} onClick={()=>addToCart(product,mainImage ,selectedSize ,selectedColor)}>Ajouter au panier</button>
                         </div>
 
                         <p>categorie: <span>{product.category}</span></p>

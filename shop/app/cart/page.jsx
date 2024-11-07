@@ -32,6 +32,7 @@ const Cart = () => {
                       <div className={styles.details}>
                         <h2>{item.name}</h2>
                         <p>{item.category}</p>
+                        <p>{item.selectedColor}</p>
                         <p>{item.price}</p>
                       </div>
                     </div>

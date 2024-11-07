@@ -13,7 +13,7 @@ export const CartProvider = (props) => {
     // États de mes données
     const [cart, setCart] = useState([]);
 
-    const addToCart = (item, size, color) => {
+    const addToCart = (item,mainImage, size, color) => {
         setCart((prevCart) => {
             const existingItem = prevCart.find((itemExist) => itemExist.id === item.id);
 
@@ -22,7 +22,7 @@ export const CartProvider = (props) => {
                     itemExist.id === item.id ? { ...itemExist, qty: itemExist.qty + 1, selectedSize: size, selectedColor: color } : itemExist
                 );
             } else {
-                return [...prevCart, { ...item, qty: 1, selectedSize: size, selectedColor: color }];
+                return [...prevCart, { ...item, qty: 1, img:mainImage, selectedSize: size, selectedColor: color }];
             }
         });
     };
