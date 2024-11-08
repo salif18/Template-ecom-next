@@ -53,9 +53,9 @@
                 gap: 10px;
 
                 label {
-                    font-size: 1em;
-                    font-family: "Roboto";
-                    color: #68686891;
+                    font-size: 0.8em;
+                    font-family: sans-serif;
+                    color: #4b4b4b91;
                     font-weight: 600;
                 }
 
@@ -136,6 +136,13 @@
                         font-family: "Montserrat";
                         font-weight: 500;
                         padding: 10px;
+                        display: flex;
+                        align-items: center;
+                        gap: 15px;
+                        img{
+                            width: 50px;
+                            height: 40px;
+                        }
                     }
                 }
 

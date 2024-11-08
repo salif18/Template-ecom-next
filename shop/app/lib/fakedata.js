@@ -405,39 +405,7 @@ const data = [
 
 
 
-// {
-//     "id": "12345",
-//     "name": "T-shirt",
-//     "description": "Un t-shirt confortable",
-//     "basePrice": 19.99,
-//     "variants": [
-//       {
-//         "color": "Red",
-//         "images": [
-//           "image_red_1.jpg",
-//           "image_red_2.jpg"
-//         ],
-//         "sizes": [
-//           { "size": "S", "stock": 10 },
-//           { "size": "M", "stock": 5 },
-//           { "size": "L", "stock": 0 }
-//         ]
-//       },
-//       {
-//         "color": "Blue",
-//         "images": [
-//           "image_blue_1.jpg",
-//           "image_blue_2.jpg"
-//         ],
-//         "sizes": [
-//           { "size": "S", "stock": 8 },
-//           { "size": "M", "stock": 2 },
-//           { "size": "L", "stock": 4 }
-//         ]
-//       }
-//     ]
-//   }
-  
+
 
 
 export default data;

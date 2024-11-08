@@ -67,25 +67,12 @@ const ConfirmOrder = () => {
                         <h2>Addresse</h2>
                     </div>
                     <section className={styles.addressData}>
-
-
                         <p>Moussa</p>
-
-
                         <p>89665544</p>
-
-
                         <p>Moussa@gmail.com</p>
-
-
                         <p>Bamako</p>
-
-
                         <p>589</p>
-
-
                         <p>52</p>
-
                     </section>
                 </section>
             </main>

@@ -4,7 +4,7 @@ import LayoutPage from '@/app/layouts/Layout'
 import { useParams } from 'next/navigation'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import styles from "../../../styles/_single.module.scss"
-import data from "../../../lib/fakedata"
+import data from "../../../lib/data"
 import GeneredStarRating from '@/app/utils/generatedStars'
 import ProductCard from '@/app/components/ProductCard'
 import { CartContext } from '@/app/context/CartContext'
@@ -15,12 +15,12 @@ const SingleProduct = () => {
 
 
     const product = data.find(item => item.id == id);
-    const productGallery = product.gallery ? product.gallery : [];
-    const otherColors = product.otherColors ? product.otherColors : []
+    const otherColors = product.othersColors ? product.othersColors : []
+    const firstImage = product.othersColors[0]
     const recommandations = data.filter(item => item.name.includes(product.name))
     const relatedCategory = data.filter(item => item.category.includes(product.category))
 
-    const [mainImage, setMainImage] = useState(product.img);
+    const [mainImage, setMainImage] = useState(firstImage.images);
 
     // Fonction pour changer l'image principale
     const changeImage = (imgSrc) => {
@@ -28,13 +28,17 @@ const SingleProduct = () => {
     };
 
     // Etat de choix de size et color
+    const [selectedColorIndex, setSelectedColorIndex] = useState(0);
     const [selectedColor, setSelectedColor] = useState('');
     const [selectedSize, setSelectedSize] = useState('');
 
-    const handleChangeProduct = (element) => {
+    const handleChangeProduct = (index, element) => {
         setSelectedColor(element.color);
-        setMainImage(element.image)
+        setMainImage(element.images)
+        setSelectedColorIndex(index);
     }
+
+    const currentColor = product.othersColors[selectedColorIndex];
 
 
     // États pour les menudrop cacher
@@ -86,9 +90,9 @@ const SingleProduct = () => {
                         <div className={styles.galleries}>
                             <ul>
                                 {
-                                    productGallery.map(photo =>
-                                        <li key={photo}>
-                                            <img src={photo} onClick={() => changeImage(photo)} />
+                                    otherColors.map((photo, index) =>
+                                        <li key={index}>
+                                            <img src={photo.images} onClick={() => changeImage(photo.images)} />
                                         </li>
                                     )
                                 }</ul>
@@ -109,14 +113,14 @@ const SingleProduct = () => {
                         </div> */}
                     </div>
                     <div className={styles.right}>
-                        <span>{product.sousCategory}</span>
+                        <span>{product.subCategory}</span>
                         <h1>{product.name}</h1>
                         <h2>{product.price} fcfa</h2>
                         <p>{product.description}</p>
 
                         <div className={styles.selectedOptions}>
                             {/* Options de couleur */}
-                            {product.otherColors.length > 0 && (
+                            {otherColors.length > 0 && (
                                 <div className={styles.options}>
                                     <label>Couleurs disponibles </label>
                                     <div className={styles.colorContainer}>
@@ -126,7 +130,7 @@ const SingleProduct = () => {
                                                 className={`${styles.colorSwatch} ${selectedColor === element.color ? styles.selected : ''
                                                     }`}
                                                 style={{ backgroundColor: element.color }}
-                                                onClick={() => handleChangeProduct(element)}
+                                                onClick={() => handleChangeProduct(index, element)}
                                             >
                                                 {/* Optionnel : Ajoutez un indicateur pour la couleur sélectionnée */}
                                                 {selectedColor === element.color && <span className={styles.checkmark}>✔</span>}
@@ -145,11 +149,12 @@ const SingleProduct = () => {
                                             value={selectedSize}
                                             onChange={(e) => setSelectedSize(e.target.value)}
                                         >
-                                            {product.sizes.map((size, index) => (
-                                                <option key={index} value={size}>
-                                                    {size}
-                                                </option>
-                                            ))}
+                                            {currentColor.sizes.length > 0 &&
+                                                currentColor.sizes.map((size, index) => (
+                                                    <option key={index} value={size.size}>
+                                                        {size.size}
+                                                    </option>
+                                                ))}
                                         </select>
                                     </>
                                 )}
@@ -162,11 +167,12 @@ const SingleProduct = () => {
                                             value={selectedSize}
                                             onChange={(e) => setSelectedSize(e.target.value)}
                                         >
-                                            {product.sizes.map((size, index) => (
-                                                <option key={index} value={size}>
-                                                    {size}
-                                                </option>
-                                            ))}
+                                            {currentColor.sizes.length > 0 &&
+                                                currentColor.sizes.map((size, index) => (
+                                                    <option key={index} value={size.size}>
+                                                        {size.size}
+                                                    </option>
+                                                ))}
                                         </select>
                                     </>
                                 )}

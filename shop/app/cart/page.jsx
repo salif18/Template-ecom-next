@@ -4,8 +4,7 @@ import LayoutPage from '../layouts/Layout'
 import styles from "../styles/_cart.module.scss"
 import { useRouter } from 'next/navigation'
 import { CartContext } from '@/app/context/CartContext';
-import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
-
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 const Cart = () => {
   const { cart, decrementQuantity, incrementQuantity, total, nombreArticles } = useContext(CartContext)
   const router = useRouter();
@@ -41,7 +40,7 @@ const Cart = () => {
                       </div>
                     </div>
                     <div className={styles.btns}>
-                      <button onClick={() => decrementQuantity(item.id, item.selectedSize, item.selectedColor)}>{item.qty > 1 ? "-" : <RemoveShoppingCartIcon style={{ fontSize: "18px" }} />}</button>
+                      <button onClick={() => decrementQuantity(item.id, item.selectedSize, item.selectedColor)}>{item.qty > 1 ? "-" : <DeleteOutlineRoundedIcon style={{ fontSize: "18px" }} />}</button>
                       <span>{item.qty}</span>
                       <button onClick={() => incrementQuantity(item.id, item.selectedSize, item.selectedColor)}>+</button>
                     </div>
@@ -62,7 +61,7 @@ const Cart = () => {
             </div>
             <div className={styles.infos}>
               <h1>Totaux du panier</h1>
-              <span>{total}Fcfa</span>
+              <span>{total} FCFA</span>
             </div>
             <button className={styles.btnCheckout} onClick={handleGotoAddress}>Passer à la caisse</button>
           </div>

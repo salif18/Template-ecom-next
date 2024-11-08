@@ -1,13 +1,12 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import Link from 'next/link';
 import LayoutPage from '../../layouts/Layout';
 import styles from "../../styles/_products.module.scss"
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ProductCard from '@/app/components/ProductCard';
-import data from "../../lib/fakedata";
+import data from "../../lib/data";
 import Floatingbtn from '@/app/components/floatingbtn';
 
 const PRODUCTS_PER_PAGE = 12; // Nombre de produits par page
@@ -17,6 +16,9 @@ const Boutique = () => {
   const handleView = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const [subCategoryFilter, setSubCategoryFilter] = useState("")
+  const [marqueFilter, setMarqueFilter] = useState("")
 
   const [filters, setFilters] = useState({
     selectedCategories: [],
@@ -43,7 +45,7 @@ const Boutique = () => {
     }
   };
 
- 
+
   //CREATION DE LA PAGINATION
   const [currentPage, setCurrentPage] = useState(1);
   const [displayedProducts, setDisplayedProducts] = useState([]);
@@ -60,68 +62,50 @@ const Boutique = () => {
   const filteredProducts = displayedProducts.filter((product) => {
     const matchesCategory = filters.selectedCategories.length === 0 ||
       filters.selectedCategories.includes(product.category) ||
-      filters.selectedCategories.includes(product.sousCategory);
+      filters.selectedCategories.includes(product.subCategory);
     const matchesPrice = product.price <= filters.maxPrice;
     const matchesRating = filters.selectedRating === '' || product.rating >= filters.selectedRating;
-    const matchesSearch = product.name.toLowerCase().includes(filters.searchQuery.toLowerCase()) || product.category.toLowerCase().includes(filters.searchQuery.toLowerCase()) || product.sousCategory.toLowerCase().includes(filters.searchQuery.toLowerCase());
-
-    return matchesCategory && matchesPrice && matchesRating && matchesSearch;
+    const matchesSearch = product.name.toLowerCase().includes(filters.searchQuery.toLowerCase()) || product.category.toLowerCase().includes(filters.searchQuery.toLowerCase()) || product.subCategory.toLowerCase().includes(filters.searchQuery.toLowerCase());
+    const matchesMarques = product.marque.includes(marqueFilter);
+    const matchesSubCategory = product.subCategory.includes(subCategoryFilter)
+    return matchesCategory && matchesPrice && matchesRating && matchesSearch && matchesMarques && matchesSubCategory;
   });
 
+  const marques = [
+    "Nike",
+    "Addidas",
+    "Burberry",
+    "Fashion",
+    "Lacoste",
+    "Calvin Klein",
+    "Rolex",
+    "Louis Vuitton",
+    "Casio",
+    "Jordan"
+  ]
 
+  const categories = [
+    "Hommes",
+    "Femmes",
+    "Enfants",
+  ]
 
   return (
     <LayoutPage>
       {/* NAVBAR */}
       <nav className={styles.nav}>
         <ul>
-          <li><Link href="/boutique">Homme</Link>
+          {
+            categories.map(categorie =>
+              <li key={categorie}><p onClick={() => setSubCategoryFilter(categorie)} >{categorie}</p></li>
+            )
+          }
+
+          <li><p>Marques</p>
             <div className={styles.menuDropdown}>
-              <Link href="#" className={styles.popupLink}>Accessoires</Link>
-              <Link href="#" className={styles.popupLink}>Vetements</Link>
-              <Link href="#" className={styles.popupLink}>Chaussures</Link>
-            </div>
-          </li>
-          <li><Link href="/a-propos">Femme</Link>
-            <div className={styles.menuDropdown}>
-              <Link href="#" className={styles.popupLink}>Accessoires</Link>
-              <Link href="#" className={styles.popupLink}>Vetements</Link>
-              <Link href="#" className={styles.popupLink}>Chaussures</Link>
-            </div>
-          </li>
-          <li><Link href="/contact">Enfant</Link>
-            <div className={styles.menuDropdown}>
-              <Link href="#" className={styles.popupLink}>Accessoires</Link>
-              <Link href="#" className={styles.popupLink}>Vetements</Link>
-              <Link href="#" className={styles.popupLink}>Chaussures</Link>
-            </div>
-          </li>
-          <li><Link href="/contact">Fille</Link>
-            <div className={styles.menuDropdown}>
-              <Link href="#" className={styles.popupLink}>Accessoires</Link>
-              <Link href="#" className={styles.popupLink}>Vetements</Link>
-              <Link href="#" className={styles.popupLink}>Chaussures</Link>
-            </div>
-          </li>
-          <li><Link href="/contact">Garcon</Link>
-            <div className={styles.menuDropdown}>
-              <Link href="#" className={styles.popupLink}>Accessoires</Link>
-              <Link href="#" className={styles.popupLink}>Vetements</Link>
-              <Link href="#" className={styles.popupLink}>Chaussures</Link>
-            </div>
-          </li>
-          <li><Link href="/boutique">Marques</Link>
-            <div className={styles.menuDropdown}>
-              <Link href="#" className={styles.popupLink}>Nike</Link>
-              <Link href="#" className={styles.popupLink}>Addidas</Link>
-              <Link href="#" className={styles.popupLink}>Burberry</Link>
-              <Link href="#" className={styles.popupLink}>Fashion</Link>
-              <Link href="#" className={styles.popupLink}>Lacos</Link>
-              <Link href="#" className={styles.popupLink}>Calvin Klein</Link>
-              <Link href="#" className={styles.popupLink}>Rolex</Link>
-              <Link href="#" className={styles.popupLink}>Louis vuitton</Link>
-              <Link href="#" className={styles.popupLink}>Casio</Link>
-              <Link href="#" className={styles.popupLink}>Jordan</Link>
+              {marques.map(marque =>
+                <p key={marque} className={styles.popupLink} onClick={() => setMarqueFilter(marque)} >{marque}</p>
+              )}
             </div>
           </li>
         </ul>
@@ -160,6 +144,13 @@ const Boutique = () => {
               <li>
                 <input
                   type="checkbox"
+                  value="Chaussures"
+                  onChange={handleFilterChange}
+                /> Chaussures
+              </li>
+              <li>
+                <input
+                  type="checkbox"
                   value="Vetements"
                   onChange={handleFilterChange}
                 /> Vetements
@@ -167,13 +158,13 @@ const Boutique = () => {
               <li>
                 <input
                   type="checkbox"
-                  value="Chaussures"
+                  value="Sacs"
                   onChange={handleFilterChange}
-                /> Chaussures
+                /> Sacs
               </li>
             </ul>
 
-            <h3>Par meuilleures notes</h3>
+            <h3>Par meilleures notes</h3>
             <input
               type="radio"
               name="selectedRating"
@@ -207,7 +198,7 @@ const Boutique = () => {
           </section>
         </aside>
         <main className={styles.main}>
-          <h1>Store gallerie</h1>
+          <h1>Store gallerie / {subCategoryFilter}</h1>
           <section className={styles.productContainer}>
             <ul className={styles.productList}>
               {
