@@ -7,7 +7,7 @@ import styles from "../../../styles/_single.module.scss"
 import data from "../../../lib/fakedata"
 import GeneredStarRating from '@/app/utils/generatedStars'
 import ProductCard from '@/app/components/ProductCard'
-import { CartContext} from '@/app/context/CartContext'
+import { CartContext } from '@/app/context/CartContext'
 
 const SingleProduct = () => {
     const { addToCart } = useContext(CartContext);
@@ -30,6 +30,11 @@ const SingleProduct = () => {
     // Etat de choix de size et color
     const [selectedColor, setSelectedColor] = useState('');
     const [selectedSize, setSelectedSize] = useState('');
+
+    const handleChangeProduct = (element) => {
+        setSelectedColor(element.color);
+        setMainImage(element.image)
+    }
 
 
     // États pour les menudrop cacher
@@ -76,6 +81,8 @@ const SingleProduct = () => {
                 <div className={styles.row1}>
                     <div className={styles.left}>
 
+                        <img src={mainImage} alt='' />
+
                         <div className={styles.galleries}>
                             <ul>
                                 {
@@ -87,9 +94,7 @@ const SingleProduct = () => {
                                 }</ul>
                         </div>
 
-                        <img src={mainImage} alt='' />
-
-                        <div className={styles.colory}>
+                        {/* <div className={styles.colory}>
                             <ul>
                                 {otherColors.map(other => (
                                     <li key={other.color}>
@@ -101,7 +106,7 @@ const SingleProduct = () => {
                                     </li>
                                 ))}
                             </ul>
-                        </div>
+                        </div> */}
                     </div>
                     <div className={styles.right}>
                         <span>{product.sousCategory}</span>
@@ -121,7 +126,7 @@ const SingleProduct = () => {
                                                 className={`${styles.colorSwatch} ${selectedColor === element.color ? styles.selected : ''
                                                     }`}
                                                 style={{ backgroundColor: element.color }}
-                                                onClick={() => setSelectedColor(element.color)}
+                                                onClick={() => handleChangeProduct(element)}
                                             >
                                                 {/* Optionnel : Ajoutez un indicateur pour la couleur sélectionnée */}
                                                 {selectedColor === element.color && <span className={styles.checkmark}>✔</span>}
@@ -169,7 +174,7 @@ const SingleProduct = () => {
                         </div>
 
                         <div className={styles.btnContainer}>
-                            <button className={styles.btnAdd} onClick={()=>addToCart(product,mainImage ,selectedSize ,selectedColor)}>Ajouter au panier</button>
+                            <button className={styles.btnAdd} onClick={() => addToCart(product, mainImage, selectedSize, selectedColor)}>Ajouter au panier</button>
                         </div>
 
                         <p>categorie: <span>{product.category}</span></p>

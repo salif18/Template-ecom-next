@@ -32,14 +32,18 @@ const Cart = () => {
                       <div className={styles.details}>
                         <h2>{item.name}</h2>
                         <p>{item.category}</p>
-                        <p>{item.selectedColor}</p>
-                        <p>{item.price}</p>
+                        <div className={styles.row}>
+                          <p>Color</p>
+                          <div style={{ backgroundColor: item.selectedColor }} className={styles.colordiv} ></div>
+                        </div>
+                        {item.selectedSize && <p>Size: {item.selectedSize}</p>}
+                        <p>{item.price} FCFA</p>
                       </div>
                     </div>
                     <div className={styles.btns}>
-                      <button onClick={() => decrementQuantity(item.id)}>{item.qty > 1 ? "-" :<RemoveShoppingCartIcon style={{fontSize:"20px"}} />   }</button>
+                      <button onClick={() => decrementQuantity(item.id, item.selectedSize, item.selectedColor)}>{item.qty > 1 ? "-" : <RemoveShoppingCartIcon style={{ fontSize: "18px" }} />}</button>
                       <span>{item.qty}</span>
-                      <button onClick={() => incrementQuantity(item.id)}>+</button>
+                      <button onClick={() => incrementQuantity(item.id, item.selectedSize, item.selectedColor)}>+</button>
                     </div>
                   </div>
                 </li>

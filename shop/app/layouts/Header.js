@@ -1,14 +1,16 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from "../styles/_header.module.scss";
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import Link from 'next/link';
+import { CartContext } from '../context/CartContext';
 
 const Header = () => {
+    const { cart, nombreArticles } = useContext(CartContext)
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const handleView = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -30,7 +32,7 @@ const Header = () => {
                     </ul>
                 </nav>
 
-                <li><Link href="/cart"><LocalMallOutlinedIcon className={styles.icon} ></LocalMallOutlinedIcon></Link></li>
+                <li><Link href="/cart"><LocalMallOutlinedIcon className={styles.icon} />{cart.length > 0 && <span>{nombreArticles}</span>}</Link></li>
                 <li><Link href="/profil"><PersonOutlineOutlinedIcon className={styles.icon}></PersonOutlineOutlinedIcon></Link></li>
                 <MenuOutlinedIcon className={styles.menuToggle} onClick={handleView} />
             </div>

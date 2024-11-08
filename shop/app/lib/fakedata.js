@@ -404,4 +404,205 @@ const data = [
 ];
 
 
+
+// {
+//     "id": "12345",
+//     "name": "T-shirt",
+//     "description": "Un t-shirt confortable",
+//     "basePrice": 19.99,
+//     "variants": [
+//       {
+//         "color": "Red",
+//         "images": [
+//           "image_red_1.jpg",
+//           "image_red_2.jpg"
+//         ],
+//         "sizes": [
+//           { "size": "S", "stock": 10 },
+//           { "size": "M", "stock": 5 },
+//           { "size": "L", "stock": 0 }
+//         ]
+//       },
+//       {
+//         "color": "Blue",
+//         "images": [
+//           "image_blue_1.jpg",
+//           "image_blue_2.jpg"
+//         ],
+//         "sizes": [
+//           { "size": "S", "stock": 8 },
+//           { "size": "M", "stock": 2 },
+//           { "size": "L", "stock": 4 }
+//         ]
+//       }
+//     ]
+//   }
+  
+
+
 export default data;
+
+
+
+
+// import React, { useState } from 'react';
+
+// const AddProductForm = () => {
+//     // Initial state du produit
+//     const [product, setProduct] = useState({
+//         name: '',
+//         description: '',
+//         basePrice: '',
+//         variants: []
+//     });
+
+//     // Pour gérer les variantes individuelles
+//     const [variant, setVariant] = useState({
+//         color: '',
+//         images: [],
+//         sizes: [{ size: '', stock: '' }]
+//     });
+
+//     // Gestion des changements dans le formulaire principal
+//     const handleChange = (e) => {
+//         const { name, value } = e.target;
+//         setProduct((prev) => ({ ...prev, [name]: value }));
+//     };
+
+//     // Gestion de l'ajout d'une variante
+//     const handleAddVariant = () => {
+//         setProduct((prev) => ({
+//             ...prev,
+//             variants: [...prev.variants, variant]
+//         }));
+//         // Réinitialiser la variante après l'ajout
+//         setVariant({ color: '', images: [], sizes: [{ size: '', stock: '' }] });
+//     };
+
+//     // Gestion des changements dans les variantes
+//     const handleVariantChange = (e) => {
+//         const { name, value } = e.target;
+//         setVariant((prev) => ({ ...prev, [name]: value }));
+//     };
+
+//     // Gestion des images de la variante
+//     const handleImageAdd = () => {
+//         const newImage = prompt('Entrez le lien de l\'image :');
+//         if (newImage) {
+//             setVariant((prev) => ({
+//                 ...prev,
+//                 images: [...prev.images, newImage]
+//             }));
+//         }
+//     };
+
+//     // Gestion des tailles de la variante
+//     const handleSizeChange = (index, field, value) => {
+//         const updatedSizes = [...variant.sizes];
+//         updatedSizes[index] = { ...updatedSizes[index], [field]: value };
+//         setVariant((prev) => ({ ...prev, sizes: updatedSizes }));
+//     };
+
+//     // Ajout d'une nouvelle taille pour la variante
+//     const handleAddSize = () => {
+//         setVariant((prev) => ({
+//             ...prev,
+//             sizes: [...prev.sizes, { size: '', stock: '' }]
+//         }));
+//     };
+
+//     // Soumission du formulaire
+//     const handleSubmit = (e) => {
+//         e.preventDefault();
+//         console.log('Produit ajouté:', product);
+//         // Envoyer `product` à votre API ou le sauvegarder
+//     };
+
+//     return (
+//         <form onSubmit={handleSubmit}>
+//             <h2>Ajouter un produit</h2>
+
+//             <label>Nom :</label>
+//             <input
+//                 type="text"
+//                 name="name"
+//                 value={product.name}
+//                 onChange={handleChange}
+//                 required
+//             />
+
+//             <label>Description :</label>
+//             <textarea
+//                 name="description"
+//                 value={product.description}
+//                 onChange={handleChange}
+//                 required
+//             />
+
+//             <label>Prix de base :</label>
+//             <input
+//                 type="number"
+//                 name="basePrice"
+//                 value={product.basePrice}
+//                 onChange={handleChange}
+//                 required
+//             />
+
+//             <h3>Ajouter une variante</h3>
+
+//             <label>Couleur :</label>
+//             <input
+//                 type="text"
+//                 name="color"
+//                 value={variant.color}
+//                 onChange={handleVariantChange}
+//                 required
+//             />
+
+//             <label>Images :</label>
+//             <button type="button" onClick={handleImageAdd}>Ajouter une image</button>
+//             <ul>
+//                 {variant.images.map((img, index) => (
+//                     <li key={index}>{img}</li>
+//                 ))}
+//             </ul>
+
+//             <h4>Tailles disponibles :</h4>
+//             {variant.sizes.map((sizeObj, index) => (
+//                 <div key={index}>
+//                     <label>Taille :</label>
+//                     <input
+//                         type="text"
+//                         value={sizeObj.size}
+//                         onChange={(e) => handleSizeChange(index, 'size', e.target.value)}
+//                         required
+//                     />
+
+//                     <label>Stock :</label>
+//                     <input
+//                         type="number"
+//                         value={sizeObj.stock}
+//                         onChange={(e) => handleSizeChange(index, 'stock', e.target.value)}
+//                         required
+//                     />
+//                 </div>
+//             ))}
+//             <button type="button" onClick={handleAddSize}>Ajouter une taille</button>
+
+//             <button type="button" onClick={handleAddVariant}>Ajouter cette variante</button>
+
+//             <h3>Variantes ajoutées :</h3>
+//             <ul>
+//                 {product.variants.map((v, index) => (
+//                     <li key={index}>
+//                         Couleur: {v.color}, Images: {v.images.join(', ')}, Tailles: {v.sizes.map(s => `${s.size} (Stock: ${s.stock})`).join(', ')}
+//                     </li>
+//                 ))}
+//             </ul>
+
+//             <button type="submit">Ajouter le produit</button>
+//         </form>
+//     );
+// };
+
+// export default AddProductForm;

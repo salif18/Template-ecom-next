@@ -29,10 +29,35 @@
         align-items: center;
         gap: 10px;
 
-        .icon {
-            font-size: 2em;
-            color: var(--textColorSecondary);
-            cursor: pointer;
+
+
+        li {
+            position: relative;
+
+
+            .icon {
+
+                font-size: 2em;
+                color: var(--textColorSecondary);
+                cursor: pointer;
+            }
+
+            span {
+                position: absolute;
+                top: -10px;
+                left: 15px;
+                background-color: orangered;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 20px;
+                height: 20px;
+                border-radius: 100%;
+                color: #ffffff;
+                font-family: "Roboto";
+                font-size: 1em;
+                font-weight: 600;
+            }
         }
 
         // navbar

@@ -74,6 +74,20 @@
                             font-size: 1em;
                             font-family: "Roboto";
                         }
+
+                        .row {
+                            display: flex;
+                            width: 100%;
+                            align-items: center;
+                            gap: 5px;
+
+                            .colordiv {
+                                margin: 5px 0;
+                                width: 15px;
+                                height: 15px;
+                                border-radius: 100%;
+                            }
+                        }
                     }
                 }
 
@@ -95,7 +109,8 @@
                         cursor: pointer;
                         border: none;
                         transition: all 0.3s ease-in-out;
-                        &:hover{
+
+                        &:hover {
                             color: #fff;
                             background: rgb(52, 106, 255);
                         }
@@ -119,26 +134,31 @@
             padding: 16px;
             gap: 16px;
             box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.13);
-            .title{
+
+            .title {
                 background: #fff;
-            h2{
-               
-                font-size: 1.2em;
-                font-family: "Montserrat";
-                padding-bottom: 16px;
-                border-bottom: 2px solid var(--banerColorSecondary);
+
+                h2 {
+
+                    font-size: 1.2em;
+                    font-family: "Montserrat";
+                    padding-bottom: 16px;
+                    border-bottom: 2px solid var(--banerColorSecondary);
+                }
             }
-        }
+
             .infos {
                 width: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                h1{
+
+                h1 {
                     font-family: "Roboto";
                     font-size: 1em;
                 }
-                span{
+
+                span {
                     font-family: "Roboto";
                     font-size: 1em;
                 }
@@ -160,7 +180,8 @@
                 background: var(--banerColorSecondary);
                 cursor: pointer;
                 transition: all 0.3s ease-in-out;
-                &:hover{
+
+                &:hover {
                     background: rgb(70, 150, 255);
                 }
             }
@@ -172,97 +193,103 @@
     .cart {
         width: 100%;
         height: auto;
-    
+
         .title {
-      
+
             width: 100%;
-    
+
             h2 {
                 font-family: "Roboto";
             }
         }
-    
+
         .cartContainer {
-           width: 100%;
-           flex-direction: column;
-           height: auto;
+            width: 100%;
+            flex-direction: column;
+            height: auto;
+
             .left {
                 width: 100%;
-    
+
                 .cartItems {
                     width: 100%;
                     height: auto;
                     margin: 5px;
+
                     // flex-direction: column;
                     .itemsInfos {
                         display: flex;
                         align-items: start;
                         gap: 16px;
-    
+
                         figure {
-                            width: 80px;
-                            height: 80px;
-    
+                            width: 50px;
+                            height: 50px;
+
                             img {
-                                width: 80px;
-                                height: 80px;
+                                width: 50px;
+                                height: 50px;
                             }
                         }
-    
+
                         .details {
                             width: 100px;
-    
+
                             h2 {
-                              
-                                font-size: 1em;
-                               
+
+                                font-size: 0.8em;
+
                             }
-    
+
                             p {
-                                font-size: 1em;
-                                
+                                font-size: 0.8em;
+
                             }
                         }
                     }
-    
+
                     .btns {
-                    //    width: 100%;
-                       justify-content: center;
-                       flex-direction: column;
-                       gap: 5px;
+                        //    width: 100%;
+                        justify-content: center;
+                        flex-direction: column;
+                        gap: 5px;
+
                         span {
                             font-size: 1em;
-                           
+
                         }
                     }
-    
+
                 }
             }
-    
+
             .right {
                 width: 100%;
-               
-                .title{
+
+                .title {
                     background: #fff;
-                h2{
-                   
-                    font-size: 1.2em;
-                    
+
+                    h2 {
+
+                        font-size: 1.2em;
+
+                    }
                 }
-            }
+
                 .infos {
                     width: 100%;
-    
-                    h1{
-                        
+
+                    h1 {
+
                         font-size: 1em;
                     }
-                    span{
-                     
+
+                    span {
+
                         font-size: 1em;
                     }
                 }
-    
+
                 .btnCheckout {
                     width: 100%;
                 }
