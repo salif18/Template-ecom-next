@@ -73,6 +73,7 @@
                         p {
                             font-size: 1em;
                             font-family: "Roboto";
+                            margin-bottom: 5px;
                         }
 
                         .row {
@@ -223,12 +224,12 @@
                         gap: 16px;
 
                         figure {
-                            width: 50px;
-                            height: 50px;
+                            width: 70px;
+                            height: 70px;
 
                             img {
-                                width: 50px;
-                                height: 50px;
+                                width: 70px;
+                                height: 70px;
                             }
                         }
 
@@ -249,7 +250,7 @@
                     }
 
                     .btns {
-                        //    width: 100%;
+                        background: transparent;
                         justify-content: center;
                         flex-direction: column;
                         gap: 5px;
@@ -257,6 +258,9 @@
                         span {
                             font-size: 1em;
 
+                        }
+                        button{
+                            background-color: #d6d6d6;
                         }
                     }
 

@@ -1,0 +1,208 @@
+.confirmOrder {
+    width: 100%;
+    min-height: 100vh;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .title {
+        width: 80%;
+        height: 100px;
+        padding: 16px;
+        border: 1px solid #d3d3d3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        h1 {
+            font-size: 2em;
+            font-family: "Montserrat";
+        }
+    }
+
+    .column {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+
+        >p {
+            font-size: 1em;
+            font-family: "Roboto";
+            margin: 1em;
+        }
+
+        .row {
+            width: 100%;
+            display: flex;
+            align-items: start;
+            justify-content: flex-start;
+
+            .rowCol {
+                display: flex;
+                flex-direction: column;
+                align-items: start;
+                gap: 16px;
+                padding: 16px;
+                border-right: 1px solid #d3d3d3;
+
+                p {
+                    font-family: "Roboto";
+                    font-weight: 500;
+                    font-size: 0.8em;
+                    text-transform: uppercase;
+                    padding-bottom: 5px;
+                    border-bottom: 1px solid #d3d3d3;
+                }
+
+                h2 {
+                    font-size: 0.8em;
+                    font-family: "Roboto";
+                    color: #353535;
+                }
+            }
+        }
+
+    }
+
+    .details {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+
+        .title {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            background-color: #ffffff;
+            width: 100%;
+            height: 9vh;
+            padding: 16px;
+
+            h2 {
+                font-family: "Roboto";
+                font-size: 1.3em;
+            }
+        }
+
+        .productTitle {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            border: 1px solid #d3d3d3;
+
+            h2 {
+                font-size: 1em;
+                font-family: "Roboto";
+            }
+        }
+
+        .products {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .productsDiv {
+                width: 100%;
+                padding: 16px;
+                border: 1px solid #d3d3d3;
+
+                p {
+                    font-size: 1em;
+                    font-family: "Roboto";
+
+                }
+            }
+
+        }
+    }
+
+    .address {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        margin-top: 25px;
+
+        .title {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            background-color: #ffffff;
+            width: 100%;
+            height: 9vh;
+            padding: 16px;
+
+            h2 {
+                font-family: "Roboto";
+                font-size: 1.3em;
+            }
+        }
+
+        .addressData {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 16px;
+            border: 1px solid #d3d3d3;
+            gap: 16px;
+
+            h2 {
+                font-family: "Roboto";
+                font-size: 0.8em;
+            }
+
+            p {
+                font-family: "Roboto";
+                font-size: 1em;
+            }
+
+        }
+    }
+
+
+}
+
+@media (max-width:768px) {
+    .confirmOrder {
+        width: 100%;
+
+        .title {
+            width: 100%;
+
+            h1 {
+                font-size: 1.2em;
+            }
+        }
+
+        .column {
+            width: 100%;
+
+            .row {
+
+                .rowCol {
+
+                    p {
+
+                        font-size: 0.76em;
+
+                    }
+
+                }
+            }
+
+        }
+
+        .details {
+            width: 100%;
+        }
+
+        .address {
+            width: 100%;
+        }
+    }
+}

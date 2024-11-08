@@ -4,9 +4,11 @@ import LayoutPage from '@/app/layouts/Layout'
 import React, { useContext } from 'react';
 import styles from "../../styles/_address.module.scss"
 import { CartContext } from '@/app/context/CartContext';
+import { useRouter } from 'next/navigation';
 
 const AddressCheckOut = () => {
   const { cart, total } = useContext(CartContext);
+  const router = useRouter()
   return (
     <LayoutPage>
       <main className={styles.address}>
@@ -63,7 +65,9 @@ const AddressCheckOut = () => {
                   <li><input type='radio' name='mode-payement' value="passer à la boutique" /> Passer à la boutique</li>
                 </ul>
               </div>
-              <button className={styles.btnCommande}>Passer commande</button>
+              <button className={styles.btnCommande}
+              onClick={()=>router.push("/succes")}
+              >Passer commande</button>
             </div>
           </div>
         </section>
