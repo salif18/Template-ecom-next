@@ -32,7 +32,7 @@ const ProductCard = ({ product }) => {
         <p className={styles.categoName}>{product.category}</p>
         <p className={styles.subCategoName}>{product.subCategory}</p>
         <h2 className={styles.price}>{product.price} FCFA</h2>
-        {/* <GeneredStarRating rating={product.rating} /> */}
+        <GeneredStarRating rating={product.rating} />
         <div className={styles.colory}>
           <ul>
             {otherColors.map(other => (
