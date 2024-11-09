@@ -11,7 +11,7 @@
      ul {
          display: flex;
          align-items: center;
-          gap: 16px;
+         gap: 16px;
 
          p {
              // position: relative;
@@ -262,7 +262,7 @@
          padding: 20px;
 
          ul {
-             gap: 0px;
+            //  gap: 16px;
 
              li {
                  padding: 0;
@@ -274,7 +274,7 @@
 
              .menuDropdown {
                  position: absolute;
-                 top: 22.8%;
+                 top: 22.9%;
                  left: 0;
                  width: 100%;
              }
