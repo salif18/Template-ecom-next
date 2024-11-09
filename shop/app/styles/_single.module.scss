@@ -35,7 +35,7 @@
                     align-items: center;
                     justify-content: center;
                     flex-direction: column;
-                    gap: 16px;
+                    gap: 5px;
 
                     img {
                         width: 80px;
@@ -369,6 +369,13 @@
                     justify-content: center;
                     width: 100%;
                     flex-direction: row;
+                }
+
+                .galleries ul{
+                    img{
+                        width: 55px;
+                        height: 55px;
+                    }
                 }
 
                 img {
