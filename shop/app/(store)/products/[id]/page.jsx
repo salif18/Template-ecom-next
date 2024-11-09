@@ -38,6 +38,7 @@ const SingleProduct = () => {
         setSelectedColorIndex(index);
     }
 
+    // RECUPERER UNIQUEMENT LES SIZE DU PRODUIT SELECTIONNER PAR SON INDEX
     const currentColor = product.othersColors[selectedColorIndex];
 
 
@@ -61,18 +62,7 @@ const SingleProduct = () => {
 
     // etat pour la notation
     const [rating, setRating] = useState(0);
-    const [hoveredRating, setHoveredRating] = useState(0);
 
-    // quand le souris survol
-    const handleMouseEnter = (value) => {
-        setHoveredRating(value);
-    };
-
-    const handleMouseLeave = () => {
-        setHoveredRating(0);
-    };
-
-    // quand on clik
     const handleClick = (value) => {
         setRating(value);
     };

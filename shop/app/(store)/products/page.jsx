@@ -12,11 +12,13 @@ import Floatingbtn from '@/app/components/floatingbtn';
 const PRODUCTS_PER_PAGE = 12; // Nombre de produits par page
 
 const Boutique = () => {
+  // ETAT DAFFICHAGE DE SIDE BAR EN RESPONSIVE
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const handleView = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // ZONE DE FILTRAGES LES VALEUR A FILTRER
   const [subCategoryFilter, setSubCategoryFilter] = useState("")
   const [marqueFilter, setMarqueFilter] = useState("")
 
@@ -44,7 +46,7 @@ const Boutique = () => {
       }));
     }
   };
-
+// FIN DE ZONE DE FILTRAGE
 
   //CREATION DE LA PAGINATION
   const [currentPage, setCurrentPage] = useState(1);
@@ -95,6 +97,7 @@ const Boutique = () => {
       {/* NAVBAR */}
       <nav className={styles.nav}>
         <ul>
+        <li><p onClick={() => setSubCategoryFilter("")}>Tout</p></li>
           {
             categories.map(categorie =>
               <li key={categorie}><p onClick={() => setSubCategoryFilter(categorie)} >{categorie}</p></li>
@@ -198,7 +201,7 @@ const Boutique = () => {
           </section>
         </aside>
         <main className={styles.main}>
-          <h1>Store gallerie / {subCategoryFilter}</h1>
+          <h1>Store gallerie / {subCategoryFilter ? subCategoryFilter : "All products"}</h1>
           <section className={styles.productContainer}>
             <ul className={styles.productList}>
               {
