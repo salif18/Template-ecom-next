@@ -92,12 +92,17 @@ const Boutique = () => {
     "Enfants",
   ]
 
+  const handleDefault=()=>{
+    setSubCategoryFilter("");
+    setMarqueFilter("")
+  }
+
   return (
     <LayoutPage>
       {/* NAVBAR */}
       <nav className={styles.nav}>
         <ul>
-        <li><p onClick={() => setSubCategoryFilter("")}>Tout</p></li>
+        <li><p onClick={handleDefault}>Tout</p></li>
           {
             categories.map(categorie =>
               <li key={categorie}><p onClick={() => setSubCategoryFilter(categorie)} >{categorie}</p></li>
@@ -120,7 +125,7 @@ const Boutique = () => {
           <form>
             <label>
               <input type='text' name='searchQuery' value={filters.searchQuery} onChange={handleFilterChange} placeholder='Que voulez-vous ?' />
-              <SearchOutlinedIcon className={styles.icon} />
+              <SearchOutlinedIcon className={styles.icon} onClick={handleView} />
             </label>
             <CloseOutlinedIcon className={styles.menuClose} onClick={handleView} />
           </form>
@@ -133,6 +138,7 @@ const Boutique = () => {
               max="10000"
               value={filters.maxPrice}
               onChange={handleFilterChange}
+              onClick={handleView}
             />
             <p>Price: <span>{filters.maxPrice} FCFA</span></p>
             <h3>Categories</h3>
@@ -142,6 +148,7 @@ const Boutique = () => {
                   type="checkbox"
                   value="Accessoires"
                   onChange={handleFilterChange}
+                  onClick={handleView}
                 /> Accessoires
               </li>
               <li>
@@ -149,6 +156,7 @@ const Boutique = () => {
                   type="checkbox"
                   value="Chaussures"
                   onChange={handleFilterChange}
+                  onClick={handleView}
                 /> Chaussures
               </li>
               <li>
@@ -156,6 +164,7 @@ const Boutique = () => {
                   type="checkbox"
                   value="Vetements"
                   onChange={handleFilterChange}
+                  onClick={handleView}
                 /> Vetements
               </li>
               <li>
@@ -163,6 +172,7 @@ const Boutique = () => {
                   type="checkbox"
                   value="Sacs"
                   onChange={handleFilterChange}
+                  onClick={handleView}
                 /> Sacs
               </li>
             </ul>
@@ -173,30 +183,35 @@ const Boutique = () => {
               name="selectedRating"
               value="100"
               onChange={handleFilterChange}
+              onClick={handleView}
             /> ★★★★★<br />
             <input
               type="radio"
               name="selectedRating"
               value="80"
               onChange={handleFilterChange}
+              onClick={handleView}
             /> ★★★★<br />
             <input
               type="radio"
               name="selectedRating"
               value="60"
               onChange={handleFilterChange}
+              onClick={handleView}
             /> ★★★<br />
             <input
               type="radio"
               name="selectedRating"
               value="40"
               onChange={handleFilterChange}
+              onClick={handleView}
             /> ★★<br />
             <input
               type="radio"
               name="selectedRating"
               value="20"
               onChange={handleFilterChange}
+              onClick={handleView}
             /> ★<br />
           </section>
         </aside>

@@ -63,7 +63,7 @@ const Cart = () => {
               <h1>Totaux du panier</h1>
               <span>{total} FCFA</span>
             </div>
-            <button className={styles.btnCheckout} onClick={handleGotoAddress}>Passer à la caisse</button>
+            {cart.length > 0 && <button className={styles.btnCheckout} onClick={handleGotoAddress}>Passer à la caisse</button>}
           </div>
         </section>
 

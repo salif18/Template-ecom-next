@@ -19,7 +19,7 @@ const Login = () => {
        
 
         <section className='avertissement'>
-           <p className='forget-pass'>Mot de passe oublié.</p>
+           <Link className='forget-pass' href="/reset" >Mot de passe oublié.</Link>
         </section>
         <button type='submit' className='btnSend'>Se connecter</button>
 
