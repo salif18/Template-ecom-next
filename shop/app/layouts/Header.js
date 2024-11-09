@@ -9,10 +9,12 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import Link from 'next/link';
 import { CartContext } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
+    const router = useRouter()
     const { cart, nombreArticles } = useContext(CartContext)
-    const {token } = useContext(AuthContext)
+    const {token} = useContext(AuthContext)
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const handleView = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -35,7 +37,20 @@ const Header = () => {
                 </nav>
 
                 <li><Link href="/cart"><LocalMallOutlinedIcon className={styles.icon} />{cart.length > 0 && <span>{nombreArticles}</span>}</Link></li>
-                <li><Link href={token ? "/profil" : "/login" } ><PersonOutlineOutlinedIcon className={styles.icon}></PersonOutlineOutlinedIcon></Link></li>
+                <li className={styles.profilZone}>
+                <p className={styles.profil}><PersonOutlineOutlinedIcon className={styles.icon}/></p>
+                <div className={styles.profilDropdown}>
+                   <div className={styles.user}>
+                    <p>Client</p>
+                   </div>
+                   <Link href="/achats" >Mes achats</Link>
+                   <button className={styles.btnAuth}
+                   onClick={()=>router.push("/login")}
+                   >Se connecter</button>
+                   {token && <button className={styles.btnlogout}>Se deconnecter</button>}
+                 </div>
+                
+                </li>
                 <MenuOutlinedIcon className={styles.menuToggle} onClick={handleView} />
             </div>
 

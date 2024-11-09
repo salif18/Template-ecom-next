@@ -21,6 +21,7 @@ const Cart = () => {
           <ul className={styles.left}>
 
             {
+              cart.length > 0 ?
               cart.map(item =>
                 <li key={item.id}>
                   <div className={styles.cartItems}>
@@ -46,7 +47,8 @@ const Cart = () => {
                     </div>
                   </div>
                 </li>
-              )
+              ) :
+              <p className={styles.empty}> Votre panier est vide</p>
 
             }
           </ul>

@@ -220,9 +220,11 @@ const Boutique = () => {
           <section className={styles.productContainer}>
             <ul className={styles.productList}>
               {
+                filteredProducts.length > 0 ?
                 filteredProducts.map((product) =>
                   <li key={product.id}><ProductCard product={product} /></li>
                 )
+                : <p className={styles.empty}>Aucuns resultat  </p>
               }
             </ul>
           </section>

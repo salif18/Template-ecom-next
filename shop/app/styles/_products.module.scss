@@ -203,6 +203,11 @@
                  gap: 5px;
                  flex-wrap: wrap;
 
+                 .empty{
+                    font-size: 1em;
+                    font-family: "Montserrat";
+                 }
+
              }
 
          }
@@ -275,7 +280,7 @@
 
              .menuDropdown {
                  position: absolute;
-                 top: 22.8%;
+                 top: 23%;
                  left: 0;
                  width: 100%;
              }
