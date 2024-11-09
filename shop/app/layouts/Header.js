@@ -8,9 +8,11 @@ import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import Link from 'next/link';
 import { CartContext } from '../context/CartContext';
+import { AuthContext } from '../context/AuthContext';
 
 const Header = () => {
     const { cart, nombreArticles } = useContext(CartContext)
+    const {token } = useContext(AuthContext)
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const handleView = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -33,7 +35,7 @@ const Header = () => {
                 </nav>
 
                 <li><Link href="/cart"><LocalMallOutlinedIcon className={styles.icon} />{cart.length > 0 && <span>{nombreArticles}</span>}</Link></li>
-                <li><Link href="/profil"><PersonOutlineOutlinedIcon className={styles.icon}></PersonOutlineOutlinedIcon></Link></li>
+                <li><Link href={token ? "/profil" : "/login" } ><PersonOutlineOutlinedIcon className={styles.icon}></PersonOutlineOutlinedIcon></Link></li>
                 <MenuOutlinedIcon className={styles.menuToggle} onClick={handleView} />
             </div>
 
