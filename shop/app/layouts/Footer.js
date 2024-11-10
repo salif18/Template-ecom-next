@@ -11,7 +11,7 @@ const Footer = () => {
     <section className={styles.row2}>
       <div className={styles.columns}>
           <h2>Line-Store</h2>
-          <p>Le meilleur look à tout moment, n’importe où.</p>
+          <p className={styles.h2}>Le meilleur look à tout moment, n’importe où.</p>
       </div>
       <div className={styles.columns}>
       <h2>Pour elle</h2>

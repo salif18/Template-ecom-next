@@ -100,6 +100,7 @@
         .row3{
             width: 100%;
             align-items: center;
+            justify-content: center;
             flex-direction: column;
 
            
@@ -108,6 +109,18 @@
         .row1{
             h2{
                 font-size: 1.2em;
+            }
+        }
+        .row2{
+            width: 100%;
+            .columns{
+                width: 100%;
+                align-items: center;
+                justify-content: center;
+                .h2{
+                    text-align: center;
+                    font-weight: 600;
+                }
             }
         }
     }

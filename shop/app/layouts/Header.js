@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { CartContext } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
 import { useRouter } from 'next/navigation';
+import { BsHandbag } from "react-icons/bs";
 
 const Header = () => {
     const router = useRouter()
@@ -41,9 +42,9 @@ const Header = () => {
                 <p className={styles.profil}><PersonOutlineOutlinedIcon className={styles.icon}/></p>
                 <div className={styles.profilDropdown}>
                    <div className={styles.user}>
-                    <p>Client</p>
+                    <p>UserName</p>
                    </div>
-                   <Link href="/achats" >Mes achats</Link>
+                   <Link href="/achats" ><BsHandbag style={{fontSize:"24px"}} /> Mes achats</Link>
                    <button className={styles.btnAuth}
                    onClick={()=>router.push("/login")}
                    >Se connecter</button>

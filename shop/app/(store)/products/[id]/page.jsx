@@ -46,6 +46,7 @@ const SingleProduct = () => {
     // États pour les menudrop cacher
     const [isCommentsOpen, setIsCommentsOpen] = useState(false);
     const [isReviewsOpen, setIsReviewsOpen] = useState(false);
+    const [activeTab, setActiveTab] = useState('');
 
     const commentsRef = useRef(null);
     const reviewsRef = useRef(null);
@@ -54,11 +55,13 @@ const SingleProduct = () => {
     const toggleCommentsMenu = () => {
         setIsCommentsOpen((prev) => !prev);
         setIsReviewsOpen(false); // Ferme le menu Avis si ouvert
+        setActiveTab('comments');
     };
 
     const toggleReviewsMenu = () => {
         setIsReviewsOpen((prev) => !prev);
         setIsCommentsOpen(false); // Ferme le menu Commentaires si ouvert
+        setActiveTab('reviews');
     };
 
     // etat pour la notation
@@ -181,8 +184,18 @@ const SingleProduct = () => {
                 <div className={styles.row2}>
 
                     <nav>
-                        <h2 onClick={toggleCommentsMenu}>Commentaires</h2>
-                        <h2 onClick={toggleReviewsMenu}>Avis</h2>
+                        <h2 
+                        onClick={toggleCommentsMenu} 
+                        className={activeTab === 'comments' ? styles.active : ''}
+                        >
+                        Commentaires
+                        </h2>
+                        <h2 
+                        className={activeTab === 'reviews' ? styles.active : ''}
+                        onClick={toggleReviewsMenu}
+                        >
+                        Avis
+                        </h2>
                     </nav>
 
                     <div className={styles.drops}>
