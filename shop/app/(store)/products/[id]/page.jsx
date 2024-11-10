@@ -8,9 +8,10 @@ import data from "../../../lib/data"
 import GeneredStarRating from '@/app/utils/generatedStars'
 import ProductCard from '@/app/components/ProductCard'
 import { CartContext } from '@/app/context/CartContext'
+import { FaCheck } from 'react-icons/fa'; // Import de l'icône FaCheck
 
 const SingleProduct = () => {
-    const { addToCart } = useContext(CartContext);
+    const { addToCart, isAdded } = useContext(CartContext);
     const { id } = useParams()
 
 
@@ -170,7 +171,7 @@ const SingleProduct = () => {
                         </div>
 
                         <div className={styles.btnContainer}>
-                            <button className={styles.btnAdd} onClick={() => addToCart(product, mainImage, selectedSize, selectedColor)}>Ajouter au panier</button>
+                            <button className={`${styles.btnAdd} ${isAdded ? styles.added : ''}`} onClick={() => addToCart(product, mainImage, selectedSize, selectedColor)}>{isAdded ? <>Ajouté <FaCheck /> </> : 'Ajouter au panier'}</button>
                         </div>
 
                         <p>categorie: <span>{product.category}</span></p>
@@ -198,10 +199,8 @@ const SingleProduct = () => {
                                             {[1, 2, 3, 4, 5].map((value) => (
                                                 <span
                                                     key={value}
-                                                    className={`${styles.star} ${value <= (hoveredRating || rating) ? styles.active : ''}`}
+                                                    className={`${styles.star} ${value <= rating ? styles.active : ''}`}
                                                     data-value={value}
-                                                    onMouseEnter={() => handleMouseEnter(value)}
-                                                    onMouseLeave={handleMouseLeave}
                                                     onClick={() => handleClick(value)}
                                                 >
                                                     ★

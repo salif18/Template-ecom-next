@@ -10,6 +10,7 @@ export const CartProvider = (props) => {
 
     // États de mes données
     const [cart, setCart] = useState([]);
+    const [isAdded, setIsAdded] = useState(false);
 
     const addToCart = (item, mainImage, size, color) => {
         setCart((prevCart) => {
@@ -37,6 +38,11 @@ export const CartProvider = (props) => {
                 ];
             }
         });
+        setIsAdded(true);
+
+        setTimeout(() => {
+            setIsAdded(false);
+        }, 1000); // Durée de l'animation
     };
 
 
@@ -113,15 +119,16 @@ export const CartProvider = (props) => {
 
 
     const contextValue = {
-        cart: cart,
-        setCart: setCart,
-        addToCart: addToCart,
-        incrementQuantity: incrementQuantity,
-        decrementQuantity: decrementQuantity,
-        removeFromCart: removeFromCart,
-        clearCart: clearCart,
-        total: total,
-        nombreArticles: nombreArticles
+        cart,
+        setCart,
+        addToCart,
+        incrementQuantity,
+        decrementQuantity,
+        removeFromCart,
+        clearCart,
+        total,
+        nombreArticles,
+        isAdded
     };
 
     return (

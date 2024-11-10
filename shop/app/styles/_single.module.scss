@@ -5,7 +5,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 16px;
+    padding: 10px;
 
     .row1 {
         width: 100%;
@@ -172,15 +172,25 @@
                 padding-bottom: 15px;
 
                 .btnAdd {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 10px;
                     width: 40%;
                     padding: 10px;
                     border: none;
                     font-size: 1.1em;
                     text-transform: uppercase;
                     color: #ffff;
-                    background-color: var(--btnPrimary);
+                    background-color: var(--btnSecondary);
                     cursor: pointer;
+                    transition: background-color 0.3s, color 0.3s;
                 }
+
+                .btnAdd.added {
+                    background-color: green;
+                    color: white;
+                  }
             }
 
 
@@ -189,13 +199,13 @@
 
     .row2 {
         width: 100%;
-        padding: 5%;
-
+        padding: 2%;
+       
         nav {
             display: flex;
             align-items: center;
             gap: 16px;
-            padding: 20px;
+            padding: 10px;
             border-top: 1px solid #d4d4d4;
 
             h2 {
@@ -316,8 +326,8 @@
 
     .row3 {
         width: 100%;
-        padding: 5%;
-
+        padding: 2%;
+      
         h2 {
             font-size: 1.5em;
             font-family: "Montserrat";
@@ -327,14 +337,14 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 16px;
+            gap: 10px;
         }
 
     }
 
     .row4 {
         width: 100%;
-        padding: 5%;
+        padding: 2%;
 
         h2 {
             font-size: 1.5em;
@@ -345,7 +355,7 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 16px;
+            gap: 10px;
         }
 
     }
