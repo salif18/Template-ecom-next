@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import styles from "./styles/_home.module.scss";
 import LayoutPage from "./layouts/Layout";
@@ -10,9 +11,12 @@ import quality from "./assets/images/quality-free-img.png"
 import tag from "./assets/images/tag-free-img.png"
 import Floatingbtn from "./components/floatingbtn";
 import Slider from "./components/Slider";
-import Carousel from "./components/Carousel";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const promodata = data[1]
+
+  const router = useRouter()
  
   return (
     <LayoutPage>
@@ -23,8 +27,8 @@ export default function Home() {
             <h2>Spécial offre de la semaine !</h2>
             <p>25% de réduction sur tous les produits</p>
             <section className={styles.btnOptions}>
-              <button className={styles.btnBuy}>Achetez maintenant</button>
-              <button className={styles.btnMore}>En savoir plus</button>
+              <button className={styles.btnBuy} onClick={()=>router.push(`/products/${promodata.id}`)} >Achetez maintenant</button>
+              <button className={styles.btnMore} onClick={()=>router.push(`/products`)}>En savoir plus</button>
             </section>
           </div>
           <div className={styles.right}>
@@ -41,9 +45,7 @@ export default function Home() {
             }
           </ul>
         </section>
-        <section>
-          <Carousel/>
-        </section>
+    
         <section className={styles.newArrival}>
           <h2 className={styles.title}>Les nouveaux arrivages</h2>
           <ul className={styles.productList}>
