@@ -9,6 +9,8 @@ import lock from "./assets/images/lock-free-img.png"
 import quality from "./assets/images/quality-free-img.png"
 import tag from "./assets/images/tag-free-img.png"
 import Floatingbtn from "./components/floatingbtn";
+import Slider from "./components/Slider";
+import Carousel from "./components/Carousel";
 
 export default function Home() {
  
@@ -25,6 +27,9 @@ export default function Home() {
               <button className={styles.btnMore}>En savoir plus</button>
             </section>
           </div>
+          <div className={styles.right}>
+              <Slider />
+          </div>
         </section>
         <section className={styles.newArrival}>
           <h2 className={styles.title}>Nos catégories</h2>
@@ -35,6 +40,9 @@ export default function Home() {
               )
             }
           </ul>
+        </section>
+        <section>
+          <Carousel/>
         </section>
         <section className={styles.newArrival}>
           <h2 className={styles.title}>Les nouveaux arrivages</h2>

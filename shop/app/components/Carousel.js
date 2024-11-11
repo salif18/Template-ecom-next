@@ -1,17 +1,27 @@
+"use client";
 import { useState, useEffect } from "react";
+import data from "../lib/data";
+import ProductCard from "./ProductCard";
 
-const Carousel = ({ items, autoScroll = true, intervalTime = 3000 }) => {
+const Carousel = () => {
+  const intervalTime = 3000;
+  const autoScroll = true;
+  const visibleItems = 4;
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Calcul du nombre de groupes
+  const totalItems = data.slice(0, 6).length;
+  const maxIndex = Math.ceil(totalItems / visibleItems) - 1;
 
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? items.length - 1 : prevIndex - 1
+      prevIndex === 0 ? maxIndex : prevIndex - 1
     );
   };
 
   const goToNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === items.length - 1 ? 0 : prevIndex + 1
+      prevIndex === maxIndex ? 0 : prevIndex + 1
     );
   };
 
@@ -28,7 +38,6 @@ const Carousel = ({ items, autoScroll = true, intervalTime = 3000 }) => {
 
   return (
     <div className="carousel-container">
-      {/* Boutons de navigation */}
       <button className="nav-button prev" onClick={goToPrevious}>
         ❮
       </button>
@@ -37,17 +46,22 @@ const Carousel = ({ items, autoScroll = true, intervalTime = 3000 }) => {
       </button>
 
       {/* Conteneur des éléments */}
-      <div className="carousel" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-        {items.map((item, index) => (
+      <div
+        className="carousel"
+        style={{
+          transform: `translateX(-${currentIndex * (100 / visibleItems)}%)`,
+        }}
+      >
+        {data.slice(0, 6).map((item, index) => (
           <div key={index} className="carousel-item">
-            {item}
+            <ProductCard product={item} />
           </div>
         ))}
       </div>
 
       {/* Indicateurs */}
       <div className="indicators">
-        {items.map((_, index) => (
+        {Array.from({ length: maxIndex + 1 }).map((_, index) => (
           <button
             key={index}
             className={`indicator ${index === currentIndex ? "active" : ""}`}
