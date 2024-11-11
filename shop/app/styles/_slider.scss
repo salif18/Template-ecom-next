@@ -32,8 +32,11 @@
 .nav-button {
   position: absolute;
   top: 50%;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.137);
   color: white;
   border: none;
   padding: 8px;
@@ -44,10 +47,16 @@
 
 .nav-button.prev {
   left: 10px;
+  &:hover{
+    background-color: rgba(0, 0, 0, 0.658);
+  }
 }
 
 .nav-button.next {
   right: 10px;
+  &:hover{
+    background-color: rgba(0, 0, 0, 0.658);
+  }
 }
 
 .indicators {
