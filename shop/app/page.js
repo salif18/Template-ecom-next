@@ -14,6 +14,7 @@ import Slider from "./components/Slider";
 import { useRouter } from "next/navigation";
 import CategoryCard from "./components/categoryCard";
 import OffreCard from "./components/OffreCard";
+import { BiSolidCategory } from "react-icons/bi";
 
 export default function Home() {
   // produit en promo
@@ -50,7 +51,7 @@ export default function Home() {
           </div>
         </section>
         <section className={styles.categoriesContainer}>
-          <h2 className={styles.title}>Nos catégories vendues</h2>
+          <h2 className={styles.title}>Nos catégories vendues  <BiSolidCategory  className={styles.icon} /></h2>
           <ul className={styles.productList}>
             {
               uniqueCategoryProducts.map((product) =>

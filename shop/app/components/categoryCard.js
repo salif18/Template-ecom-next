@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import styles from "../styles/_categoryCard.module.scss"
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import { useRouter } from 'next/navigation';
+import { BiSolidCategory } from "react-icons/bi";
 
 const CategoryCard = ({ product }) => {
   const router = useRouter();
@@ -22,7 +23,7 @@ const CategoryCard = ({ product }) => {
       <figure>
         <img src={mainImage} alt={product.name} onClick={handleGoToSingleProduct} />
         <div onClick={handleGoToSingleProduct}>
-          <LocalMallOutlinedIcon className={styles.icon} />
+          <BiSolidCategory  className={styles.icon} />
           <span>Categorie {product.category}</span>
         </div>
       </figure>

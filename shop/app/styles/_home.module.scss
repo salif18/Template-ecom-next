@@ -112,6 +112,9 @@
         padding: 16px;
 
         .title {
+            display: flex;
+            align-items: center;
+            gap: 16px;
             align-self: flex-start;
             font-family: "Montserrat";
             margin: 15px 10%;
