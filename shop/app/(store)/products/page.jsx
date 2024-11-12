@@ -14,7 +14,8 @@ const PRODUCTS_PER_PAGE = 12; // Nombre de produits par page
 
 const Boutique = () => {
   const searchParams = useSearchParams();
-  const categoryParam = searchParams.get("category");
+  const categoryParam = searchParams ? searchParams.get("category") : "";
+
 
   const [categoryLocal, setCategoryLocal] = useState(categoryParam || "");
 
