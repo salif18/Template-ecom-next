@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import LayoutPage from '../../layouts/Layout';
 import styles from "../../styles/_products.module.scss"
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
@@ -110,6 +110,7 @@ const Boutique = () => {
   return (
     <LayoutPage>
       {/* NAVBAR */}
+      <Suspense fallback={<div>Chargement...</div>}>
       <nav className={styles.nav}>
         <ul>
         <li><p onClick={handleDefault}>Tout</p></li>
@@ -262,6 +263,7 @@ const Boutique = () => {
         </main>
         <Floatingbtn />
       </div>
+      </Suspense>
     </LayoutPage>
   )
 }
