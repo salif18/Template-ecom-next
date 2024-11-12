@@ -81,6 +81,7 @@ export default function Home() {
           </ul>
         </section>
         <section className={styles.promotion}>
+        <div className={styles.back}></div>
           <h2 className={styles.title}>Nos meilleurs offres</h2>
           <div className={styles.containerPromo}>
           <h2 className={styles.h2}>Promos jusq’à -15% sur ces articles de mode,</h2>
