@@ -8,7 +8,9 @@ const CategoryCard = ({ product }) => {
   const router = useRouter();
 
   const handleGoToSingleProduct = () => {
-    router.push(`/products?category=${product.category}`);
+    localStorage.setItem("categorie",product.category);
+    router.push(`/products`);
+    // router.push(`/products?category=${product.category}`);
   }
   
 

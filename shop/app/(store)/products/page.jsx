@@ -1,5 +1,5 @@
 "use client"
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import LayoutPage from '../../layouts/Layout';
 import styles from "../../styles/_products.module.scss"
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
@@ -13,11 +13,20 @@ import { useSearchParams } from 'next/navigation';
 const PRODUCTS_PER_PAGE = 12; // Nombre de produits par page
 
 const Boutique = () => {
-  const searchParams = useSearchParams();
-const categoryParam = searchParams ? searchParams.get("category") : "";
+// const searchParams = useSearchParams();
+// const categoryParam = searchParams ? searchParams.get("category") : "";
 
 
-  const [categoryLocal, setCategoryLocal] = useState(categoryParam || "");
+//   const [categoryLocal, setCategoryLocal] = useState(categoryParam || "");
+const [categoryLocal, setCategoryLocal] = useState("");
+
+// Récupérer la catégorie du localStorage au chargement
+useEffect(() => {
+  const storedCategory = localStorage.getItem("categorie");
+  if (storedCategory) {
+    setCategoryLocal(storedCategory);
+  }
+}, []);
 
 
  
