@@ -5,7 +5,7 @@ import data from "../lib/data";
 const Slider = () => {
   const intervalTime = 3000;
   const autoScroll = true;
-  const images = data[1]?.othersColors || [];
+  const images = data[16]?.othersColors || [];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {

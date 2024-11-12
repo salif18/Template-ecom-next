@@ -30,8 +30,8 @@ export default function Home() {
       return map;                         // Renvoie le Map mis à jour pour la prochaine itération
     }, new Map()).values()                // À la fin, .values() donne les produits uniques dans chaque catégorie
   );
-  
- 
+
+
   return (
     <LayoutPage>
       <main className={styles.page}>
@@ -41,12 +41,12 @@ export default function Home() {
             <h2>Spécial offre de la semaine !</h2>
             <p>25% de réduction sur tous les produits</p>
             <section className={styles.btnOptions}>
-              <button className={styles.btnBuy} onClick={()=>router.push(`/products/${promodata.id}`)} >Achetez maintenant</button>
+              <button className={styles.btnBuy} onClick={() => router.push(`/products/${promodata.id}`)} >Achetez maintenant</button>
               {/* <button className={styles.btnMore} onClick={()=>router.push(`/products`)}>En savoir plus</button> */}
             </section>
           </div>
           <div className={styles.right}>
-              <Slider />
+            <Slider />
           </div>
         </section>
         <section className={styles.categoriesContainer}>
@@ -59,12 +59,12 @@ export default function Home() {
             }
           </ul>
         </section>
-    
+
         <section className={styles.newArrival}>
           <h2 className={styles.title}>Les nouveaux arrivages</h2>
           <ul className={styles.productList}>
             {
-              data.slice(0, 5).map((product) =>
+              data.reverse().slice(0, 5).map((product) =>
                 <li key={product.id}><ProductCard product={product} /></li>
               )
             }
@@ -74,24 +74,26 @@ export default function Home() {
           <h2 className={styles.title}>Les plus populaires</h2>
           <ul className={styles.productList}>
             {
-              data.slice(0, 5).map((product) =>
+              data.reverse().slice(0, 5).map((product) =>
                 <li key={product.id}><ProductCard product={product} /></li>
               )
             }
           </ul>
         </section>
         <section className={styles.promotion}>
-        <div className={styles.back}></div>
+          <div className={styles.back}></div>
           <h2 className={styles.title}>Nos meilleurs offres</h2>
           <div className={styles.containerPromo}>
-          <h2 className={styles.h2}>Promos jusq’à -15% sur ces articles de mode,</h2>
-          <ul className={styles.productList}>
-            {
-              data.slice(0, 3).map((product) =>
-                <li key={product.id}><OffreCard product={product} /></li>
-              )
-            }
-          </ul>
+            <div className={styles.infoPromo}>
+              <h2 className={styles.h2}>Promos jusq’à <span>-15% </span><br />sur ces articles de mode</h2>
+            </div>
+            <ul className={styles.productList}>
+              {
+                data.slice(0, 3).map((product) =>
+                  <li key={product.id}><OffreCard product={product} /></li>
+                )
+              }
+            </ul>
           </div>
         </section>
         <section className={styles.marquesContainer}>
@@ -129,7 +131,7 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <Floatingbtn/>
+      <Floatingbtn />
     </LayoutPage>
   );
 }

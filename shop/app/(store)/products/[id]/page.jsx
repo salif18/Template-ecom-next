@@ -18,8 +18,8 @@ const SingleProduct = () => {
     const product = data.find(item => item.id == id);
     const otherColors = product.othersColors ? product.othersColors : []
     const firstImage = product.othersColors[0]
-    const recommandations = data.filter(item => item.name.includes(product.name))
-    const relatedCategory = data.filter(item => item.category.includes(product.category))
+    const recommandations = data.filter(item => item.category.includes(product.category))
+    // const relatedCategory = data.filter(item => item.category.includes(product.category))
 
     const [mainImage, setMainImage] = useState(firstImage.images);
 
@@ -253,7 +253,7 @@ const SingleProduct = () => {
                         }
                     </ul>
                 </div>
-                <div className={styles.row4}>
+                {/* <div className={styles.row4}>
                     <h2>Les produits liés à cette catégorie</h2>
                     <ul className={styles.productList}>
                         {
@@ -262,7 +262,7 @@ const SingleProduct = () => {
                             )
                         }
                     </ul>
-                </div>
+                </div> */}
             </main>
         </LayoutPage>
     )

@@ -27,7 +27,6 @@ const CategoryCard = ({ product }) => {
         </div>
       </figure>
       <section className={styles.details}>
-        <h2 onClick={handleGoToSingleProduct}>{product.name}</h2>
         <p className={styles.categoName}>{product.category}</p>
       </section>
     </article>
