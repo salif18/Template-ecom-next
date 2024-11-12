@@ -14,7 +14,7 @@ const PRODUCTS_PER_PAGE = 12; // Nombre de produits par page
 
 const Boutique = () => {
   const searchParams = useSearchParams();
-  const categoryParam = searchParams ? searchParams.get("category") : "";
+const categoryParam = searchParams ? searchParams.get("category") : "";
 
 
   const [categoryLocal, setCategoryLocal] = useState(categoryParam || "");
@@ -111,7 +111,7 @@ const Boutique = () => {
   return (
     <LayoutPage>
       {/* NAVBAR */}
-      <Suspense fallback={<div>Chargement...</div>}>
+ 
       <nav className={styles.nav}>
         <ul>
         <li><p onClick={handleDefault}>Tout</p></li>
@@ -264,7 +264,7 @@ const Boutique = () => {
         </main>
         <Floatingbtn />
       </div>
-      </Suspense>
+
     </LayoutPage>
   )
 }
