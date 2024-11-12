@@ -7,7 +7,7 @@ const LayoutPage = ({ children }) => {
         <>
             <Header />
             <Suspense fallback={<div>Chargement...</div>}>
-            <main>{children}</main>
+                <main>{children}</main>
             </Suspense>
             <Footer />
         </>
