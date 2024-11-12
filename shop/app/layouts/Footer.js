@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
     <section className={styles.row1}>
-       <h2>Promos jusq’à -70% sur tous les vetements & articles de mode, sur toutes les marques.</h2>
+       <h2>Promos jusq’à -5% sur tous les vetements & articles de mode, sur toutes les marques.</h2>
     </section>
     <section className={styles.row2}>
       <div className={styles.columns}>

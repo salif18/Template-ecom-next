@@ -8,10 +8,18 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ProductCard from '@/app/components/ProductCard';
 import data from "../../lib/data";
 import Floatingbtn from '@/app/components/floatingbtn';
+import { useSearchParams } from 'next/navigation';
 
 const PRODUCTS_PER_PAGE = 12; // Nombre de produits par page
 
 const Boutique = () => {
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+
+  const [categoryLocal, setCategoryLocal] = useState(categoryParam || "");
+
+
+ 
   // ETAT DAFFICHAGE DE SIDE BAR EN RESPONSIVE
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const handleView = () => {
@@ -62,9 +70,9 @@ const Boutique = () => {
   const totalPages = Math.ceil(data.length / PRODUCTS_PER_PAGE);
 
   const filteredProducts = displayedProducts.filter((product) => {
-    const matchesCategory = filters.selectedCategories.length === 0 ||
-      filters.selectedCategories.includes(product.category) ||
-      filters.selectedCategories.includes(product.subCategory);
+    const matchesCategory = 
+    (filters.selectedCategories.length === 0 || filters.selectedCategories.includes(product.category)) &&
+    (categoryLocal ? product.category === categoryLocal : true);
     const matchesPrice = product.price <= filters.maxPrice;
     const matchesRating = filters.selectedRating === '' || product.rating >= filters.selectedRating;
     const matchesSearch = product.name.toLowerCase().includes(filters.searchQuery.toLowerCase()) || product.category.toLowerCase().includes(filters.searchQuery.toLowerCase()) || product.subCategory.toLowerCase().includes(filters.searchQuery.toLowerCase());
@@ -94,7 +102,9 @@ const Boutique = () => {
 
   const handleDefault=()=>{
     setSubCategoryFilter("");
-    setMarqueFilter("")
+    setMarqueFilter("");
+    setCategoryLocal("");
+    localStorage.removeItem("categorie")
   }
 
   return (

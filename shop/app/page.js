@@ -12,11 +12,25 @@ import tag from "./assets/images/tag-free-img.png"
 import Floatingbtn from "./components/floatingbtn";
 import Slider from "./components/Slider";
 import { useRouter } from "next/navigation";
+import CategoryCard from "./components/categoryCard";
+import OffreCard from "./components/OffreCard";
 
 export default function Home() {
+  // produit en promo
   const promodata = data[1]
 
   const router = useRouter()
+
+  // nos categories
+  const uniqueCategoryProducts = Array.from(
+    data.reduce((map, item) => {
+      if (!map.has(item.category)) {     // Vérifie si la catégorie est déjà dans le Map
+        map.set(item.category, item);     // Si non, ajoute la catégorie avec le produit
+      }
+      return map;                         // Renvoie le Map mis à jour pour la prochaine itération
+    }, new Map()).values()                // À la fin, .values() donne les produits uniques dans chaque catégorie
+  );
+  
  
   return (
     <LayoutPage>
@@ -28,19 +42,19 @@ export default function Home() {
             <p>25% de réduction sur tous les produits</p>
             <section className={styles.btnOptions}>
               <button className={styles.btnBuy} onClick={()=>router.push(`/products/${promodata.id}`)} >Achetez maintenant</button>
-              <button className={styles.btnMore} onClick={()=>router.push(`/products`)}>En savoir plus</button>
+              {/* <button className={styles.btnMore} onClick={()=>router.push(`/products`)}>En savoir plus</button> */}
             </section>
           </div>
           <div className={styles.right}>
               <Slider />
           </div>
         </section>
-        <section className={styles.newArrival}>
-          <h2 className={styles.title}>Nos catégories</h2>
+        <section className={styles.categoriesContainer}>
+          <h2 className={styles.title}>Nos catégories vendues</h2>
           <ul className={styles.productList}>
             {
-              data.slice(0, 5).map((product) =>
-                <li key={product.id}><ProductCard product={product} /></li>
+              uniqueCategoryProducts.map((product) =>
+                <li key={product.id}><CategoryCard product={product} /></li>
               )
             }
           </ul>
@@ -56,7 +70,7 @@ export default function Home() {
             }
           </ul>
         </section>
-        <section className={styles.newArrival}>
+        <section className={styles.populaireContainer}>
           <h2 className={styles.title}>Les plus populaires</h2>
           <ul className={styles.productList}>
             {
@@ -66,17 +80,20 @@ export default function Home() {
             }
           </ul>
         </section>
-        <section className={styles.newArrival}>
+        <section className={styles.promotion}>
           <h2 className={styles.title}>Nos meilleurs offres</h2>
+          <div className={styles.containerPromo}>
+          <h2 className={styles.h2}>Promos jusq’à -15% sur ces articles de mode,</h2>
           <ul className={styles.productList}>
             {
               data.slice(0, 3).map((product) =>
-                <li key={product.id}><ProductCard product={product} /></li>
+                <li key={product.id}><OffreCard product={product} /></li>
               )
             }
           </ul>
+          </div>
         </section>
-        <section className={styles.newArrival}>
+        <section className={styles.marquesContainer}>
           <h2 className={styles.title}>Nos marques vendues</h2>
           <ul className={styles.productList}>
             {

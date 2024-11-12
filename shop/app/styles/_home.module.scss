@@ -66,7 +66,7 @@
                     width: 250px;
                     height: 40px;
                     border: none;
-                    background: #ffff;
+                    background: orange;
                     font-size: 1em;
                     font-family: "Montserrat";
                     text-transform: uppercase;
@@ -103,6 +103,33 @@
         }
     }
 
+    // categorie
+    .categoriesContainer {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 16px;
+
+        .title {
+            align-self: flex-start;
+            font-family: "Montserrat";
+            margin: 15px 10%;
+        }
+
+        .productList {
+            background-color: #fff;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 20px;
+            width: 100%;
+
+        }
+    }
+
     // newArrival
     .newArrival {
         width: 100%;
@@ -114,7 +141,7 @@
         .title {
             align-self: flex-start;
             font-family: "Montserrat";
-            margin: 0 10%;
+            margin: 15px 10%;
         }
 
         .productList {
@@ -125,6 +152,99 @@
             gap: 16px;
             padding: 20px;
             width: 100%;
+        }
+    }
+
+    // populaire
+    .populaireContainer{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 16px;
+
+        .title {
+            align-self: flex-start;
+            font-family: "Montserrat";
+            margin: 15px 10%;
+        }
+
+        .productList {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 20px;
+            width: 100%;
+
+        }
+    }
+
+     // promotion
+     .promotion {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 16px;
+        background: var(--banerColorPrimary);
+
+        .title {
+            align-self: flex-start;
+            font-family: "Montserrat";
+            margin: 15px;
+            color: #fff;
+        }
+
+        .containerPromo{
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            padding: 16px;
+            .h2{
+                font-family: "Roboto";
+                color: #fff;
+                text-transform: uppercase;
+                font-weight: 600;
+                font-size: 2em;
+            }
+        .productList {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 1px;
+            padding: 20px;
+            width: 100%;
+        }
+    }
+    }
+
+    // marques
+    .marquesContainer {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 16px;
+        background-color: #fff;
+
+        .title {
+            align-self: flex-start;
+            font-family: "Montserrat";
+            margin: 16px 10%;
+        }
+
+        .productList {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 20px;
+            width: 100%;
+            margin: 16px;
 
             .markImg {
                 width: 100px;
@@ -207,12 +327,26 @@
             }
         }
 
-        .newArrival {
+        .categoriesContainer,
+        .newArrival,
+        .populaireContainer,
+        .marquesContainer{
             width: 100%;
-
             .productList {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .promotion{
+            flex-direction: column;
+            width: 100%;
+            .containerPromo{
+                width: 100%;
+                flex-direction: column;
+                .productList{
+                    width: 100%;
+                }
             }
         }
 
