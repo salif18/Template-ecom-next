@@ -3,33 +3,25 @@ import { useState, useEffect } from "react";
 import data from "../lib/data";
 
 const Slider = () => {
-  const intervalTime = 3000;
   const autoScroll = true;
   const images = data[16]?.othersColors || [];
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const goToPrevious = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  };
-
-  const goToNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    );
-  };
+  // FONCTION CHANGER DIRECTION
+  const handleChangeDirection = (direction) => {
+    setCurrentIndex(prevIndex => (prevIndex + direction + images.length) % images.length)
+}
 
   useEffect(() => {
     if (autoScroll) {
-      const slideInterval = setInterval(goToNext, intervalTime);
+      const slideInterval = setInterval(()=>handleChangeDirection(1), 3000);
       return () => clearInterval(slideInterval);
     }
   }, [currentIndex]);
 
   return (
     <div className="slider-container">
-      <button className="nav-button prev" onClick={goToPrevious}>
+      <button className="nav-button prev" onClick={()=>handleChangeDirection(1)}>
         ❮
       </button>
 
@@ -41,7 +33,7 @@ const Slider = () => {
         ))}
       </div>
 
-      <button className="nav-button next" onClick={goToNext}>
+      <button className="nav-button next" onClick={()=>handleChangeDirection(-1)}>
         ❯
       </button>
 

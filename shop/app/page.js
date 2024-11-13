@@ -15,8 +15,13 @@ import { useRouter } from "next/navigation";
 import CategoryCard from "./components/categoryCard";
 import OffreCard from "./components/OffreCard";
 import { BiSolidCategory } from "react-icons/bi";
+import MySlide from "./components/MySlide";
+import MyCarousel from "./components/MyCarousel";
 
 export default function Home() {
+
+  const slidestData = [1, 2, 3, 4, 5, 6]
+  const dataCarousel = ["carousel 1", "carousel 2", "carousel 3","carousel 4", "carousel 5", "carousel 6","carousel 7", "carousel 8", "carousel 9", "carousel 10", "carousel 11", "carousel 12"];
   // produit en promo
   const promodata = data[1]
 
@@ -66,7 +71,8 @@ export default function Home() {
           <ul className={styles.productList}>
             {
               data.reverse().slice(0, 5).map((product) =>
-                <li key={product.id}><ProductCard product={product} /></li>
+                <li key={product.id}><ProductCard product={product} />
+                </li>
               )
             }
           </ul>

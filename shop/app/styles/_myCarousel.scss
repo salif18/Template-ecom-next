@@ -1,0 +1,96 @@
+.my-carousel-container {
+    width: 950px;
+    height: 50vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f1f5;
+
+    .carousels {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        transition: transform 0.5s ease-in-out;
+        transform: translateX(calc(-200px * var(--index)));
+
+        .carousel-item {
+            width: 200px;
+            height: 200px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    .prev,
+    .next {
+        position: absolute;
+        border: none;
+        background: rgba(34, 34, 34, 0.16);
+        width: 50px;
+        height: 50px;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 50%;
+        font-size: 2em;
+        cursor: pointer;
+        color: #fff;
+        transition: background 0.3s ease;
+
+        &:hover {
+            background: #222;
+        }
+    }
+
+    .prev {
+        left: 20px;
+    }
+
+    .next {
+        right: 20px;
+    }
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .my-carousel-container {
+        width: 100%;
+        height: auto;
+        padding: 16px;
+
+        .carousels {
+            width: 100%;
+            gap: 8px;
+            transform: translateX(calc(-100% * var(--index)));
+            /* Adjust for one item visible */
+
+            .carousel-item {
+                width: 100%;
+                /* Takes full width for one item */
+                height: 150px;
+                /* Adjust height for smaller screens */
+            }
+        }
+
+        .prev,
+        .next {
+            width: 40px;
+            height: 40px;
+            font-size: 1.5em;
+            top: calc(50% - 20px);
+            /* Center vertically for smaller buttons */
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+    }
+}
