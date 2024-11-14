@@ -1020,6 +1020,244 @@ const data = [
           }
         ]
       },
+
+      {
+        id: 21,
+        name: "Pantalon ",
+        category: "Vetements",
+        subCategory: "Femmes",
+        marque: "Burberry",
+        rating: "80",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        price: 6000,
+        date: "2024-06-18",
+        othersColors: [
+          {
+            color: "Gray",
+            images: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2017/12/product-w-jeans4-300x300.jpg",
+            sizes: [
+              { size: "32", stock: 5 },
+              { size: "34", stock: 4 },
+              { size: "36", stock: 2 },
+              { size: "38", stock: 5 },
+              { size: "40", stock: 4 },
+              { size: "42", stock: 2 }
+            ]
+          },
+          {
+            color: "Blue",
+            images: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2017/12/product-w-jeans2-300x300.jpg",
+            sizes: [
+              { size: "32", stock: 5 },
+              { size: "34", stock: 4 },
+              { size: "36", stock: 2 },
+              { size: "38", stock: 5 },
+              { size: "40", stock: 4 },
+              { size: "42", stock: 2 }
+            ]
+          },
+          {
+            color: "Black",
+            images: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2017/12/product-m-jeans2-300x300.jpg",
+            sizes: [
+              { size: "32", stock: 5 },
+              { size: "34", stock: 4 },
+              { size: "36", stock: 2 },
+              { size: "38", stock: 5 },
+              { size: "40", stock: 4 },
+              { size: "42", stock: 2 }
+            ]
+          },
+          {
+            color: "Red",
+            images: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUwKd7PHzRPolR50e2_jCA5GNoyhmriyOCloX9NIHZI6C7heyBmg-9vBbbsoJdwUB6FwfHcA&s",
+            sizes: [
+              { size: "32", stock: 5 },
+              { size: "34", stock: 4 },
+              { size: "36", stock: 2 },
+              { size: "38", stock: 5 },
+              { size: "40", stock: 4 },
+              { size: "42", stock: 2 }
+            ]
+          }
+        ]
+      },
+
+      {
+        id: 22,
+        name: "T-shirt ",
+        category: "Vetements",
+        subCategory: "Hommes",
+        marque: "Lacoste",
+        rating: "60",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        price: 5000,
+        date: "2024-06-18",
+        othersColors: [
+          {
+            color: "Aqua",
+            images: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2021/03/tshirt2-300x300.jpg",
+            sizes: [
+              { size: "32", stock: 5 },
+              { size: "34", stock: 4 },
+              { size: "36", stock: 2 },
+              { size: "38", stock: 5 },
+              { size: "40", stock: 4 },
+              { size: "42", stock: 2 }
+            ]
+          },
+          {
+            color: "Blue",
+            images: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2021/03/tshirt4-300x300.jpg",
+            sizes: [
+              { size: "32", stock: 5 },
+              { size: "34", stock: 4 },
+              { size: "36", stock: 2 },
+              { size: "38", stock: 5 },
+              { size: "40", stock: 4 },
+              { size: "42", stock: 2 }
+            ]
+          },
+          {
+            color: "Green",
+            images: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2021/03/tshirt5-300x300.jpg",
+            sizes: [
+              { size: "32", stock: 5 },
+              { size: "34", stock: 4 },
+              { size: "36", stock: 2 },
+              { size: "38", stock: 5 },
+              { size: "40", stock: 4 },
+              { size: "42", stock: 2 }
+            ]
+          },
+          {
+            color: "Orange",
+            images: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2021/03/tshirt7-300x300.jpg",
+            sizes: [
+              { size: "32", stock: 5 },
+              { size: "34", stock: 4 },
+              { size: "36", stock: 2 },
+              { size: "38", stock: 5 },
+              { size: "40", stock: 4 },
+              { size: "42", stock: 2 }
+            ]
+          }
+        ]
+      },
+
+      {
+        id: 23,
+        name: "T-shirt flamant rose",
+        category: "Vetements",
+        subCategory: "Femmes",
+        marque: "Jordan",
+        rating: "80",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        price: 5000,
+        date: "2024-06-18",
+        othersColors: [
+          {
+            color: "Pink",
+            images: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2021/03/tshirt3-300x300.jpg",
+            sizes: [
+              { size: "32", stock: 5 },
+              { size: "34", stock: 4 },
+              { size: "36", stock: 2 },
+              { size: "38", stock: 5 },
+              { size: "40", stock: 4 },
+              { size: "42", stock: 2 }
+            ]
+          },
+          {
+            color: "Orange",
+            images: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2021/03/tshirt7-300x300.jpg",
+            sizes: [
+              { size: "32", stock: 5 },
+              { size: "34", stock: 4 },
+              { size: "36", stock: 2 },
+              { size: "38", stock: 5 },
+              { size: "40", stock: 4 },
+              { size: "42", stock: 2 }
+            ]
+          },
+          {
+            color: "Green",
+            images: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2021/03/tshirt5-300x300.jpg",
+            sizes: [
+              { size: "32", stock: 5 },
+              { size: "34", stock: 4 },
+              { size: "36", stock: 2 },
+              { size: "38", stock: 5 },
+              { size: "40", stock: 4 },
+              { size: "42", stock: 2 }
+            ]
+          },
+          {
+            color: "Purple",
+            images: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2021/03/tshirt3-300x300.jpg",
+            sizes: [
+              { size: "32", stock: 5 },
+              { size: "34", stock: 4 },
+              { size: "36", stock: 2 },
+              { size: "38", stock: 5 },
+              { size: "40", stock: 4 },
+              { size: "42", stock: 2 }
+            ]
+          }
+        ]
+      },
+
+      {
+        id: 24,
+        name: " Colliers Bangle Bracelet ",
+        category: "Accessoires",
+        subCategory: "Femmes",
+        marque: "Fashion",
+        rating: "80",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        price: 6000,
+        date: "2024-06-18",
+        othersColors: [
+          {
+            color: "Blue",
+            images: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2017/12/product-accessory1.jpg",
+            sizes: [
+              
+            ]
+          },
+          {
+            color: "Green",
+            images: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2022/08/product-accessory1-c.jpg",
+            sizes: [
+              
+            ]
+          },
+          {
+            color: "Red",
+            images: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2022/08/product-accessory1-b.jpg",
+            sizes: [
+              { size: "32", stock: 5 },
+              { size: "34", stock: 4 },
+              { size: "36", stock: 2 },
+              { size: "38", stock: 5 },
+              { size: "40", stock: 4 },
+              { size: "42", stock: 2 }
+            ]
+          },
+          {
+            color: "Black",
+            images: "data:image/jpeg;base64,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",
+            sizes: [
+              { size: "32", stock: 5 },
+              { size: "34", stock: 4 },
+              { size: "36", stock: 2 },
+              { size: "38", stock: 5 },
+              { size: "40", stock: 4 },
+              { size: "42", stock: 2 }
+            ]
+          }
+        ]
+      },
 ];
   
   export default data;
