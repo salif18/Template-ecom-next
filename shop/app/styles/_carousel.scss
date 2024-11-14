@@ -1,9 +1,15 @@
 .carousel-container {
   position: relative;
-  max-width: 1100px; /* Ajustez selon vos préférences */
+  max-width: 1200px; /* Ajustez selon vos préférences */
   margin: auto;
   overflow: hidden;
 }
+
+/* Affiche les boutons lorsque la souris survole la zone du carrousel */
+.carousel-container:hover .nav-button {
+  opacity: 1;
+}
+
 
 .carousel {
   display: flex;
@@ -27,6 +33,7 @@
   padding: 10px;
   cursor: pointer;
   z-index: 10;
+  opacity: 0;
 }
 
 .nav-button.prev {

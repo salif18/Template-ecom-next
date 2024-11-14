@@ -18,7 +18,18 @@ const SingleProduct = () => {
     const product = data.find(item => item.id == id);
     const otherColors = product.othersColors ? product.othersColors : []
     const firstImage = product.othersColors[0]
-    const recommandations = data.filter(item => item.category.includes(product.category))
+   
+// Liste des termes à vérifier dans le nom du produit
+const searchTerms = product.name.split(" "); // Diviser le nom du produit en mots individuels
+
+const recommandations = data.filter(item =>
+  item.category.includes(product.category) &&
+  item.subCategory.includes(product.subCategory) &&
+  searchTerms.some(term => 
+    item.name.toLowerCase().includes(term.toLowerCase())
+  )
+);
+       
     // const relatedCategory = data.filter(item => item.category.includes(product.category))
 
     const [mainImage, setMainImage] = useState(firstImage.images);

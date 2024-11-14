@@ -1,4 +1,4 @@
-.OffreCard {
+.newCard {
     height: 306.4px;
     border-radius: 5px;
     width: 214.4px;
@@ -14,16 +14,12 @@
         overflow: hidden;
         width: 100%;
         border-radius: 10px;
-        transition: all 0.3s ease-in-out;
 
         img {
             width: 100%;
             height: 25vh;
             border-radius: 10px;
-        }
 
-        &:hover {
-            transform: scale(1.08);
         }
 
     }
@@ -31,34 +27,16 @@
     .details {
         display: flex;
         flex-direction: column;
-        gap: 16px;
 
         h2 {
             font-size: 1em;
             font-family: "Roboto";
-            color: #fff;
         }
 
-        button {
-            border-radius: 10px;
-            padding: 10px;
-            border: none;
-            width: 100%;
-            height: 40px;
-            background: orange;
-            color: #000;
-            font-family: "Roboto";
-            font-weight: 600;
-            font-size: 0.8em;
-            text-transform: uppercase;
-            transition: all 0.3s ease-in-out;
-            cursor: pointer;
-
-            &:hover {
-                background: #222222;
-                color: #fff;
-            }
-
+        .subCategoName {
+            margin-top: 5px;
+            font-size: 1em;
+            font-family: "Montserrat";
         }
 
     }
@@ -66,29 +44,35 @@
 }
 
 @media (max-width:768px) {
-    .OffreCard {
+    .newCard {
         width: 100%;
         height: 100%;
+        margin: 0.1rem;
 
-        img {
+        figure {
             width: 100%;
-            height: 30vh;
+
+            img {
+                width: 100%;
+                height: 18vh;
+            }
+
         }
 
         .details {
             display: flex;
             flex-direction: column;
-            width: 100%;
 
             h2 {
                 font-size: 0.8em;
                 font-family: "Roboto";
             }
 
-            button {
-                width: 100%;
+            .subCategoName {
+                margin-top: 5px;
+                font-size: 0.8em;
+                font-family: "Montserrat";
             }
-
 
         }
 

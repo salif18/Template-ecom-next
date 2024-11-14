@@ -1,32 +1,37 @@
 "use client";
 import { useState, useEffect } from "react";
-import ProductCard from "./ProductCard";
+import NewCard from "./NewCard";
 
 const Carousel = ({ data }) => {
   const autoScroll = true;
+  const totalItems = data.length;
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleItems ,setVisibleItems] = useState(5);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
-  // Créer une nouvelle liste avec les éléments dupliqués au début et à la fin
-  const duplicatedData = [
-    ...data.slice(-visibleItems), // Derniers éléments ajoutés au début
-    ...data,
-    ...data.slice(0, visibleItems), // Premiers éléments ajoutés à la fin
-  ];
-
-  const totalItems = duplicatedData.length;
+  const [direction, setDirection] = useState(1); // 1 pour suivant, -1 pour précédent
 
   
-  // Fonction pour changer de direction
-  const handleChangeDirection = (direction) => {
-    if (isTransitioning) return; // Éviter d'appeler pendant une transition
-    setIsTransitioning(true);
-    setCurrentIndex((prevIndex) =>
-      (prevIndex + direction + totalItems) % totalItems
-    );
-  };
+  // Fonction pour changer d'image en suivant la direction
+  const handleChangeDirection = (manualDirection = null) => {
+    const actualDirection = manualDirection !== null ? manualDirection : direction;
 
+    setCurrentIndex((prevIndex) => {
+      const newIndex = prevIndex + actualDirection;
+
+      // Si on atteint la fin ou le début, inverse la direction
+      if (newIndex >= totalItems - visibleItems) {
+        setDirection(-1); // Inverser pour aller dans la direction opposée
+        return totalItems - visibleItems;
+      }
+      if (newIndex < 0) {
+        setDirection(1); // Inverser pour aller dans la direction opposée
+        return 0;
+      }
+
+      return newIndex;
+    });
+  };
+  
 // Changer le nombre a afficher en mode responsive
   useEffect(() => {
     const updateItemVisible = () => {
@@ -41,28 +46,11 @@ const Carousel = ({ data }) => {
 
   useEffect(() => {
     if (autoScroll) {
-      const interval = setInterval(() => handleChangeDirection(1), 3000);
+      const interval = setInterval(() => handleChangeDirection(), 3000);
       return () => clearInterval(interval);
     }
   }, [currentIndex, autoScroll]);
 
-
-  useEffect(() => {
-    // Réinitialiser l'index sans transition en cas de dépassement (loop effect)
-    if (currentIndex === 0) {
-      setTimeout(() => {
-        setIsTransitioning(false);
-        setCurrentIndex(data.length); // Repositionner à la fin
-      }, 500);
-    } else if (currentIndex === totalItems - visibleItems) {
-      setTimeout(() => {
-        setIsTransitioning(false);
-        setCurrentIndex(visibleItems); // Repositionner au début
-      }, 500);
-    } else {
-      setIsTransitioning(false);
-    }
-  }, [currentIndex, totalItems, data.length, visibleItems]);
 
   return (
     <div className="carousel-container">
@@ -80,11 +68,11 @@ const Carousel = ({ data }) => {
           transform: `translateX(-${(currentIndex * 100) / visibleItems}%)`,
         }}
       >
-        {duplicatedData.map((item, index) => (
+        {data.map((item, index) => (
           <div key={index} className="carousel-item"
            style={{ minWidth: `${100 / visibleItems}%` }} 
           >
-            <ProductCard product={item} />
+            <NewCard product={item} />
           </div>
         ))}
       </div>

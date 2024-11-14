@@ -65,8 +65,8 @@ export default function Home() {
         </section>
         {/* SECTION NEW ARRIVAL */}
         <section className={styles.newArrival}>
-          <h2 className={styles.title}>Les nouveaux arrivages</h2>
-          <Carousel data={data.reverse().slice(0, 6)} />
+          <h2 className={styles.title}>Nouveaux arrivants</h2>
+          <Carousel data={data.reverse().slice(0, 8)} />
         </section>
         {/* SECTION POPULAIRE */}
         <section className={styles.populaireContainer}>
