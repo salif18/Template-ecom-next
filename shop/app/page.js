@@ -15,14 +15,9 @@ import { useRouter } from "next/navigation";
 import CategoryCard from "./components/categoryCard";
 import OffreCard from "./components/OffreCard";
 import { BiSolidCategory } from "react-icons/bi";
-import MySlide from "./components/MySlide";
-import MyCarousel from "./components/MyCarousel";
 import Carousel from "./components/Carousel";
 
 export default function Home() {
-
-  const slidestData = [1, 2, 3, 4, 5, 6]
-  const dataCarousel = ["carousel 1", "carousel 2", "carousel 3","carousel 4", "carousel 5", "carousel 6","carousel 7", "carousel 8", "carousel 9", "carousel 10", "carousel 11", "carousel 12"];
   // produit en promo
   const promodata = data[1]
 
@@ -42,6 +37,7 @@ export default function Home() {
   return (
     <LayoutPage>
       <main className={styles.page}>
+      {/* SECTION BANNIERE */}
         <section className={styles.banner1}>
           <div className={styles.backColor}></div>
           <div className={styles.left}>
@@ -56,6 +52,7 @@ export default function Home() {
             <Slider />
           </div>
         </section>
+        {/* SECTION CATEGORIES */}
         <section className={styles.categoriesContainer}>
           <h2 className={styles.title}>Nos catégories vendues  <BiSolidCategory  className={styles.icon} /></h2>
           <ul className={styles.productList}>
@@ -66,11 +63,12 @@ export default function Home() {
             }
           </ul>
         </section>
-
+        {/* SECTION NEW ARRIVAL */}
         <section className={styles.newArrival}>
           <h2 className={styles.title}>Les nouveaux arrivages</h2>
           <Carousel data={data.reverse().slice(0, 6)} />
         </section>
+        {/* SECTION POPULAIRE */}
         <section className={styles.populaireContainer}>
           <h2 className={styles.title}>Les plus populaires</h2>
           <ul className={styles.productList}>
@@ -81,6 +79,7 @@ export default function Home() {
             }
           </ul>
         </section>
+        {/* SECTION PROMOTION */}
         <section className={styles.promotion}>
           <div className={styles.back}></div>
           <h2 className={styles.title}>Nos meilleurs offres</h2>
@@ -97,6 +96,7 @@ export default function Home() {
             </ul>
           </div>
         </section>
+        {/* SECTION MARQUES */}
         <section className={styles.marquesContainer}>
           <h2 className={styles.title}>Nos marques vendues</h2>
           <ul className={styles.productList}>
@@ -109,6 +109,7 @@ export default function Home() {
             }
           </ul>
         </section>
+        {/* SECTION SERVICES */}
         <section className={styles.services}>
           <div className={styles.colonnes}>
             <Image src={globe} alt="" />
