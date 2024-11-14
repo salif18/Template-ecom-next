@@ -10,7 +10,7 @@ import data from "../../lib/data";
 import Floatingbtn from '@/app/components/floatingbtn';
 import { useSearchParams } from 'next/navigation';
 
-const PRODUCTS_PER_PAGE = 12; // Nombre de produits par page
+const PRODUCTS_PER_PAGE = 10; // Nombre de produits par page
 
 const Boutique = () => {
 // const searchParams = useSearchParams();
@@ -19,15 +19,6 @@ const Boutique = () => {
 
 //   const [categoryLocal, setCategoryLocal] = useState(categoryParam || "");
 const [categoryLocal, setCategoryLocal] = useState("");
-
-// Récupérer la catégorie du localStorage au chargement
-useEffect(() => {
-  const storedCategory = localStorage.getItem("categorie");
-  if (storedCategory) {
-    setCategoryLocal(storedCategory);
-  }
-}, []);
-
 
  
   // ETAT DAFFICHAGE DE SIDE BAR EN RESPONSIVE
@@ -46,6 +37,17 @@ useEffect(() => {
     selectedRating: '',
     searchQuery: ''
   });
+
+  
+// Récupérer la catégorie du localStorage au chargement
+useEffect(() => {
+  const storedCategory = localStorage.getItem("categorie");
+  const storedSubCategory = localStorage.getItem("subcategorie")
+
+  if (storedCategory) setCategoryLocal(storedCategory);
+  if (storedSubCategory) setSubCategoryFilter(storedSubCategory);
+}, []);
+
 
 
   const handleFilterChange = (event) => {
@@ -115,6 +117,7 @@ useEffect(() => {
     setMarqueFilter("");
     setCategoryLocal("");
     localStorage.removeItem("categorie")
+    localStorage.removeItem("subcategorie")
   }
 
   return (

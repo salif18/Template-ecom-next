@@ -4,7 +4,6 @@ import styles from "./styles/_home.module.scss";
 import LayoutPage from "./layouts/Layout";
 import data from "../../shop/app/lib/data";
 import marques from "../../shop/app/lib/fakemarque";
-import ProductCard from "./components/ProductCard";
 import globe from "./assets/images/globe-free-img.png";
 import lock from "./assets/images/lock-free-img.png"
 import quality from "./assets/images/quality-free-img.png"
@@ -16,6 +15,7 @@ import CategoryCard from "./components/categoryCard";
 import OffreCard from "./components/OffreCard";
 import { BiSolidCategory } from "react-icons/bi";
 import Carousel from "./components/Carousel";
+import PopulairCard from "./components/PopulairCard";
 
 export default function Home() {
   // produit en promo
@@ -74,7 +74,7 @@ export default function Home() {
           <ul className={styles.productList}>
             {
               data.reverse().slice(0, 5).map((product) =>
-                <li key={product.id}><ProductCard product={product} /></li>
+                <li key={product.id}><PopulairCard product={product} /></li>
               )
             }
           </ul>

@@ -42,6 +42,11 @@
      p{
         font-size: 1em;
         font-family: "Roboto";
+        color: #929292;
+        cursor: pointer;
+        &:hover{   
+           color: #000000;
+        }
      }
      input{
         width: 100%;
@@ -76,6 +81,7 @@
         p{
             font-family: "Roboto";
             font-size: 1.1em;
+            
         }
 
         .socials{

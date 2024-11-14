@@ -476,7 +476,7 @@ const data = [
         marque: "Addidas",
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        price: 25000,
+        price: 24000,
         date: "2024-06-18",
         othersColors: [
           {
@@ -533,7 +533,7 @@ const data = [
 
       {
         id: 13,
-        name: "Blazers Femme",
+        name: "Blazers ",
         category: "Vetements",
         subCategory: "Hommes",
         marque: "Fashion",
@@ -600,7 +600,7 @@ const data = [
         marque: "Fashion",
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        price: 25000,
+        price: 30000,
         date: "2024-06-18",
         othersColors: [
           {
@@ -662,7 +662,7 @@ const data = [
         marque: "Fashion",
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        price: 25000,
+        price: 8000,
         date: "2024-06-18",
         othersColors: [
           {
@@ -723,7 +723,7 @@ const data = [
         marque: "Lacoste",
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        price: 25000,
+        price: 22000,
         date: "2024-06-18",
         othersColors: [
           {
@@ -784,7 +784,7 @@ const data = [
         marque: "Calvin Klein",
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        price: 25000,
+        price: 4000,
         date: "2024-06-18",
         othersColors: [
           {
@@ -841,11 +841,11 @@ const data = [
         id: 18,
         name: "Sac à main ",
         category: "Sacs",
-        subCategory: "Hommes",
+        subCategory: "Femmes",
         marque: "Calvin Klein",
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        price: 25000,
+        price: 8000,
         date: "2024-06-18",
         othersColors: [
           {
@@ -906,7 +906,7 @@ const data = [
         marque: "Calvin Klein",
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        price: 25000,
+        price: 4000,
         date: "2024-06-18",
         othersColors: [
           {
@@ -967,7 +967,7 @@ const data = [
         marque: "Addidas",
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        price: 25000,
+        price: 6000,
         date: "2024-06-18",
         othersColors: [
           {

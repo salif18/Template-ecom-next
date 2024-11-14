@@ -2,7 +2,18 @@ import React from 'react'
 import styles from "../styles/_footer.module.scss";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import { useRouter } from 'next/navigation';
+
 const Footer = () => {
+  const router = useRouter()
+
+  const handleGoToSingleProduct = (category, subCategory) => {
+    localStorage.setItem("categorie",category);
+    localStorage.setItem("subcategorie",subCategory);
+    router.push(`/products`);
+
+    // router.push(`/products?category=${product.category}`);
+  }
   return (
     <footer className={styles.footer}>
     <section className={styles.row1}>
@@ -15,17 +26,17 @@ const Footer = () => {
       </div>
       <div className={styles.columns}>
       <h2>Pour elle</h2>
-        <p>Accessoires femmes</p>
-        <p>Accessoires femmes</p>
-        <p>Accessoires femmes</p>
-        <p>Accessoires femmes</p>
+        <p onClick={()=>handleGoToSingleProduct("Accessoires","Femmes")}>Accessoires femmes</p>
+        <p onClick={()=>handleGoToSingleProduct("Chaussures","Femmes")}>Chaussures femmes</p>
+        <p onClick={()=>handleGoToSingleProduct("Vetements","Femmes")}>Vetements femmes</p>
+        <p onClick={()=>handleGoToSingleProduct("Sacs","Femmes")}>Sacs femmes</p>
       </div>
       <div className={styles.columns}>
       <h2>Pour lui</h2>
-      <p>Accessoires hommes</p>
-      <p>Accessoires hommes</p>
-      <p>Accessoires hommes</p>
-      <p>Accessoires hommes</p>
+      <p onClick={()=>handleGoToSingleProduct("Accessoires","Hommes")}>Accessoires hommes</p>
+      <p onClick={()=>handleGoToSingleProduct("Chaussures","Hommes")}>Chaussures hommes</p>
+      <p onClick={()=>handleGoToSingleProduct("Vetements","Hommes")}>Vetements hommes</p>
+      <p onClick={()=>handleGoToSingleProduct("Sacs","Hommes")}>Sacs hommes</p>
       </div>
       <div className={styles.columns}>
       <h2>Newsletter</h2>

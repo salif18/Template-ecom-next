@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import styles from "../styles/_productCard.module.scss"
 import GeneredStarRating from '../utils/generatedStars'
-import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
+import { BiCartDownload } from "react-icons/bi";
 import { useRouter } from 'next/navigation';
 
 const ProductCard = ({ product }) => {
@@ -23,7 +23,7 @@ const ProductCard = ({ product }) => {
       <figure>
         <img src={mainImage} alt={product.name} onClick={() => handleGoToSingleProduct(product.id)} />
         <div onClick={() => handleGoToSingleProduct(product.id)}>
-          <LocalMallOutlinedIcon className={styles.icon} />
+          <BiCartDownload className={styles.icon} />
           <span>Ajouter au panier</span>
         </div>
       </figure>
