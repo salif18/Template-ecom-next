@@ -17,6 +17,7 @@ import OffreCard from "./components/OffreCard";
 import { BiSolidCategory } from "react-icons/bi";
 import MySlide from "./components/MySlide";
 import MyCarousel from "./components/MyCarousel";
+import Carousel from "./components/Carousel";
 
 export default function Home() {
 
@@ -68,14 +69,7 @@ export default function Home() {
 
         <section className={styles.newArrival}>
           <h2 className={styles.title}>Les nouveaux arrivages</h2>
-          <ul className={styles.productList}>
-            {
-              data.reverse().slice(0, 5).map((product) =>
-                <li key={product.id}><ProductCard product={product} />
-                </li>
-              )
-            }
-          </ul>
+          <Carousel data={data.reverse().slice(0, 6)} />
         </section>
         <section className={styles.populaireContainer}>
           <h2 className={styles.title}>Les plus populaires</h2>

@@ -1,47 +1,75 @@
 "use client";
 import { useState, useEffect } from "react";
-import data from "../lib/data";
 import ProductCard from "./ProductCard";
 
-const Carousel = () => {
-  const intervalTime = 3000;
+const Carousel = ({ data }) => {
   const autoScroll = true;
-  const visibleItems = 4;
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [visibleItems ,setVisibleItems] = useState(5);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Calcul du nombre de groupes
-  const totalItems = data.slice(0, 6).length;
-  const maxIndex = Math.ceil(totalItems / visibleItems) - 1;
+  // Créer une nouvelle liste avec les éléments dupliqués au début et à la fin
+  const duplicatedData = [
+    ...data.slice(-visibleItems), // Derniers éléments ajoutés au début
+    ...data,
+    ...data.slice(0, visibleItems), // Premiers éléments ajoutés à la fin
+  ];
 
-  const goToPrevious = () => {
+  const totalItems = duplicatedData.length;
+
+  
+  // Fonction pour changer de direction
+  const handleChangeDirection = (direction) => {
+    if (isTransitioning) return; // Éviter d'appeler pendant une transition
+    setIsTransitioning(true);
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? maxIndex : prevIndex - 1
+      (prevIndex + direction + totalItems) % totalItems
     );
   };
 
-  const goToNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === maxIndex ? 0 : prevIndex + 1
-    );
-  };
+// Changer le nombre a afficher en mode responsive
+  useEffect(() => {
+    const updateItemVisible = () => {
+        setVisibleItems(window.innerWidth < 768 ? 2 : 5);
+    };
+    updateItemVisible();
 
-  const goToSlide = (index) => {
-    setCurrentIndex(index);
-  };
+    window.addEventListener('resize', updateItemVisible);
+
+    return () => window.removeEventListener('resize', updateItemVisible);
+}, []);
 
   useEffect(() => {
     if (autoScroll) {
-      const interval = setInterval(goToNext, intervalTime);
+      const interval = setInterval(() => handleChangeDirection(1), 3000);
       return () => clearInterval(interval);
     }
-  }, [currentIndex, autoScroll, intervalTime]);
+  }, [currentIndex, autoScroll]);
+
+
+  useEffect(() => {
+    // Réinitialiser l'index sans transition en cas de dépassement (loop effect)
+    if (currentIndex === 0) {
+      setTimeout(() => {
+        setIsTransitioning(false);
+        setCurrentIndex(data.length); // Repositionner à la fin
+      }, 500);
+    } else if (currentIndex === totalItems - visibleItems) {
+      setTimeout(() => {
+        setIsTransitioning(false);
+        setCurrentIndex(visibleItems); // Repositionner au début
+      }, 500);
+    } else {
+      setIsTransitioning(false);
+    }
+  }, [currentIndex, totalItems, data.length, visibleItems]);
 
   return (
     <div className="carousel-container">
-      <button className="nav-button prev" onClick={goToPrevious}>
+      <button className="nav-button prev" onClick={() => handleChangeDirection(-1)}>
         ❮
       </button>
-      <button className="nav-button next" onClick={goToNext}>
+      <button className="nav-button next" onClick={() => handleChangeDirection(1)}>
         ❯
       </button>
 
@@ -49,24 +77,15 @@ const Carousel = () => {
       <div
         className="carousel"
         style={{
-          transform: `translateX(-${currentIndex * (100 / visibleItems)}%)`,
+          transform: `translateX(-${(currentIndex * 100) / visibleItems}%)`,
         }}
       >
-        {data.slice(0, 6).map((item, index) => (
-          <div key={index} className="carousel-item">
+        {duplicatedData.map((item, index) => (
+          <div key={index} className="carousel-item"
+           style={{ minWidth: `${100 / visibleItems}%` }} 
+          >
             <ProductCard product={item} />
           </div>
-        ))}
-      </div>
-
-      {/* Indicateurs */}
-      <div className="indicators">
-        {Array.from({ length: maxIndex + 1 }).map((_, index) => (
-          <button
-            key={index}
-            className={`indicator ${index === currentIndex ? "active" : ""}`}
-            onClick={() => goToSlide(index)}
-          />
         ))}
       </div>
     </div>
