@@ -54,7 +54,7 @@ export default function Home() {
         </section>
         {/* SECTION CATEGORIES */}
         <section className={styles.categoriesContainer}>
-          <h2 className={styles.title}>Nos catégories vendues  <BiSolidCategory  className={styles.icon} /></h2>
+          <h2 className={styles.title}>Nos catégories vendues  </h2>
           <ul className={styles.productList}>
             {
               uniqueCategoryProducts.map((product) =>
