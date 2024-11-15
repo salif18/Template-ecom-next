@@ -13,6 +13,9 @@ import { useRouter } from 'next/navigation';
 import { BsHandbag } from "react-icons/bs";
 
 import { FaOpencart } from "react-icons/fa";
+import { GoHome } from "react-icons/go";
+import { MdOutlineContactSupport } from "react-icons/md";
+import { GrContact } from "react-icons/gr";
 
 const Header = () => {
     const router = useRouter()
@@ -49,10 +52,10 @@ const Header = () => {
                 <nav className={`${styles.nav} ${isMenuOpen ? styles.menuOpen : ""}`}>
                     <ul>
                         <CloseOutlinedIcon className={styles.menuClose} onClick={handleView} />
-                        <li><Link href="/">Home</Link></li>
-                        <li><Link href="/products">Boutique</Link></li>
-                        <li><Link href="/about">A propos</Link></li>
-                        <li><Link href="/contact">Nous contacter</Link></li>
+                        <li><Link href="/"><GoHome className={styles.icons} /> Home</Link></li>
+                        <li><Link href="/products"><FaOpencart className={styles.icons} /> Boutique</Link></li>
+                        <li><Link href="/about"><MdOutlineContactSupport  className={styles.icons} /> A propos</Link></li>
+                        <li><Link href="/contact"><GrContact className={styles.icons} /> Nous contacter</Link></li>
                     </ul>
                 </nav>
 

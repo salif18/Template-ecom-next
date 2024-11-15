@@ -188,6 +188,13 @@
                     text-transform: uppercase;
                     color: #db7500f5;
                     padding: 8px;
+                    display: flex;
+                    align-items: center;
+                    gap: 14px;
+                    
+                    .icons{
+                        font-size: 2em;
+                    }
 
                 }
 
@@ -397,6 +404,8 @@
                 align-items: center;
                 gap: 16px;
 
+              
+
                 a {
                     // position: relative;
                     font-family: "Roboto";
@@ -404,6 +413,14 @@
                     text-transform: uppercase;
                     color: var(--textColorSecondary);
                     padding: 8px;
+                    display: flex;
+                    align-items: center;
+                    gap: 14px;
+
+                    .icons{
+                        display: flex;
+                        font-size: 2em;
+                    }
 
                 }
 
