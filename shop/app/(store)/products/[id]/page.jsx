@@ -90,9 +90,7 @@ const recommandations = data.filter(item =>
                 <div className={styles.row1}>
                     <div className={styles.left}>
 
-                        <img src={mainImage} alt='' />
-
-                        <div className={styles.galleries}>
+                    <div className={styles.galleries}>
                             <ul>
                                 {
                                     otherColors.map((photo, index) =>
@@ -102,6 +100,8 @@ const recommandations = data.filter(item =>
                                     )
                                 }</ul>
                         </div>
+
+                        <img src={mainImage} alt='' />
 
                         {/* <div className={styles.colory}>
                             <ul>

@@ -1,5 +1,6 @@
  // navbar
  .nav {
+    margin-top: 4.8%;
      display: flex;
      align-items: center;
      justify-content: center;
@@ -36,7 +37,7 @@
 
          .menuDropdown {
              position: absolute;
-             top: 20%;
+             top: 14.7%;
              width: 100%;
              //  left: 0;
              display: none;
@@ -172,7 +173,11 @@
 
              input {
                  margin-bottom: 15px;
-               
+                 font-family: "Roboto";
+             }
+
+             .ratingColor{
+                color: #db7500f5;
              }
          }
      }
@@ -265,6 +270,7 @@
 
      // nav
      .nav {
+        margin-top: 20%;
          /* Firefox */
          padding: 20px;
 
@@ -281,7 +287,7 @@
 
              .menuDropdown {
                  position: absolute;
-                 top: 23%;
+                 top: 14%;
                  left: 0;
                  width: 100%;
              }
@@ -303,6 +309,7 @@
              }
 
              .menuToggle {
+                color: orangered;
                  display: block; // Affiche l'icône du menu hamburger
              }
          }

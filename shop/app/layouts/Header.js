@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from "../styles/_header.module.scss";
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
@@ -23,8 +23,25 @@ const Header = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
+    //scroller et fixer le navbar
+  const [isFixed, setIsFixed] = useState(false)
+  useEffect(() => {
+    const scrolling = () => {
+      if (document.documentElement.scrollTop > 20) {
+        setIsFixed(true)
+      } else {
+        setIsFixed(false)
+      }
+    }
+    window.addEventListener('scroll', scrolling)
+    return (() => {
+      window.removeEventListener('scroll', scrolling)
+    })
+  }, [])
+
+
     return (
-        <header className={styles.header}>
+        <header className={isFixed ? styles.headerFixed : styles.header}>
             <section className={styles.logo}>
                 <h1> <FaOpencart style={{fontSize:"2.2em"}} /> Fashion</h1>
             </section>

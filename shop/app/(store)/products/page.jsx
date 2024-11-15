@@ -203,41 +203,44 @@ useEffect(() => {
 
             <h3>Par meilleures notes</h3>
             <input
-           
+            
               type="radio"
               name="selectedRating"
               value="100"
               onChange={handleFilterChange}
               onClick={handleView}
-            /> ★★★★★<br />
+            /> <span   className={styles.ratingColor}>★★★★★</span> ( 5 étoiles )<br />
             <input
               type="radio"
               name="selectedRating"
               value="80"
               onChange={handleFilterChange}
               onClick={handleView}
-            /> ★★★★<br />
+            /> <span   className={styles.ratingColor}>★★★★</span>( 4 étoiles )<br />
             <input
+            
               type="radio"
               name="selectedRating"
               value="60"
               onChange={handleFilterChange}
               onClick={handleView}
-            /> ★★★<br />
+            /> <span   className={styles.ratingColor}>★★★</span> ( 3 étoiles )<br />
             <input
+          
               type="radio"
               name="selectedRating"
               value="40"
               onChange={handleFilterChange}
               onClick={handleView}
-            /> ★★<br />
+            /> <span   className={styles.ratingColor}>★★</span> ( 2 étoiles )<br />
             <input
+      
               type="radio"
               name="selectedRating"
               value="20"
               onChange={handleFilterChange}
               onClick={handleView}
-            /> ★<br />
+            /> <span   className={styles.ratingColor}>★</span> ( 1 étoile )<br />
           </section>
         </aside>
         <main className={styles.main}>

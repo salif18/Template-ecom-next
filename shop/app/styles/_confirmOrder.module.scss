@@ -1,4 +1,5 @@
 .confirmOrder {
+    margin-top: 4.8%;
     width: 100%;
     min-height: 100vh;
     padding: 16px;
@@ -169,6 +170,7 @@
 
 @media (max-width:768px) {
     .confirmOrder {
+        margin-top: 20%;
         width: 100%;
 
         .title {
