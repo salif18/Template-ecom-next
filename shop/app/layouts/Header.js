@@ -43,7 +43,7 @@ const Header = () => {
     return (
         <header className={isFixed ? styles.headerFixed : styles.header}>
             <section className={styles.logo}>
-                <h1> <FaOpencart style={{fontSize:"2.2em"}} /> Fashion</h1>
+                <h1 onClick={()=> router.push("/")}> <FaOpencart style={{fontSize:"2.2em"}} /> Fashion</h1>
             </section>
             <div className={styles.headerLeft}>
                 <nav className={`${styles.nav} ${isMenuOpen ? styles.menuOpen : ""}`}>
