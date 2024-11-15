@@ -199,13 +199,13 @@ const recommandations = data.filter(item =>
                         onClick={toggleCommentsMenu} 
                         className={activeTab === 'comments' ? styles.active : ''}
                         >
-                        Commentaires
+                        Donner une note
                         </h2>
                         <h2 
                         className={activeTab === 'reviews' ? styles.active : ''}
                         onClick={toggleReviewsMenu}
                         >
-                        Avis
+                        Voir les commentaires
                         </h2>
                     </nav>
 
@@ -246,9 +246,25 @@ const recommandations = data.filter(item =>
 
                         {isReviewsOpen && (
                             <div className={styles.dropdowncontent} ref={reviewsRef}>
-                                <a href="#">Avis 1</a>
-                                <a href="#">Avis 2</a>
-                                <a href="#">Avis 3</a>
+                                <h1>Les avis</h1>
+                                <div className={styles.commentaireContainer}>
+                                  <di className={styles.avisCard}>
+                                    <h2>★★★★</h2>
+                                    <p className={styles.date}>02/11/2024</p>
+                                    <p className={styles.text}>parfait , bon rapport qualité/prix</p>
+                                  </di>
+                                  <di className={styles.avisCard}>
+                                    <h2>★★★</h2>
+                                    <p className={styles.date}>02/11/2024</p>
+                                    <p className={styles.text}>parfait , bon rapport qualité/prix</p>
+                                  </di>
+                                  <di className={styles.avisCard}>
+                                    <h2>★★★★★</h2>
+                                    <p className={styles.date}>02/11/2024</p>
+                                    <p className={styles.text}>parfait , bon rapport qualité/prix</p>
+                                  </di>
+                                </div>
+                               
                             </div>
                         )}
 

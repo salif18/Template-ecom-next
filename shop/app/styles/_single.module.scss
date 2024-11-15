@@ -249,6 +249,12 @@
                 display: flex;
                 flex-direction: column;
 
+                h1{
+                    font-family: "Roboto";
+                    font-size: 1.2em;
+                    margin: 16px;
+                }
+
                 .formCommenter {
                     padding: 20px;
                     border: 1px solid #d4d4d4;
@@ -323,7 +329,7 @@
                         margin: 2% 0;
                         border: none;
                         width: 25%;
-                        background: var(--banerColorPrimary);
+                        background: var(--btnPrimary);
                         font-family: "Roboto";
                         text-transform: uppercase;
                         padding: 10px;
@@ -333,6 +339,40 @@
                     }
                 }
 
+
+            .commentaireContainer{
+                width: 100%;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+                border: 1px solid #d4d4d4;
+                // margin: 0 16px;
+                .avisCard{
+                    width: 1000px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    margin: 16px;
+
+                    h2{
+                        font-size: 1em;
+                        color: orangered;
+                    }
+
+                    .date{
+                        font-family: "Roboto";
+                        font-size: 1em;
+                        font-weight: 600;
+                        color: #555;
+                    }
+                    .text{
+                        font-family: "Roboto";
+                        font-size: 1em;
+                        font-weight: 600;
+                    }
+                }
+            }
             }
 
         }
@@ -438,8 +478,15 @@
             .drops {
 
                 .dropdowncontent {
+                    width: 100%;
                     .formCommenter {
                         .btnCommenter {
+                            width: 100%;
+                        }
+                    }
+                    .commentaireContainer{
+                        width: 100%;
+                        .avisCard{
                             width: 100%;
                         }
                     }

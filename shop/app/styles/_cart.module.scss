@@ -186,12 +186,12 @@
                 font-weight: bold;
                 color: #fff;
                 border: none;
-                background: var(--banerColorSecondary);
+                background: var(--btnPrimary);
                 cursor: pointer;
                 transition: all 0.3s ease-in-out;
 
                 &:hover {
-                    background: rgb(70, 150, 255);
+                    background: rgba(12, 12, 12, 0.705);
                 }
             }
         }
