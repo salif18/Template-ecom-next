@@ -28,12 +28,7 @@ const ProductCard = ({ product }) => {
         </div>
       </figure>
       <section className={styles.details}>
-        <h2 onClick={() => handleGoToSingleProduct(product.id)}>{product.name}</h2>
-        <p className={styles.categoName}>{product.category}</p>
-        <p className={styles.subCategoName}>{product.subCategory}</p>
-        <h2 className={styles.price}>{product.price} FCFA</h2>
-        <GeneredStarRating rating={product.rating} />
-        <div className={styles.colory}>
+      <div className={styles.colory}>
           <ul>
             {otherColors.map(other => (
               <li key={other.color}>
@@ -46,6 +41,12 @@ const ProductCard = ({ product }) => {
             ))}
           </ul>
         </div>
+        <h2 onClick={() => handleGoToSingleProduct(product.id)}>{product.name}</h2>
+        <p className={styles.categoName}>{product.category}</p>
+        <p className={styles.subCategoName}>{product.subCategory}</p>
+        <GeneredStarRating rating={product.rating} />  
+        <h2 className={styles.price}>{product.price} FCFA</h2>
+        
       </section>
     </article>
   )
