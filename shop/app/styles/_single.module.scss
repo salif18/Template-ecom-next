@@ -449,8 +449,7 @@
         .row4 {
             width: 100%;
             .productList {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
+                width: 100%;
             }
         }
 
