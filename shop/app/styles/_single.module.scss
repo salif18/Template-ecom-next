@@ -187,7 +187,7 @@
                     font-size: 0.8em;
                     text-transform: uppercase;
                     color: #ffff;
-                    background-color: var(--btnSecondary);
+                    background-color:orangered;
                     cursor: pointer;
                     transition: background-color 0.3s, color 0.3s;
                 }
@@ -348,7 +348,6 @@
 
         .productList {
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
             gap: 10px;
         }

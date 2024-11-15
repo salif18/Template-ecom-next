@@ -12,6 +12,8 @@ import { AuthContext } from '../context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { BsHandbag } from "react-icons/bs";
 
+import { FaOpencart } from "react-icons/fa";
+
 const Header = () => {
     const router = useRouter()
     const { cart, nombreArticles } = useContext(CartContext)
@@ -24,7 +26,7 @@ const Header = () => {
     return (
         <header className={styles.header}>
             <section className={styles.logo}>
-                <h1>Hadja-Fashion</h1>
+                <h1> <FaOpencart style={{fontSize:"2.2em"}} /> Fashion</h1>
             </section>
             <div className={styles.headerLeft}>
                 <nav className={`${styles.nav} ${isMenuOpen ? styles.menuOpen : ""}`}>

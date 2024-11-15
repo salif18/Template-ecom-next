@@ -6,9 +6,9 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import styles from "../../../styles/_single.module.scss"
 import data from "../../../lib/data"
 import GeneredStarRating from '@/app/utils/generatedStars'
-import ProductCard from '@/app/components/ProductCard'
 import { CartContext } from '@/app/context/CartContext'
 import { FaCheck } from 'react-icons/fa'; // Import de l'icône FaCheck
+import MyCarousel from '@/app/components/MyCarousel'
 
 const SingleProduct = () => {
     const { addToCart, isAdded } = useContext(CartContext);
@@ -255,13 +255,9 @@ const recommandations = data.filter(item =>
                     </div>
                 </div>
                 <div className={styles.row3}>
-                    <h2>Autres recommandations du produit</h2>
+                    <h2>Vous aimerez aussi</h2>
                     <ul className={styles.productList}>
-                        {
-                            recommandations.map((product) =>
-                                <li key={product.id}><ProductCard product={product} /></li>
-                            )
-                        }
+                    <MyCarousel data={recommandations} />
                     </ul>
                 </div>
                 {/* <div className={styles.row4}>

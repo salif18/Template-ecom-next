@@ -1,58 +1,83 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 
 const MyCarousel = ({ data }) => {
-    const slideData = data.reverse().slice(0, 5);
-    const dataLength = slideData.length;
-    const [currentIndex, setCurrentIndex] = useState(0);
+  const autoScroll = true;
+  const totalItems = data.length;
 
-    const [itemVisible, setItemVisible] = useState(4);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [visibleItems ,setVisibleItems] = useState(5);
+  const [direction, setDirection] = useState(1); // 1 pour suivant, -1 pour précédent
 
+  
+  // Fonction pour changer d'image en suivant la direction
+  const handleChangeDirection = (manualDirection = null) => {
+    const actualDirection = manualDirection !== null ? manualDirection : direction;
 
-    useEffect(() => {
-        const updateItemVisible = () => {
-            setItemVisible(window.innerWidth < 768 ? 1 : 4);
-        };
-        updateItemVisible();
+    setCurrentIndex((prevIndex) => {
+      const newIndex = prevIndex + actualDirection;
 
-        window.addEventListener('resize', updateItemVisible);
+      // Si on atteint la fin ou le début, inverse la direction
+      if (newIndex >= totalItems - visibleItems) {
+        setDirection(-1); // Inverser pour aller dans la direction opposée
+        return totalItems - visibleItems;
+      }
+      if (newIndex < 0) {
+        setDirection(1); // Inverser pour aller dans la direction opposée
+        return 0;
+      }
 
-        return () => window.removeEventListener('resize', updateItemVisible);
-    }, []);
-
-    // Changer la direction
-    const handleChangeDirection = (direction) => {
-        setCurrentIndex((prevIndex) => (prevIndex + direction + dataLength) % dataLength);
+      return newIndex;
+    });
+  };
+  
+// Changer le nombre a afficher en mode responsive
+  useEffect(() => {
+    const updateItemVisible = () => {
+        setVisibleItems(window.innerWidth < 768 ? 2 : 5);
     };
+    updateItemVisible();
 
-    // Obtenir les éléments visibles
-    const visibles = () => {
-        const items = [];
-        for (let i = 0; i < itemVisible; i++) {
-            items.push(data[(currentIndex + i) % dataLength]);
-        }
-        return items;
-    };
+    window.addEventListener('resize', updateItemVisible);
+
+    return () => window.removeEventListener('resize', updateItemVisible);
+}, []);
+
+  useEffect(() => {
+    if (autoScroll) {
+      const interval = setInterval(() => handleChangeDirection(), 3000);
+      return () => clearInterval(interval);
+    }
+  }, [currentIndex, autoScroll]);
 
 
-    return (
-        <section className="my-carousel-container">
-            <button className="prev" onClick={() => handleChangeDirection(-1)}>
-                ❮
-            </button>
-            <section className="carousels">
-                {visibles().map((product, index) => (
-                    <div key={index} className="carousel-item">
-                        {product}
-                    </div>
-                ))}
-            </section>
-            <button className="next" onClick={() => handleChangeDirection(1)}>
-                ❯
-            </button>
-        </section>
-    );
+  return (
+    <div className="Mycarousel-container">
+      <button className="nav-button prev" onClick={() => handleChangeDirection(-1)}>
+        ❮
+      </button>
+      <button className="nav-button next" onClick={() => handleChangeDirection(1)}>
+        ❯
+      </button>
+
+      {/* Conteneur des éléments */}
+      <div
+        className="carousel"
+        style={{
+          transform: `translateX(-${(currentIndex * 100) / visibleItems}%)`,
+        }}
+      >
+        {data.map((item, index) => (
+          <div key={index} className="carousel-item"
+           style={{ minWidth: `${100 / visibleItems}%` }} 
+          >
+            <ProductCard product={item} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default MyCarousel;
