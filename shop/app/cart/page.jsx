@@ -11,7 +11,7 @@ const Cart = () => {
   const { token } = useContext(AuthContext)
   const router = useRouter();
   const handleGotoAddress = () => {
-   token ? router.push("/cart/address") : router.push("/login")
+   router.push("/cart/address") 
   }
   return (
     <LayoutPage>

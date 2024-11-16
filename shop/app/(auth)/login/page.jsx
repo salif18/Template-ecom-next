@@ -2,11 +2,13 @@
 import { AuthContext } from '@/app/context/AuthContext'
 import LayoutPage from '@/app/layouts/Layout'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import React, { useContext, useState } from 'react'
 
 const Login = () => {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const redirect = searchParams.get("redirect")
    const { login ,user } = useContext(AuthContext);
 
   const [isValid , setIsValid ] = useState(true)
@@ -24,7 +26,7 @@ const Login = () => {
     e.preventDefault();
     login(user ,new Date(),formData.contact)
     console.log(formData)
-    router.push("/")
+    router.push(redirect || "/")
   }
 
   return (

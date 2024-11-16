@@ -9,6 +9,7 @@ import { AuthContext } from '@/app/context/AuthContext';
 
 const AddressCheckOut = () => {
   const { cart, total , clearCart } = useContext(CartContext);
+  const { token } = useContext(AuthContext)
   
 
   const router = useRouter()
@@ -49,7 +50,8 @@ const AddressCheckOut = () => {
     }
    localStorage.setItem("order",JSON.stringify(order))
     console.log(order)
-    router.push("/succes")
+    // localStorage.setItem('redirectUrl',"/succes")
+    token ? router.push("/succes") : router.push("/login?redirect=/cart/address")
     clearCart()
   }
 
