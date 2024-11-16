@@ -23,7 +23,7 @@ const Footer = () => {
     </section>
     <section className={styles.row2}>
       <div className={styles.columns}>
-          <h2><FaOpencart style={{fontSize:"2.2em"}} /> Fashion</h2>
+          <h2 className={styles.colLogo}><FaOpencart style={{fontSize:"2.2em"}} /> Fashion</h2>
           <p className={styles.h2}>Le meilleur look à tout moment, n’importe où.</p>
       </div>
       <div className={styles.columns}>
