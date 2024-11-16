@@ -28,7 +28,7 @@ const Registre = () => {
     e.preventDefault();
     login(formData ,new Date(),formData.numero)
     console.log(formData)
-    router.push("/registre")
+    router.push("/")
   }
 
   return (
