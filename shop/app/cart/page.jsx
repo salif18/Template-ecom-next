@@ -5,10 +5,10 @@ import styles from "../styles/_cart.module.scss"
 import { useRouter } from 'next/navigation'
 import { CartContext } from '@/app/context/CartContext';
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
-import { AuthContext } from '../context/AuthContext'
+import { CgShoppingCart } from "react-icons/cg";
+
 const Cart = () => {
   const { cart, decrementQuantity, incrementQuantity, total, nombreArticles } = useContext(CartContext)
-  const { token } = useContext(AuthContext)
   const router = useRouter();
   const handleGotoAddress = () => {
    router.push("/cart/address") 
@@ -50,9 +50,13 @@ const Cart = () => {
                   </div>
                 </li>
               ) :
+              <div className={styles.emptyContainer}>
               <p className={styles.empty}> Votre panier est vide</p>
-
+              <p className={styles.empty}><CgShoppingCart style={{fontSize:"2.5em",}} /></p>
+              <button className={styles.btnshop} onClick={()=> router.push("/products")} > Shop now</button>
+              </div>
             }
+           
           </ul>
           <div className={styles.right}>
             <div className={styles.title}>

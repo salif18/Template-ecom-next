@@ -2,6 +2,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import LayoutPage from '../layouts/Layout';
 import styles from "../styles/_confirmOrder.module.scss"
+import { MdOutlinePhoneInTalk } from "react-icons/md";
+import { MdOutlineEmail } from "react-icons/md";
+import { SlLocationPin } from "react-icons/sl";
+import { LiaStreetViewSolid } from "react-icons/lia";
+import { FaDoorClosed } from "react-icons/fa";
 
 
 const ConfirmOrder = () => {
@@ -79,12 +84,12 @@ const ConfirmOrder = () => {
                         <h2>Addresse</h2>
                     </div>
                     <section className={styles.addressData}>
-                        <p>{user.name}</p>
-                        <p>{user.numero}</p>
-                        <p>{user.email}</p>
-                        <p>{address.ville}</p>
-                        <p>{address.rue}</p>
-                        <p>{address.logt}</p>
+                        <p>{user?.username}</p>
+                        <p><MdOutlinePhoneInTalk style={{fontSize:"24px", marginRight:"10px"}} />  {user.numero}</p>
+                        <p><MdOutlineEmail style={{fontSize:"24px", marginRight:"10px"}} /> {user.email}</p>
+                        <p><SlLocationPin style={{fontSize:"24px", marginRight:"10px"}} /> {address.ville}</p>
+                        <p><LiaStreetViewSolid style={{fontSize:"24px", marginRight:"10px"}} /> {address.rue}</p>
+                        <p><FaDoorClosed style={{fontSize:"24px", marginRight:"10px"}} /> {address.logt}</p>
                     </section>
                 </section>
             </main>

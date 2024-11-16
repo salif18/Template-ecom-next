@@ -5,7 +5,7 @@ import styles from "../styles/_footer.module.scss";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import { useRouter } from 'next/navigation';
-
+import { FaOpencart } from "react-icons/fa";
 const Footer = () => {
   const router = useRouter()
 
@@ -23,7 +23,7 @@ const Footer = () => {
     </section>
     <section className={styles.row2}>
       <div className={styles.columns}>
-          <h2>Line-Store</h2>
+          <h2><FaOpencart style={{fontSize:"2.2em"}} /> Fashion</h2>
           <p className={styles.h2}>Le meilleur look à tout moment, n’importe où.</p>
       </div>
       <div className={styles.columns}>
