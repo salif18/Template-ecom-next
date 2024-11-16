@@ -1,11 +1,27 @@
 "use client"
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import LayoutPage from '../layouts/Layout';
 import styles from "../styles/_confirmOrder.module.scss"
-import { CartContext } from '../context/CartContext';
+
 
 const ConfirmOrder = () => {
-    const { total, cart } = useContext(CartContext)
+    const [order, setOrder] = useState({});
+
+    useEffect(() => {
+        const orderlocal = localStorage.getItem('order');
+        if (orderlocal) {
+            try {
+                setOrder(JSON.parse(orderlocal));
+            } catch (e) {
+                console.error("Erreur lors de l'analyse JSON:", e);
+                setOrder({});
+            }
+        } else {
+            setOrder({});
+        }
+    }, []);
+
+    const { user = {}, address = {}, cart = [], total = 0 } = order;
     return (
         <LayoutPage>
             <main className={styles.confirmOrder}>
@@ -25,7 +41,7 @@ const ConfirmOrder = () => {
                         </div>
                         <div className={styles.rowCol}>
                             <p>Mode de paiement</p>
-                            <h2>à la livraison par espèce</h2>
+                            <h2>{order.payementMode}</h2>
                         </div>
                     </section>
                 </section>
@@ -38,14 +54,10 @@ const ConfirmOrder = () => {
                         <h2>Produits</h2>
                         <h2>Total</h2>
                     </div>
-                    <div className={styles.products}>
-                        <div className={styles.productsDiv}><p>Produits</p></div>
-                        <div className={styles.productsDiv}><p>Total</p></div>
-                    </div>
-
+                   
                     {
                         cart.map(item =>
-                            <div className={styles.products}>
+                            <div key={item.id} className={styles.products}>
                                 <div className={styles.productsDiv}><p>{item.name} x{item.qty}</p></div>
                                 <div className={styles.productsDiv}><p>{item.price * item.qty}</p></div>
                             </div>
@@ -67,12 +79,12 @@ const ConfirmOrder = () => {
                         <h2>Addresse</h2>
                     </div>
                     <section className={styles.addressData}>
-                        <p>Moussa</p>
-                        <p>89665544</p>
-                        <p>Moussa@gmail.com</p>
-                        <p>Bamako</p>
-                        <p>589</p>
-                        <p>52</p>
+                        <p>{user.name}</p>
+                        <p>{user.numero}</p>
+                        <p>{user.email}</p>
+                        <p>{address.ville}</p>
+                        <p>{address.rue}</p>
+                        <p>{address.logt}</p>
                     </section>
                 </section>
             </main>

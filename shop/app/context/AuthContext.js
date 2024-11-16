@@ -40,10 +40,10 @@ export const AuthProvider = (props) => {
 
     const logout = () => {
         // Supprime les données utilisateur du localStorage et du state
-        localStorage.removeItem("user");
+        // localStorage.removeItem("user");
         localStorage.removeItem("userId");
         localStorage.removeItem("token");
-        setUser(null);
+        // setUser(null);
         setToken(null);
         setUserId(null);
     };

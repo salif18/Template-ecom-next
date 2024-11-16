@@ -5,11 +5,13 @@ import styles from "../styles/_cart.module.scss"
 import { useRouter } from 'next/navigation'
 import { CartContext } from '@/app/context/CartContext';
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
+import { AuthContext } from '../context/AuthContext'
 const Cart = () => {
   const { cart, decrementQuantity, incrementQuantity, total, nombreArticles } = useContext(CartContext)
+  const { token } = useContext(AuthContext)
   const router = useRouter();
   const handleGotoAddress = () => {
-    router.push("/cart/address")
+   token ? router.push("/cart/address") : router.push("/login")
   }
   return (
     <LayoutPage>

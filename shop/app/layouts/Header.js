@@ -16,11 +16,12 @@ import { FaOpencart } from "react-icons/fa";
 import { GoHome } from "react-icons/go";
 import { MdOutlineContactSupport } from "react-icons/md";
 import { GrContact } from "react-icons/gr";
+import { CiUser } from "react-icons/ci";
 
 const Header = () => {
     const router = useRouter()
     const { cart, nombreArticles } = useContext(CartContext)
-    const {token} = useContext(AuthContext)
+    const {user,token , logout} = useContext(AuthContext)
     
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const handleView = () => {
@@ -65,15 +66,16 @@ const Header = () => {
                 <p className={styles.profil}><PersonOutlineOutlinedIcon className={styles.icon}/></p>
                 <div className={styles.profilDropdown}>
                    <div className={styles.user}>
-                    <p>UserName</p>
+                   {token && <p><CiUser style={{fontSize:"24px"}} /> {user?.username}</p>}
                    </div>
-                   <Link href="/achats" ><BsHandbag style={{fontSize:"24px"}} /> Mes achats</Link>
-                   <button className={styles.btnAuth}
+                   {token && <Link href="/achats" ><BsHandbag style={{fontSize:"24px"}} /> Mes achats</Link>}
+                   {!token && <button className={styles.btnAuth}
                    onClick={()=>router.push("/login")}
                    >Se connecter</button>
-                   {token && <button className={styles.btnlogout}>Se deconnecter</button>}
+                   }
+                   {token && <button className={styles.btnlogout} onClick={logout} >Se deconnecter</button>}
                  </div>
-                
+               
                 </li>
                 <MenuOutlinedIcon className={styles.menuToggle} onClick={handleView} />
             </div>

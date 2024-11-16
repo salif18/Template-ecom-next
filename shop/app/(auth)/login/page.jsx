@@ -1,21 +1,45 @@
+"use client"
+import { AuthContext } from '@/app/context/AuthContext'
 import LayoutPage from '@/app/layouts/Layout'
 import Link from 'next/link'
-import React from 'react'
+import { useRouter } from 'next/navigation'
+import React, { useContext, useState } from 'react'
 
 const Login = () => {
+  const router = useRouter()
+   const { login ,user } = useContext(AuthContext);
+
+  const [isValid , setIsValid ] = useState(true)
+  const [formData ,setFormData ] = useState({
+   contact:"",
+   password:""
+  })
+
+  const handleChange=(e)=>{
+   const { name , value } = e.target;
+    setFormData((prev)=>({...prev , [name]:value}))
+  }
+
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    login(user ,new Date(),formData.contact)
+    console.log(formData)
+    router.push("/")
+  }
+
   return (
     <LayoutPage>
        <main className='auth'>
       
-      <form>
+      <form onSubmit={handleSubmit}>
       <section className='title'>
          <h1>Se connecter à votre compte client</h1>
       </section>
        
         <label htmlFor='numero'>Numéro or email</label>
-        <input id='numero' type='text' name='contact' placeholder='numero / email' />
+        <input id='numero' type='text' name='contact' value={formData.contact} onChange={handleChange} placeholder='numero / email' />
         <label htmlFor='userpassword'>Mot de passe</label>
-        <input id='userpassword' type='password' name='password' placeholder='mot de passe' />
+        <input id='userpassword' type='password' name='password' value={formData.password} onChange={handleChange} placeholder='mot de passe' />
        
 
         <section className='avertissement'>
