@@ -21,6 +21,7 @@ const Header = () => {
     const router = useRouter()
     const { cart, nombreArticles } = useContext(CartContext)
     const {token} = useContext(AuthContext)
+    
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const handleView = () => {
         setIsMenuOpen(!isMenuOpen);

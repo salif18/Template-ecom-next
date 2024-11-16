@@ -2,7 +2,7 @@
 
 import LayoutPage from '@/app/layouts/Layout'
 import { useParams } from 'next/navigation'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import styles from "../../../styles/_single.module.scss"
 import data from "../../../lib/data"
 import GeneredStarRating from '@/app/utils/generatedStars'
@@ -18,18 +18,18 @@ const SingleProduct = () => {
     const product = data.find(item => item.id == id);
     const otherColors = product.othersColors ? product.othersColors : []
     const firstImage = product.othersColors[0]
-   
-// Liste des termes à vérifier dans le nom du produit
-const searchTerms = product.name.split(" "); // Diviser le nom du produit en mots individuels
 
-const recommandations = data.filter(item =>
-  item.category.includes(product.category) &&
-  item.subCategory.includes(product.subCategory) &&
-  searchTerms.some(term => 
-    item.name.toLowerCase().includes(term.toLowerCase())
-  )
-);
-       
+    // Liste des termes à vérifier dans le nom du produit
+    const searchTerms = product.name.split(" "); // Diviser le nom du produit en mots individuels
+
+    const recommandations = data.filter(item =>
+        item.category.includes(product.category) &&
+        item.subCategory.includes(product.subCategory) &&
+        searchTerms.some(term =>
+            item.name.toLowerCase().includes(term.toLowerCase())
+        )
+    );
+
     // const relatedCategory = data.filter(item => item.category.includes(product.category))
 
     const [mainImage, setMainImage] = useState(firstImage.images);
@@ -89,8 +89,7 @@ const recommandations = data.filter(item =>
             <main className={styles.singlePage}>
                 <div className={styles.row1}>
                     <div className={styles.left}>
-
-                    <div className={styles.galleries}>
+                        <div className={styles.galleries}>
                             <ul>
                                 {
                                     otherColors.map((photo, index) =>
@@ -100,22 +99,7 @@ const recommandations = data.filter(item =>
                                     )
                                 }</ul>
                         </div>
-
                         <img src={mainImage} alt='' />
-
-                        {/* <div className={styles.colory}>
-                            <ul>
-                                {otherColors.map(other => (
-                                    <li key={other.color}>
-                                        <div
-                                            style={{ backgroundColor: other.color }}
-                                            onClick={() => changeImage(other.image)}
-                                            className={styles.colorSwatch}
-                                        ></div>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div> */}
                     </div>
                     <div className={styles.right}>
                         <span>{product.subCategory}</span>
@@ -195,17 +179,17 @@ const recommandations = data.filter(item =>
                 <div className={styles.row2}>
 
                     <nav>
-                        <h2 
-                        onClick={toggleCommentsMenu} 
-                        className={activeTab === 'comments' ? styles.active : ''}
+                        <h2
+                            onClick={toggleCommentsMenu}
+                            className={activeTab === 'comments' ? styles.active : ''}
                         >
-                        Donner une note
+                            Donner une note
                         </h2>
-                        <h2 
-                        className={activeTab === 'reviews' ? styles.active : ''}
-                        onClick={toggleReviewsMenu}
+                        <h2
+                            className={activeTab === 'reviews' ? styles.active : ''}
+                            onClick={toggleReviewsMenu}
                         >
-                        Voir les commentaires
+                            Voir les commentaires
                         </h2>
                     </nav>
 
@@ -248,44 +232,35 @@ const recommandations = data.filter(item =>
                             <div className={styles.dropdowncontent} ref={reviewsRef}>
                                 <h1>Les avis</h1>
                                 <div className={styles.commentaireContainer}>
-                                  <di className={styles.avisCard}>
-                                    <h2>★★★★</h2>
-                                    <p className={styles.date}>02/11/2024</p>
-                                    <p className={styles.text}>parfait , bon rapport qualité/prix</p>
-                                  </di>
-                                  <di className={styles.avisCard}>
-                                    <h2>★★★</h2>
-                                    <p className={styles.date}>02/11/2024</p>
-                                    <p className={styles.text}>parfait , bon rapport qualité/prix</p>
-                                  </di>
-                                  <di className={styles.avisCard}>
-                                    <h2>★★★★★</h2>
-                                    <p className={styles.date}>02/11/2024</p>
-                                    <p className={styles.text}>parfait , bon rapport qualité/prix</p>
-                                  </di>
+                                    <di className={styles.avisCard}>
+                                        <h2>★★★★</h2>
+                                        <p className={styles.date}>02/11/2024</p>
+                                        <p className={styles.text}>parfait , bon rapport qualité/prix</p>
+                                    </di>
+                                    <di className={styles.avisCard}>
+                                        <h2>★★★</h2>
+                                        <p className={styles.date}>02/11/2024</p>
+                                        <p className={styles.text}>parfait , bon rapport qualité/prix</p>
+                                    </di>
+                                    <di className={styles.avisCard}>
+                                        <h2>★★★★★</h2>
+                                        <p className={styles.date}>02/11/2024</p>
+                                        <p className={styles.text}>parfait , bon rapport qualité/prix</p>
+                                    </di>
                                 </div>
-                               
+
                             </div>
                         )}
 
                     </div>
                 </div>
                 <div className={styles.row3}>
-                    <h2>Vous aimerez aussi</h2>
+                    <h2 className={styles.h2}>Vous aimerez aussi</h2>
                     <ul className={styles.productList}>
-                    <MyCarousel data={recommandations} />
+                        <MyCarousel data={recommandations} />
                     </ul>
                 </div>
-                {/* <div className={styles.row4}>
-                    <h2>Les produits liés à cette catégorie</h2>
-                    <ul className={styles.productList}>
-                        {
-                            relatedCategory.map((product) =>
-                                <li key={product.id}><ProductCard product={product} /></li>
-                            )
-                        }
-                    </ul>
-                </div> */}
+
             </main>
         </LayoutPage>
     )

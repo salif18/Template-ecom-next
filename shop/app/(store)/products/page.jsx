@@ -8,19 +8,14 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ProductCard from '@/app/components/ProductCard';
 import data from "../../lib/data";
 import Floatingbtn from '@/app/components/floatingbtn';
-import { useSearchParams } from 'next/navigation';
+import { IoMdArrowDropdown } from "react-icons/io";
 
 const PRODUCTS_PER_PAGE = 10; // Nombre de produits par page
 
 const Boutique = () => {
-// const searchParams = useSearchParams();
-// const categoryParam = searchParams ? searchParams.get("category") : "";
 
+  const [categoryLocal, setCategoryLocal] = useState("");
 
-//   const [categoryLocal, setCategoryLocal] = useState(categoryParam || "");
-const [categoryLocal, setCategoryLocal] = useState("");
-
- 
   // ETAT DAFFICHAGE DE SIDE BAR EN RESPONSIVE
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const handleView = () => {
@@ -38,15 +33,18 @@ const [categoryLocal, setCategoryLocal] = useState("");
     searchQuery: ''
   });
 
-  
-// Récupérer la catégorie du localStorage au chargement
-useEffect(() => {
-  const storedCategory = localStorage.getItem("categorie");
-  const storedSubCategory = localStorage.getItem("subcategorie")
+  //CREATION DE LA PAGINATION
+  const [currentPage, setCurrentPage] = useState(1);
 
-  if (storedCategory) setCategoryLocal(storedCategory);
-  if (storedSubCategory) setSubCategoryFilter(storedSubCategory);
-}, []);
+
+  // Récupérer la catégorie du localStorage au chargement
+  useEffect(() => {
+    const storedCategory = localStorage.getItem("categorie");
+    const storedSubCategory = localStorage.getItem("subcategorie")
+
+    if (storedCategory) setCategoryLocal(storedCategory);
+    if (storedSubCategory) setSubCategoryFilter(storedSubCategory);
+  }, []);
 
 
 
@@ -65,26 +63,14 @@ useEffect(() => {
         [name]: value,
       }));
     }
+    setCurrentPage(1); // Réinitialiser la page à 1 lors de la modification d'un filtre
   };
-// FIN DE ZONE DE FILTRAGE
+  // FIN DE ZONE DE FILTRAGE
 
-  //CREATION DE LA PAGINATION
-  const [currentPage, setCurrentPage] = useState(1);
-  const [displayedProducts, setDisplayedProducts] = useState([]);
-
-  // Mettre à jour les produits affichés à chaque changement de page
-  useEffect(() => {
-    const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
-    const endIndex = startIndex + PRODUCTS_PER_PAGE;
-    setDisplayedProducts(data.slice(startIndex, endIndex));
-  }, [currentPage, data]);
-
-  const totalPages = Math.ceil(data.length / PRODUCTS_PER_PAGE);
-
-  const filteredProducts = displayedProducts.filter((product) => {
-    const matchesCategory = 
-    (filters.selectedCategories.length === 0 || filters.selectedCategories.includes(product.category)) &&
-    (categoryLocal ? product.category === categoryLocal : true);
+  const filteredProducts = data.filter((product) => {
+    const matchesCategory =
+      (filters.selectedCategories.length === 0 || filters.selectedCategories.includes(product.category)) &&
+      (categoryLocal ? product.category === categoryLocal : true);
     const matchesPrice = product.price <= filters.maxPrice;
     const matchesRating = filters.selectedRating === '' || product.rating >= filters.selectedRating;
     const matchesSearch = product.name.toLowerCase().includes(filters.searchQuery.toLowerCase()) || product.category.toLowerCase().includes(filters.searchQuery.toLowerCase()) || product.subCategory.toLowerCase().includes(filters.searchQuery.toLowerCase());
@@ -92,6 +78,13 @@ useEffect(() => {
     const matchesSubCategory = product.subCategory.includes(subCategoryFilter)
     return matchesCategory && matchesPrice && matchesRating && matchesSearch && matchesMarques && matchesSubCategory;
   });
+
+  // Pagination sur les produits filtrés
+  const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
+  const displayedProducts = filteredProducts.slice(
+    (currentPage - 1) * PRODUCTS_PER_PAGE,
+    currentPage * PRODUCTS_PER_PAGE
+  );
 
   const marques = [
     "Nike",
@@ -112,28 +105,35 @@ useEffect(() => {
     "Enfants",
   ]
 
-  const handleDefault=()=>{
+  const handleDefault = () => {
     setSubCategoryFilter("");
     setMarqueFilter("");
     setCategoryLocal("");
-    localStorage.removeItem("categorie")
-    localStorage.removeItem("subcategorie")
-  }
+    localStorage.removeItem("categorie");
+    localStorage.removeItem("subcategorie");
+    setFilters({
+      selectedCategories: [],
+      maxPrice: 100000,
+      selectedRating: '',
+      searchQuery: '',
+    });
+    setCurrentPage(1); // Réinitialiser la page
+  };
 
   return (
     <LayoutPage>
       {/* NAVBAR */}
- 
+
       <nav className={styles.nav}>
         <ul>
-        <li><p onClick={handleDefault}>Tout</p></li>
+          <li><p onClick={handleDefault}>Tout</p></li>
           {
             categories.map(categorie =>
               <li key={categorie}><p onClick={() => setSubCategoryFilter(categorie)} >{categorie}</p></li>
             )
           }
 
-          <li><p>Marques</p>
+          <li><p>Marques <IoMdArrowDropdown style={{ fontSize: "2em" }} /> </p>
             <div className={styles.menuDropdown}>
               {marques.map(marque =>
                 <p key={marque} className={styles.popupLink} onClick={() => setMarqueFilter(marque)} >{marque}</p>
@@ -203,44 +203,44 @@ useEffect(() => {
 
             <h3>Par meilleures notes</h3>
             <input
-            
+
               type="radio"
               name="selectedRating"
               value="100"
               onChange={handleFilterChange}
               onClick={handleView}
-            /> <span   className={styles.ratingColor}>★★★★★</span> ( 5 étoiles )<br />
+            /> <span className={styles.ratingColor}>★★★★★</span> ( 5 étoiles )<br />
             <input
               type="radio"
               name="selectedRating"
               value="80"
               onChange={handleFilterChange}
               onClick={handleView}
-            /> <span   className={styles.ratingColor}>★★★★</span>( 4 étoiles )<br />
+            /> <span className={styles.ratingColor}>★★★★</span>( 4 étoiles )<br />
             <input
-            
+
               type="radio"
               name="selectedRating"
               value="60"
               onChange={handleFilterChange}
               onClick={handleView}
-            /> <span   className={styles.ratingColor}>★★★</span> ( 3 étoiles )<br />
+            /> <span className={styles.ratingColor}>★★★</span> ( 3 étoiles )<br />
             <input
-          
+
               type="radio"
               name="selectedRating"
               value="40"
               onChange={handleFilterChange}
               onClick={handleView}
-            /> <span   className={styles.ratingColor}>★★</span> ( 2 étoiles )<br />
+            /> <span className={styles.ratingColor}>★★</span> ( 2 étoiles )<br />
             <input
-      
+
               type="radio"
               name="selectedRating"
               value="20"
               onChange={handleFilterChange}
               onClick={handleView}
-            /> <span   className={styles.ratingColor}>★</span> ( 1 étoile )<br />
+            /> <span className={styles.ratingColor}>★</span> ( 1 étoile )<br />
           </section>
         </aside>
         <main className={styles.main}>
@@ -248,11 +248,11 @@ useEffect(() => {
           <section className={styles.productContainer}>
             <ul className={styles.productList}>
               {
-                filteredProducts.length > 0 ?
-                filteredProducts.map((product) =>
-                  <li key={product.id}><ProductCard product={product} /></li>
-                )
-                : <p className={styles.empty}>Aucuns resultat  </p>
+                displayedProducts.length > 0 ?
+                  displayedProducts.map((product) =>
+                    <li key={product.id}><ProductCard product={product} /></li>
+                  )
+                  : <p className={styles.empty}>Aucuns resultat  </p>
               }
             </ul>
           </section>
@@ -266,7 +266,10 @@ useEffect(() => {
               <button
                 key={i}
                 onClick={() => setCurrentPage(i + 1)}
-                className={currentPage === i + 1 ? styles.actives : ''}
+                style={{
+                  backgroundColor: currentPage === i + 1 ? 'black' : 'white',
+                  color: currentPage === i + 1 ? 'white' : 'black',
+                }}
                 disabled={currentPage === i + 1}
               >
                 {i + 1}

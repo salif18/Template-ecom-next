@@ -382,7 +382,8 @@
         width: 80%;
         padding: 2%;
        
-        h2 {
+        .h2 {
+            margin: 0 20px;
             font-size: 1.5em;
             font-family: "Montserrat";
         }
@@ -396,24 +397,6 @@
 
     }
 
-    .row4 {
-        width: 80%;
-        padding: 2%;
-        background-color: #f9f9f9;
-
-        h2 {
-            font-size: 1.5em;
-            font-family: "Montserrat";
-        }
-
-        .productList {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 10px;
-        }
-
-    }
 }
 
 @media (max-width:768px) {
@@ -495,8 +478,7 @@
             }
         }
 
-        .row3,
-        .row4 {
+        .row3{
             width: 100%;
             .productList {
                 width: 100%;
