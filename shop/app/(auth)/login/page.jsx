@@ -18,6 +18,7 @@ const Login = () => {
   })
 
   const [isValid, setIsValid] = useState(true)
+  const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
     contact: "",
     password: ""
@@ -30,11 +31,28 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+     // Validation des champs
+     if (!formData.contact || !formData.password ) {
+      setIsValid(false); // Affichez un message d'erreur à l'utilisateur
+      setMessage("Veuillez remplir les champs!")
+      return;
+    }
+
     login(user, new Date(), formData.contact)
     console.log(formData)
     router.push(redirect || "/")
     localStorage.removeItem("redirectUrl")
   }
+
+   // Réinitialisation du message d'erreur après un certain temps
+   useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => setMessage(""), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
+
+
 
   return (
     <LayoutPage>
@@ -46,11 +64,12 @@ const Login = () => {
           </section>
 
           <label htmlFor='numero'>Numéro or email</label>
-          <input id='numero' type='text' name='contact' value={formData.contact} onChange={handleChange} placeholder='numero / email' />
+          <input id='numero' className={!isValid && !formData.contact && "error"} type='text' name='contact' value={formData.contact} onChange={handleChange} placeholder='numero / email' />
+          {(!isValid && !formData.contact) && <p className="errorMessage">{message}</p>}
           <label htmlFor='userpassword'>Mot de passe</label>
-          <input id='userpassword' type='password' name='password' value={formData.password} onChange={handleChange} placeholder='mot de passe' />
+          <input id='userpassword' className={!isValid && !formData.password && "error"} type='password' name='password' value={formData.password} onChange={handleChange} placeholder='mot de passe' />
 
-
+          {(!isValid && !formData.password) && <p className="errorMessage">{message}</p>}
           <section className='avertissement'>
             <Link className='forget-pass' href="/reset" >Mot de passe oublié.</Link>
           </section>

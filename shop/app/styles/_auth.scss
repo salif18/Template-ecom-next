@@ -45,6 +45,16 @@
             font-weight: 500;
         }
 
+        input.error{
+            border: 1px solid red;
+        }
+
+        .errorMessage{
+            font-size: 0.8em;
+           color: red;
+          font-family: "Roboto";
+        }
+
         .btnSend {
             margin: 15px 0;
             width: 100%;

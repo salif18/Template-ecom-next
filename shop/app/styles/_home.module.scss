@@ -274,7 +274,7 @@
             margin: 25px;
 
             .markImg {
-                width: 100px;
+                width: 200px;
                 height: 100px;
                 cursor: pointer;
                 transition: all 0.3s ease-in-out;
@@ -364,6 +364,10 @@
         .marquesContainer{
             width: 100%;
             .productList {
+                .markImg{
+                    width: 150px;
+                    height: 100px;
+                }
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
             }

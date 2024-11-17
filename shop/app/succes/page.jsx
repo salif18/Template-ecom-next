@@ -71,7 +71,7 @@ const ConfirmOrder = () => {
 
                     <div className={styles.products}>
                         <div className={styles.productsDiv}><p>Mode de paiement</p></div>
-                        <div className={styles.productsDiv}><p>a la livraison</p></div>
+                        <div className={styles.productsDiv}><p>{order.payementMode}</p></div>
                     </div>
                     <div className={styles.products}>
                         <div className={styles.productsDiv}><p>Total</p></div>
