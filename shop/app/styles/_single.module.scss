@@ -25,6 +25,8 @@
             gap: 20px;
 
             img {
+                display: block;
+                object-fit:contain ;
                 width: 500px;
                 height: 70vh;
             }
@@ -43,6 +45,8 @@
                     gap: 5px;
 
                     img {
+                        display: block;
+                        object-fit: contain;
                         width: 80px;
                         height: 80px;
                         background-color: #ffff;
