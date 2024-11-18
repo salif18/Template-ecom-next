@@ -16,10 +16,37 @@ import OffreCard from "./components/OffreCard";
 import { BiSolidCategory } from "react-icons/bi";
 import Carousel from "./components/Carousel";
 import PopulairCard from "./components/PopulairCard";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  // produit en promo
-  const promodata = data[1]
+ // État pour les produits
+ const [specialOffer, setSpecialOffer] = useState({}); // Produit avec la plus grande promo
+ const [promo, setPromo] = useState([]); // Produit avec la plus petite promo
+
+ useEffect(() => {
+   // Filtrer les promotions
+   const promodata = data.filter((item) => item.is_promo === true);
+
+   if (promodata.length > 0) {
+     // Trouver la promo max
+     const maxPromo = promodata.reduce((max, item) =>
+       item.discount_percentage > max.discount_percentage ? item : max
+     );
+
+    // Trouver toutes les autres promotions sauf le max
+    const otherPromos = promodata.filter((item) => item.id !== maxPromo.id);
+
+     // Mettre à jour l'état
+     setSpecialOffer(maxPromo);
+     setPromo(otherPromos);
+
+     console.log("Produit avec le plus grand pourcentage de réduction :", maxPromo);
+     console.log("Produit avec le plus petit pourcentage de réduction :", otherPromos);
+   } else {
+     console.log("Aucune promotion disponible.");
+   }
+ }, [data]); // Exécuter à chaque fois que `data` change
+  
 
   const router = useRouter()
 
@@ -44,7 +71,7 @@ export default function Home() {
             <h2>Spécial offre de la semaine !</h2>
             <p>25% de réduction sur tous les produits</p>
             <section className={styles.btnOptions}>
-              <button className={styles.btnBuy} onClick={() => router.push(`/products/${promodata.id}`)} >Achetez maintenant</button>
+              <button className={styles.btnBuy} onClick={() => router.push(`/products/${specialOffer.id}`)} >Achetez maintenant</button>
               {/* <button className={styles.btnMore} onClick={()=>router.push(`/products`)}>En savoir plus</button> */}
             </section>
           </div>
@@ -89,7 +116,7 @@ export default function Home() {
             </div>
             <ul className={styles.productList}>
               {
-                data.slice(0, 3).map((product) =>
+                promo?.map((product) =>
                   <li key={product.id}><OffreCard product={product} /></li>
                 )
               }

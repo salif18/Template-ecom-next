@@ -8,6 +8,9 @@ const data = [
       rating: "80",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       price: 4000,
+      is_promo:true,
+      promo_price:3400,
+      discount_percentage:"-15",
       date: "2024-01-05",
       othersColors: [
         {
@@ -57,6 +60,9 @@ const data = [
       rating: "100",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       price: 12500,
+      is_promo:true,
+      promo_price:10625,
+      discount_percentage:"-15",
       date: "2024-02-10",
       othersColors: [
         {
@@ -106,6 +112,9 @@ const data = [
       rating: "1210",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       price: 8000,
+      is_promo:"",
+      promo_price:"",
+      discount_percentage:"",
       date: "2024-03-15",
       othersColors: [
         {
@@ -139,6 +148,9 @@ const data = [
       rating: "50",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       price: 9000,
+      is_promo:"",
+      promo_price:"",
+      discount_percentage:"",
       date: "2024-04-20",
       othersColors: [
         {
@@ -172,6 +184,9 @@ const data = [
       rating: "80",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       price: 4000,
+      is_promo:true,
+      promo_price:3000,
+      discount_percentage:"-15",
       date: "2024-05-15",
       othersColors: [
         {
@@ -222,6 +237,9 @@ const data = [
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 4000,
+        is_promo:"",
+        promo_price:"",
+        discount_percentage:"",
         date: "2024-01-05",
         othersColors: [
           {
@@ -259,6 +277,9 @@ const data = [
         rating: "60",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 10000,
+        is_promo:"",
+        promo_price:"",
+        discount_percentage:"",
         date: "2024-02-10",
         othersColors: [
           {
@@ -307,6 +328,9 @@ const data = [
         marque: "Fashion",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 22000,
+        is_promo:"",
+        promo_price:"",
+        discount_percentage:"",
         date: "2024-03-15",
         othersColors: [
           {
@@ -389,6 +413,9 @@ const data = [
         rating: "20",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 3000,
+        is_promo:"",
+        promo_price:"",
+        discount_percentage:"",
         date: "2024-05-15",
         othersColors: [
           {
@@ -428,6 +455,9 @@ const data = [
         rating: "60",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 4000,
+        is_promo:"",
+        promo_price:"",
+        discount_percentage:"",
         date: "2024-06-18",
         othersColors: [
           {
@@ -477,6 +507,9 @@ const data = [
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 24000,
+        is_promo:"",
+        promo_price:"",
+        discount_percentage:"",
         date: "2024-06-18",
         othersColors: [
           {
@@ -540,6 +573,9 @@ const data = [
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 25000,
+        is_promo:"",
+        promo_price:"",
+        discount_percentage:"",
         date: "2024-06-18",
         othersColors: [
           {
@@ -601,6 +637,9 @@ const data = [
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 30000,
+        is_promo:"",
+        promo_price:"",
+        discount_percentage:"",
         date: "2024-06-18",
         othersColors: [
           {
@@ -663,6 +702,9 @@ const data = [
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 8000,
+        is_promo:"",
+        promo_price:"",
+        discount_percentage:"",
         date: "2024-06-18",
         othersColors: [
           {
@@ -724,6 +766,9 @@ const data = [
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 22000,
+        is_promo:"",
+        promo_price:"",
+        discount_percentage:"",
         date: "2024-06-18",
         othersColors: [
           {
@@ -785,6 +830,9 @@ const data = [
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 4000,
+        is_promo:true,
+        promo_price:3000,
+        discount_percentage:"25",
         date: "2024-06-18",
         othersColors: [
           {
@@ -846,6 +894,9 @@ const data = [
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 8000,
+        is_promo:"",
+        promo_price:"",
+        discount_percentage:"",
         date: "2024-06-18",
         othersColors: [
           {
@@ -907,6 +958,9 @@ const data = [
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 4000,
+        is_promo:"",
+        promo_price:"",
+        discount_percentage:"",
         date: "2024-06-18",
         othersColors: [
           {
@@ -968,6 +1022,9 @@ const data = [
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 6000,
+        is_promo:"",
+        promo_price:"",
+        discount_percentage:"",
         date: "2024-06-18",
         othersColors: [
           {
@@ -1030,6 +1087,9 @@ const data = [
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 6000,
+        is_promo:"",
+        promo_price:"",
+        discount_percentage:"",
         date: "2024-06-18",
         othersColors: [
           {
@@ -1092,6 +1152,9 @@ const data = [
         rating: "60",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 5000,
+        is_promo:"",
+        promo_price:"",
+        discount_percentage:"",
         date: "2024-06-18",
         othersColors: [
           {
@@ -1154,6 +1217,9 @@ const data = [
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 5000,
+        is_promo:"",
+        promo_price:"",
+        discount_percentage:"",
         date: "2024-06-18",
         othersColors: [
           {
@@ -1216,6 +1282,9 @@ const data = [
         rating: "80",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 6000,
+        is_promo:"",
+        promo_price:"",
+        discount_percentage:"",
         date: "2024-06-18",
         othersColors: [
           {
