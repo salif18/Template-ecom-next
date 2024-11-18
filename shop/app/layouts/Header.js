@@ -59,7 +59,7 @@ const Header = () => {
             <li><Link href="/about"><MdOutlineContactSupport className={styles.icons} /> A propos</Link></li>
             <li><Link href="/contact"><GrContact className={styles.icons} /> Nous contacter</Link></li>
             <li className={styles.profilZone}>
-              <p className={styles.profil}><PersonOutlineOutlinedIcon className={styles.icon} /> Profil</p>
+              <p className={styles.profil}><PersonOutlineOutlinedIcon className={styles.icons} /> Profil</p>
               <div className={styles.profilDropdown}>
                 <div className={styles.user}>
                   {token && <p><CiUser style={{ fontSize: "24px" }} /> {user?.username}</p>}

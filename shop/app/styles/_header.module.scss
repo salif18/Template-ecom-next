@@ -41,6 +41,7 @@
         li {
             position: relative;
             .icon {
+                margin: 10px;
                 font-size: 2em;
                 color: #A89F91;
                 cursor: pointer;
@@ -76,11 +77,6 @@
                 color: #A89F91;
                 text-transform: uppercase;
                
-                .icon {
-                    font-size: 2em;
-                    color: #A89F91;
-                    cursor: pointer;
-                }
             }
 
             .profilDropdown {
@@ -274,6 +270,7 @@
             position: relative;
 
             .icon {
+                margin: 10px;
                 font-size: 2em;
                 color: inherit;
                 cursor: pointer;
@@ -301,12 +298,15 @@
         .profilZone {
           
             .profil {
-              
-                .icon {
-                    font-size: 2em;
-                    color: var(--textColorSecondary);
-                    cursor: pointer;
-                }
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 1em;
+                font-family: "Roboto";
+                font-weight: 600;
+                color: var(--textColorSecondary);
+                text-transform: uppercase;
+               
             }
 
             .profilDropdown {
@@ -485,9 +485,7 @@ width: 100%;
 .profil{
     width: 100%;
     color: var(--textColorPrimary);
-    .icon{
-        color: var(--textColorPrimary);
-    }
+   
 }
                 // Hover effect removed to keep it open in responsive mode
                 &:hover .profilDropdown {
