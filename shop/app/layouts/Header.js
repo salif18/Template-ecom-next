@@ -19,16 +19,16 @@ import { GrContact } from "react-icons/gr";
 import { CiUser } from "react-icons/ci";
 
 const Header = () => {
-    const router = useRouter()
-    const { cart, nombreArticles } = useContext(CartContext)
-    const {user,token , logout} = useContext(AuthContext)
-    
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const handleView = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
+  const router = useRouter()
+  const { cart, nombreArticles } = useContext(CartContext)
+  const { user, token, logout } = useContext(AuthContext)
 
-    //scroller et fixer le navbar
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const handleView = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  //scroller et fixer le navbar
   const [isFixed, setIsFixed] = useState(false)
   useEffect(() => {
     const scrolling = () => {
@@ -45,43 +45,44 @@ const Header = () => {
   }, [])
 
 
-    return (
-        <header className={isFixed ? styles.headerFixed : styles.header}>
-            <section className={styles.logo}>
-                <h1 onClick={()=> router.push("/")}> <FaOpencart style={{fontSize:"2.2em"}} /> Fashion</h1>
-            </section>
-            <div className={styles.headerLeft}>
-                <nav className={`${styles.nav} ${isMenuOpen ? styles.menuOpen : ""}`}>
-                    <ul>
-                        <CloseOutlinedIcon className={styles.menuClose} onClick={handleView} />
-                        <li><Link href="/"><GoHome className={styles.icons} /> Home</Link></li>
-                        <li><Link href="/products"><FaOpencart className={styles.icons} /> Boutique</Link></li>
-                        <li><Link href="/about"><MdOutlineContactSupport  className={styles.icons} /> A propos</Link></li>
-                        <li><Link href="/contact"><GrContact className={styles.icons} /> Nous contacter</Link></li>
-                    </ul>
-                </nav>
+  return (
+    <header className={isFixed ? styles.headerFixed : styles.header}>
+      <section className={styles.logo}>
+        <h1 onClick={() => router.push("/")}> <FaOpencart style={{ fontSize: "2.2em" }} /> Fashion</h1>
+      </section>
+      <div className={styles.headerLeft}>
+        <nav className={`${styles.nav} ${isMenuOpen ? styles.menuOpen : ""}`}>
+          <ul>
+            <CloseOutlinedIcon className={styles.menuClose} onClick={handleView} />
+            <li><Link href="/"><GoHome className={styles.icons} /> Home</Link></li>
+            <li><Link href="/products"><FaOpencart className={styles.icons} /> Boutique</Link></li>
+            <li><Link href="/about"><MdOutlineContactSupport className={styles.icons} /> A propos</Link></li>
+            <li><Link href="/contact"><GrContact className={styles.icons} /> Nous contacter</Link></li>
+            <li className={styles.profilZone}>
+              <p className={styles.profil}><PersonOutlineOutlinedIcon className={styles.icon} /> Profil</p>
+              <div className={styles.profilDropdown}>
+                <div className={styles.user}>
+                  {token && <p><CiUser style={{ fontSize: "24px" }} /> {user?.username}</p>}
+                </div>
+                {token && <Link href="/achats" ><BsHandbag style={{ fontSize: "24px" }} /> Mes achats</Link>}
+                {!token && <button className={styles.btnAuth}
+                  onClick={() => router.push("/login")}
+                >Se connecter</button>
+                }
+                {token && <button className={styles.btnlogout} onClick={logout} >Se deconnecter</button>}
+              </div>
 
-                <li><Link href="/cart"><LocalMallOutlinedIcon className={styles.icon} />{cart.length > 0 && <span>{nombreArticles}</span>}</Link></li>
-                <li className={styles.profilZone}>
-                <p className={styles.profil}><PersonOutlineOutlinedIcon className={styles.icon}/></p>
-                <div className={styles.profilDropdown}>
-                   <div className={styles.user}>
-                   {token && <p><CiUser style={{fontSize:"24px"}} /> {user?.username}</p>}
-                   </div>
-                   {token && <Link href="/achats" ><BsHandbag style={{fontSize:"24px"}} /> Mes achats</Link>}
-                   {!token && <button className={styles.btnAuth}
-                   onClick={()=>router.push("/login")}
-                   >Se connecter</button>
-                   }
-                   {token && <button className={styles.btnlogout} onClick={logout} >Se deconnecter</button>}
-                 </div>
-               
-                </li>
-                <MenuOutlinedIcon className={styles.menuToggle} onClick={handleView} />
-            </div>
+            </li>
+          </ul>
+        </nav>
 
-        </header>
-    );
+        <li><Link href="/cart"><LocalMallOutlinedIcon className={styles.icon} />{cart.length > 0 && <span>{nombreArticles}</span>}</Link></li>
+
+        <MenuOutlinedIcon className={styles.menuToggle} onClick={handleView} />
+      </div>
+
+    </header>
+  );
 }
 
 export default Header;

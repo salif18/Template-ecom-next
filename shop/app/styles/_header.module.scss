@@ -67,6 +67,15 @@
 
         .profilZone {
             .profil {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 1em;
+                font-family: "Roboto";
+                font-weight: 600;
+                color: #A89F91;
+                text-transform: uppercase;
+               
                 .icon {
                     font-size: 2em;
                     color: #A89F91;
@@ -290,7 +299,9 @@
         }
 
         .profilZone {
+          
             .profil {
+              
                 .icon {
                     font-size: 2em;
                     color: var(--textColorSecondary);
@@ -470,7 +481,14 @@
             }
 
             .profilZone {
-
+width: 100%;
+.profil{
+    width: 100%;
+    color: var(--textColorPrimary);
+    .icon{
+        color: var(--textColorPrimary);
+    }
+}
                 // Hover effect removed to keep it open in responsive mode
                 &:hover .profilDropdown {
                     position: fixed;
