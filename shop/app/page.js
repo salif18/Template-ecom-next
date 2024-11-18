@@ -13,70 +13,67 @@ import Slider from "./components/Slider";
 import { useRouter } from "next/navigation";
 import CategoryCard from "./components/categoryCard";
 import OffreCard from "./components/OffreCard";
-import { BiSolidCategory } from "react-icons/bi";
 import Carousel from "./components/Carousel";
 import PopulairCard from "./components/PopulairCard";
 import { useEffect, useState } from "react";
 
 export default function Home() {
- // État pour les produits
- const [specialOffer, setSpecialOffer] = useState({}); // Produit avec la plus grande promo
- const [promo, setPromo] = useState([]); // Produit avec la plus petite promo
+  // État pour les produits
+  const [specialOffer, setSpecialOffer] = useState({});
+  const [promo, setPromo] = useState([]);
 
- useEffect(() => {
-   // Filtrer les promotions
-   const promodata = data.filter((item) => item.is_promo === true);
+  useEffect(() => {
+    // Filtrer les promotions
+    const promodata = data.filter((item) => item.is_promo);
 
-   if (promodata.length > 0) {
-     // Trouver la promo max
-     const maxPromo = promodata.reduce((max, item) =>
-       item.discount_percentage > max.discount_percentage ? item : max
-     );
+    if (promodata.length > 0) {
+      // Trouver la promo max
+      const maxPromo = promodata.reduce((max, item) =>
+        item.discount_percentage > max.discount_percentage ? item : max
+      );
 
-    // Trouver toutes les autres promotions sauf le max
-    const otherPromos = promodata.filter((item) => item.id !== maxPromo.id);
+      // Trouver toutes les autres promotions sauf le max
+      const otherPromos = promodata.filter((item) => item.id !== maxPromo.id);
 
-     // Mettre à jour l'état
-     setSpecialOffer(maxPromo);
-     setPromo(otherPromos);
+      // Mettre à jour l'état
+      setSpecialOffer(maxPromo);
+      setPromo(otherPromos);
 
-     console.log("Produit avec le plus grand pourcentage de réduction :", maxPromo);
-     console.log("Produit avec le plus petit pourcentage de réduction :", otherPromos);
-   } else {
-     console.log("Aucune promotion disponible.");
-   }
- }, [data]); // Exécuter à chaque fois que `data` change
-  
+    } else {
+      console.log("Aucune promotion disponible.");
+    }
+  }, [data]);
+
 
   const router = useRouter()
 
   // nos categories
   const uniqueCategoryProducts = Array.from(
     data.reduce((map, item) => {
-      if (!map.has(item.category)) {     // Vérifie si la catégorie est déjà dans le Map
-        map.set(item.category, item);     // Si non, ajoute la catégorie avec le produit
+      if (!map.has(item.category)) {
+        map.set(item.category, item);
       }
-      return map;                         // Renvoie le Map mis à jour pour la prochaine itération
-    }, new Map()).values()                // À la fin, .values() donne les produits uniques dans chaque catégorie
+      return map;
+    }, new Map()).values()
   );
 
 
   return (
     <LayoutPage>
       <main className={styles.page}>
-      {/* SECTION BANNIERE */}
+        {/* SECTION BANNIERE */}
         <section className={styles.banner1}>
           <div className={styles.backColor}></div>
           <div className={styles.left}>
             <h2>Spécial offre de la semaine !</h2>
-            <p>25% de réduction sur tous les produits</p>
+            <p>-{specialOffer.discount_percentage}% de réduction sur cet article</p>
             <section className={styles.btnOptions}>
               <button className={styles.btnBuy} onClick={() => router.push(`/products/${specialOffer.id}`)} >Achetez maintenant</button>
               {/* <button className={styles.btnMore} onClick={()=>router.push(`/products`)}>En savoir plus</button> */}
             </section>
           </div>
           <div className={styles.right}>
-            <Slider />
+            <Slider data={specialOffer} />
           </div>
         </section>
         {/* SECTION CATEGORIES */}
@@ -112,11 +109,11 @@ export default function Home() {
           <h2 className={styles.title}>Nos meilleurs offres</h2>
           <div className={styles.containerPromo}>
             <div className={styles.infoPromo}>
-              <h2 className={styles.h2}>Promos jusq’à <span>-15% </span><br />sur ces articles de mode</h2>
+              <h2 className={styles.h2}>Promos jusq’à <span>-{promo[0]?.discount_percentage}% </span><br />sur ces articles de mode</h2>
             </div>
             <ul className={styles.productList}>
               {
-                promo?.map((product) =>
+                promo.map((product) =>
                   <li key={product.id}><OffreCard product={product} /></li>
                 )
               }

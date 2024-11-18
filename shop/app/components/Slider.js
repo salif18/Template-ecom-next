@@ -1,15 +1,17 @@
 "use client"
 import { useState, useEffect } from "react";
-import data from "../lib/data";
 
-const Slider = () => {
+
+const Slider = ({data}) => {
   const autoScroll = true;
-  const images = data[16]?.othersColors || [];
+ 
+  // Vérifie si othersColors existe et est un tableau
+  const imagesSlider = Array.isArray(data.othersColors) ? data.othersColors : [];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // FONCTION CHANGER DIRECTION
   const handleChangeDirection = (direction) => {
-    setCurrentIndex(prevIndex => (prevIndex + direction + images.length) % images.length)
+    setCurrentIndex(prevIndex => (prevIndex + direction + imagesSlider.length) % imagesSlider.length)
 }
 
   useEffect(() => {
@@ -26,7 +28,7 @@ const Slider = () => {
       </button>
 
       <div className="slider" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-        {images.map((image, index) => (
+        {imagesSlider.map((image, index) => (
           <div key={index} className="slide">
             <img src={image.images} alt={`Slide ${index}`} />
           </div>
@@ -38,7 +40,7 @@ const Slider = () => {
       </button>
 
       <div className="indicators">
-        {images.map((_, index) => (
+        {imagesSlider.map((_, index) => (
           <button
             key={index}
             className={`indicator ${index === currentIndex ? "active" : ""}`}

@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "../styles/_footer.module.scss";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -13,9 +13,32 @@ const Footer = () => {
     localStorage.setItem("categorie",category);
     localStorage.setItem("subcategorie",subCategory);
     router.push(`/products`);
-
-    // router.push(`/products?category=${product.category}`);
   }
+
+  // abonnement
+  const [abonment ,setAbonment] = useState("");
+ const [isValid ,setIsValid] = useState(true);
+ const [message ,setMessage ] = useState();
+
+  const handleSubmit =(e)=>{
+    e.preventDefault();
+     // Validation des champs
+     if (!abonment) {
+      setIsValid(false); // Affichez un message d'erreur à l'utilisateur
+      setMessage("Veuillez rentrer votre email !.")
+      return;
+    }
+    console.log(abonment);
+  }
+
+  // Réinitialisation du message d'erreur après un certain temps
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => setMessage(""), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
+
   return (
     <footer className={styles.footer}>
     <section className={styles.row1}>
@@ -42,8 +65,9 @@ const Footer = () => {
       </div>
       <div className={styles.columns}>
       <h2>Newsletter</h2>
-      <input type='text' placeholder='example@gmail.com' />
-      <button className={styles.btnAbonner}>S'abonner</button>
+      <input type='text' name='abonment' value={abonment} style={{border:!isValid && "1px solid red"}} onChange={(e)=>setAbonment(e.target.value)} placeholder='example@gmail.com' />
+      {(!isValid && !abonment) && <p style={{color: !isValid && "red" , fontSize:"0.8em"}} >{message}</p>}
+      <button className={styles.btnAbonner} onClick={(e)=>handleSubmit(e)} >S'abonner</button>
       </div>
     </section>
     <section className={styles.row3}>

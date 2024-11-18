@@ -10,7 +10,7 @@ const data = [
       price: 4000,
       is_promo:true,
       promo_price:3400,
-      discount_percentage:"-15",
+      discount_percentage:"15",
       date: "2024-01-05",
       othersColors: [
         {
@@ -62,7 +62,7 @@ const data = [
       price: 12500,
       is_promo:true,
       promo_price:10625,
-      discount_percentage:"-15",
+      discount_percentage:"15",
       date: "2024-02-10",
       othersColors: [
         {
@@ -186,7 +186,7 @@ const data = [
       price: 4000,
       is_promo:true,
       promo_price:3000,
-      discount_percentage:"-15",
+      discount_percentage:"15",
       date: "2024-05-15",
       othersColors: [
         {

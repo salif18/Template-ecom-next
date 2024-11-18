@@ -2,7 +2,7 @@
 
 import LayoutPage from '@/app/layouts/Layout'
 import { useParams } from 'next/navigation'
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import styles from "../../../styles/_single.module.scss"
 import data from "../../../lib/data"
 import GeneredStarRating from '@/app/utils/generatedStars'
@@ -77,12 +77,39 @@ const SingleProduct = () => {
 
     // etat pour la notation
     const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState("");
+    const [userName, setUserName] = useState("");
+    const [isValid ,setIsValid] = useState(true);
+    const [message ,setMessage ] = useState();
 
     const handleClick = (value) => {
         setRating(value);
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+          // Validation des champs
+     if (!comment && !userName) {
+        setIsValid(false); // Affichez un message d'erreur à l'utilisateur
+        setMessage("Veuillez rentrer votre email !.")
+        return;
+      }
 
+        const avis = {
+            user: userName,
+            rating: rating,
+            commentaires: comment
+        }
+
+        console.log(avis)
+    }
+
+    useEffect(() => {
+        if (message) {
+          const timer = setTimeout(() => setMessage(""), 3000);
+          return () => clearTimeout(timer);
+        }
+      }, [message]);
 
     return (
         <LayoutPage>
@@ -104,7 +131,11 @@ const SingleProduct = () => {
                     <div className={styles.right}>
                         <span>{product.subCategory}</span>
                         <h1>{product.name}</h1>
-                        <h2>{product.price} fcfa</h2>
+
+                        <div style={{ display: "flex", gap: "10px", fontSize: "0.8em" }}>
+                            <h2 style={{ textDecoration: product.is_promo && "line-through", color: product.is_promo && "#999999" }}>{product.price} FCFA</h2>
+                            {product.is_promo && <h2 className={styles.price}>{product.promo_price} FCFA</h2>}
+                        </div>
                         <p>{product.description}</p>
 
                         <div className={styles.selectedOptions}>
@@ -220,10 +251,12 @@ const SingleProduct = () => {
                                         </span>
                                     </section>
                                     <h2>Votre nom*</h2>
-                                    <input type='text' placeholder='Nom' />
+                                    <input type='text' name='userName' value={userName} style={{border:!isValid && "1px solid red"}} onChange={(e) => setUserName(e.target.value)} placeholder='Nom' />
+                                    {(!isValid && !userName) && <p style={{color: !isValid && "red" , fontSize:"0.8em"}} >{message}</p>}
                                     <h2>Votre avis *</h2>
-                                    <textarea type='text' placeholder='votre commentaaire'></textarea>
-                                    <button className={styles.btnCommenter}>Commenter</button>
+                                    <textarea type='text' value={comment} style={{border:!isValid && "1px solid red"}} onChange={(e) => setComment(e.target.value)} placeholder='votre commentaaire'></textarea>
+                                    {(!isValid && !comment) && <p style={{color: !isValid && "red", fontSize:"0.8em"}} >{message}</p>}
+                                    <button className={styles.btnCommenter} onClick={(e) => handleSubmit(e)}>Commenter</button>
                                 </div>
                             </div>
                         )}

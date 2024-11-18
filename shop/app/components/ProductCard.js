@@ -45,8 +45,10 @@ const ProductCard = ({ product }) => {
         <p className={styles.categoName}>{product.category}</p>
         <p className={styles.subCategoName}>{product.subCategory}</p>
         <GeneredStarRating rating={product.rating} />  
-        <h2 className={styles.price}>{product.price} FCFA</h2>
-        
+        <div style={{display:"flex", gap:"10px", fontSize:"0.8em"}}>
+        <h2 className={styles.price} style={{textDecoration: product.is_promo && "line-through", color: product.is_promo && "#999999"}}>{product.price} FCFA</h2>
+        {product.is_promo && <h2 className={styles.price}>{product.promo_price} FCFA</h2>}
+        </div>
       </section>
     </article>
   )
