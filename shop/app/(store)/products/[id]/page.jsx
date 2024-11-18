@@ -80,7 +80,7 @@ const SingleProduct = () => {
     const [comment, setComment] = useState("");
     const [userName, setUserName] = useState("");
     const [isValid ,setIsValid] = useState(true);
-    const [message ,setMessage ] = useState();
+    const [message ,setMessage ] = useState("");
 
     const handleClick = (value) => {
         setRating(value);
@@ -89,7 +89,7 @@ const SingleProduct = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
           // Validation des champs
-     if (!comment && !userName) {
+     if (!comment || !userName) {
         setIsValid(false); // Affichez un message d'erreur à l'utilisateur
         setMessage("Veuillez rentrer tous les champs!.")
         return;
@@ -251,10 +251,10 @@ const SingleProduct = () => {
                                         </span>
                                     </section>
                                     <h2>Votre nom*</h2>
-                                    <input type='text' name='userName' value={userName} style={{border:!isValid && "1px solid red"}} onChange={(e) => setUserName(e.target.value)} placeholder='Nom' />
+                                    <input type='text' name='userName' value={userName} style={{border:!isValid && !userName && "1px solid red"}} onChange={(e) => setUserName(e.target.value)} placeholder='Nom' />
                                     {(!isValid && !userName) && <p style={{color: !isValid && "red" , fontSize:"0.8em"}} >{message}</p>}
                                     <h2>Votre avis *</h2>
-                                    <textarea type='text' value={comment} style={{border:!isValid && "1px solid red"}} onChange={(e) => setComment(e.target.value)} placeholder='votre commentaaire'></textarea>
+                                    <textarea type='text' value={comment} style={{border:!isValid && !comment && "1px solid red"}} onChange={(e) => setComment(e.target.value)} placeholder='votre commentaaire'></textarea>
                                     {(!isValid && !comment) && <p style={{color: !isValid && "red", fontSize:"0.8em"}} >{message}</p>}
                                     <button className={styles.btnCommenter} onClick={(e) => handleSubmit(e)}>Commenter</button>
                                 </div>
