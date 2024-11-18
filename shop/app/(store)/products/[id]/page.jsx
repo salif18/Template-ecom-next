@@ -91,7 +91,7 @@ const SingleProduct = () => {
           // Validation des champs
      if (!comment && !userName) {
         setIsValid(false); // Affichez un message d'erreur à l'utilisateur
-        setMessage("Veuillez rentrer votre email !.")
+        setMessage("Veuillez rentrer tous les champs!.")
         return;
       }
 

@@ -12,7 +12,8 @@
     border-bottom: 1px solid #22222215;
     gap: 15px;
     z-index: 100;
-    // transition: 0.3s all ease;
+    opacity: 1;
+    transition: 0.3s all ease;
     // logo
     .logo {
         display: flex;
@@ -30,7 +31,7 @@
 
     .headerLeft {
         display: flex;
-        opacity: 0;
+        opacity: 1;
         transition: opacity 0.3s ease-in-out;
         align-items: center;
         gap: 10px;
@@ -39,10 +40,9 @@
 
         li {
             position: relative;
-
             .icon {
                 font-size: 2em;
-                color: #db7500f5;
+                color: #A89F91;
                 cursor: pointer;
             }
 
@@ -69,7 +69,7 @@
             .profil {
                 .icon {
                     font-size: 2em;
-                    color: #db7500f5;
+                    color: #A89F91;
                     cursor: pointer;
                 }
             }
@@ -186,7 +186,7 @@
                     font-family: "Roboto";
                     font-weight: 600;
                     text-transform: uppercase;
-                    color: #db7500f5;
+                    color: #A89F91;
                     padding: 8px;
                     display: flex;
                     align-items: center;
@@ -215,7 +215,7 @@
         font-size: 2em;
         margin: 16px;
         display: none;
-        color: #d4d4d4;
+        color: #A89F91;
         cursor: pointer;
     }
 }
@@ -234,7 +234,8 @@
     border-bottom: 1px solid #22222215;
     gap: 15px;
     z-index: 100;
-    // transition: 0.3s all ease;
+    opacity: 1;
+    transition: 0.3s all ease;
 
     // logo
     .logo {

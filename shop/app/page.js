@@ -18,9 +18,9 @@ import PopulairCard from "./components/PopulairCard";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  // État pour les produits
-  const [specialOffer, setSpecialOffer] = useState({});
-  const [promo, setPromo] = useState([]);
+  // État pour les produits en promotion
+  const [specialOffre, setSpecialOffre] = useState({});
+  const [hasPromo, setHasPromo] = useState([]);
 
   useEffect(() => {
     // Filtrer les promotions
@@ -36,8 +36,8 @@ export default function Home() {
       const otherPromos = promodata.filter((item) => item.id !== maxPromo.id);
 
       // Mettre à jour l'état
-      setSpecialOffer(maxPromo);
-      setPromo(otherPromos);
+      setSpecialOffre(maxPromo);
+      setHasPromo(otherPromos);
 
     } else {
       console.log("Aucune promotion disponible.");
@@ -66,14 +66,14 @@ export default function Home() {
           <div className={styles.backColor}></div>
           <div className={styles.left}>
             <h2>Spécial offre de la semaine !</h2>
-            <p>-{specialOffer.discount_percentage}% de réduction sur cet article</p>
+            <p>-{specialOffre.discount_percentage}% de réduction sur cet article</p>
             <section className={styles.btnOptions}>
               <button className={styles.btnBuy} onClick={() => router.push(`/products/${specialOffer.id}`)} >Achetez maintenant</button>
               {/* <button className={styles.btnMore} onClick={()=>router.push(`/products`)}>En savoir plus</button> */}
             </section>
           </div>
           <div className={styles.right}>
-            <Slider data={specialOffer} />
+            <Slider data={specialOffre} />
           </div>
         </section>
         {/* SECTION CATEGORIES */}
@@ -109,11 +109,11 @@ export default function Home() {
           <h2 className={styles.title}>Nos meilleurs offres</h2>
           <div className={styles.containerPromo}>
             <div className={styles.infoPromo}>
-              <h2 className={styles.h2}>Promos jusq’à <span>-{promo[0]?.discount_percentage}% </span><br />sur ces articles de mode</h2>
+              <h2 className={styles.h2}>Promos jusq’à <span>-{hasPromo[0]?.discount_percentage}% </span><br />sur ces articles de mode</h2>
             </div>
             <ul className={styles.productList}>
               {
-                promo.map((product) =>
+                hasPromo.map((product) =>
                   <li key={product.id}><OffreCard product={product} /></li>
                 )
               }
