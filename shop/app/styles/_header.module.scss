@@ -18,6 +18,7 @@
     .logo {
         display: flex;
         align-items: center;
+        cursor: pointer;
 
         h1 {
             font-family:"Roboto";
@@ -76,6 +77,7 @@
                 font-weight: 600;
                 color: #A89F91;
                 text-transform: uppercase;
+                cursor: pointer;
                
             }
 
@@ -111,7 +113,8 @@
                     font-size: 1em;
                     font-family: "Roboto";
                     font-weight: 600;
-
+                   color: #000;
+                   cursor: pointer;
                     &:hover {
                         color: #000;
                         background: #f0f1f5;
@@ -124,6 +127,7 @@
                     display: flex;
                     align-items: center;
                     padding-left: 10px;
+                    cursor: pointer;
                     p {
                         font-size: 1em;
                         font-family: "Roboto";
@@ -246,6 +250,7 @@
     .logo {
         display: flex;
         align-items: center;
+        cursor: pointer;
 
         h1 {
             font-family:"Roboto";
@@ -306,6 +311,7 @@
                 font-weight: 600;
                 color: var(--textColorSecondary);
                 text-transform: uppercase;
+                cursor: pointer;
                
             }
 
@@ -319,7 +325,7 @@
                 align-items: flex-start;
                 gap: 5px;
                 padding: 20px;
-
+cursor: pointer;
 
 
 

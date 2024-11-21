@@ -11,9 +11,9 @@ const PopulairCard = ({product}) => {
       router.push(`/products/${id}`)
     }
 
-    const firstImage = product.othersColors[0]
-    const [mainImage, setMainImage] = useState(firstImage.images);
-    const otherColors = product.othersColors ? product.othersColors : []
+  
+    const [mainImage, setMainImage] = useState(product?.image);
+    
     // Fonction pour changer l'image principale
     const changeImage = (imgSrc) => {
       setMainImage(imgSrc);
@@ -22,14 +22,14 @@ const PopulairCard = ({product}) => {
   return (
     <article className={styles.populaireCard} >
     <figure>
-      <img src={mainImage} alt={product.name} onClick={() => handleGoToSingleProduct(product.id)} />
-      <div onClick={() => handleGoToSingleProduct(product.id)}>
+      <img src={mainImage} alt={product.name} onClick={() => handleGoToSingleProduct(product._id)} />
+      <div onClick={() => handleGoToSingleProduct(product._id)}>
         <BiCartDownload className={styles.icon} />
         <span>Ajouter au panier</span>
       </div>
     </figure>
     <section className={styles.details}>
-      <h2 onClick={() => handleGoToSingleProduct(product.id)}>{product.name}</h2>
+      <h2 onClick={() => handleGoToSingleProduct(product._id)}>{product.name}</h2>
       <p className={styles.categoName}>{product.category}</p>
       <p className={styles.subCategoName}>{product.subCategory}</p>
       <h2 className={styles.price}>{product.price} FCFA</h2>

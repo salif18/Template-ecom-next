@@ -25,7 +25,7 @@ const Cart = () => {
             {
               cart.length > 0 ?
               cart.map(item =>
-                <li key={item.id}>
+                <li key={item._id}>
                   <div className={styles.cartItems}>
                     <div className={styles.itemsInfos}>
                       <figure>
@@ -43,9 +43,9 @@ const Cart = () => {
                       </div>
                     </div>
                     <div className={styles.btns}>
-                      <button onClick={() => decrementQuantity(item.id, item.selectedSize, item.selectedColor)}>{item.qty > 1 ? "-" : <DeleteOutlineRoundedIcon style={{ fontSize: "18px" }} />}</button>
+                      <button onClick={() => decrementQuantity(item._id, item.selectedSize, item.selectedColor)}>{item.qty > 1 ? "-" : <DeleteOutlineRoundedIcon style={{ fontSize: "18px" }} />}</button>
                       <span>{item.qty}</span>
-                      <button onClick={() => incrementQuantity(item.id, item.selectedSize, item.selectedColor)}>+</button>
+                      <button onClick={() => incrementQuantity(item._id, item.selectedSize, item.selectedColor)}>+</button>
                     </div>
                   </div>
                 </li>

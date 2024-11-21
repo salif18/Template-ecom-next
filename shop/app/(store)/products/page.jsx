@@ -6,15 +6,38 @@ import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ProductCard from '@/app/components/ProductCard';
-import data from "../../lib/data";
+// import data from "../../lib/data";
 import Floatingbtn from '@/app/components/floatingbtn';
 import { IoMdArrowDropdown } from "react-icons/io";
+import axios from 'axios';
 
 const PRODUCTS_PER_PAGE = 10; // Nombre de produits par page
 
 const Boutique = () => {
-
+  const [data ,setData] = useState([]);
   const [categoryLocal, setCategoryLocal] = useState("");
+
+
+  useEffect(()=>{
+     const getProducts =async()=>{
+       try{
+         const response = await axios.get(`${process.env.NEXT_PUBLIC_URI}/products`,{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer `,
+        },
+         });
+         if(response.status === 200){
+         setData(response.data.produits)
+         console.log(response.data.produits)
+        }
+       }catch(e){
+        console.error( e.response.data.message || "erreur ")
+       }
+     }
+
+     getProducts()
+  },[])
 
   // ETAT DAFFICHAGE DE SIDE BAR EN RESPONSIVE
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -74,7 +97,7 @@ const Boutique = () => {
     const matchesPrice = product.price <= filters.maxPrice;
     const matchesRating = filters.selectedRating === '' || product.rating >= filters.selectedRating;
     const matchesSearch = product.name.toLowerCase().includes(filters.searchQuery.toLowerCase()) || product.category.toLowerCase().includes(filters.searchQuery.toLowerCase()) || product.subCategory.toLowerCase().includes(filters.searchQuery.toLowerCase());
-    const matchesMarques = product.marque.includes(marqueFilter);
+    const matchesMarques = product.brand.includes(marqueFilter);
     const matchesSubCategory = product.subCategory.includes(subCategoryFilter)
     return matchesCategory && matchesPrice && matchesRating && matchesSearch && matchesMarques && matchesSubCategory;
   });
@@ -186,10 +209,10 @@ const Boutique = () => {
               <li>
                 <input
                   type="checkbox"
-                  value="Vetements"
+                  value="Vêtements"
                   onChange={handleFilterChange}
                   onClick={handleView}
-                /> Vetements
+                /> Vêtements
               </li>
               <li>
                 <input
@@ -250,7 +273,7 @@ const Boutique = () => {
               {
                 displayedProducts.length > 0 ?
                   displayedProducts.map((product) =>
-                    <li key={product.id}><ProductCard product={product} /></li>
+                    <li key={product._id}><ProductCard product={product} /></li>
                   )
                   : <p className={styles.empty}>Aucuns resultat  </p>
               }

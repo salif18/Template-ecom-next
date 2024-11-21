@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "../styles/_productCard.module.scss"
 import GeneredStarRating from '../utils/generatedStars'
 import { BiCartDownload } from "react-icons/bi";
@@ -7,13 +7,25 @@ import { useRouter } from 'next/navigation';
 
 const ProductCard = ({ product }) => {
   const router = useRouter();
+  const [otherColors , setOthersColors] = useState([])
+  const [mainImage , setMainImage] = useState(null)
+
+     
+ // Met à jour les autres états liés au produit
+ useEffect(() => {
+  if (product) {
+      setMainImage(product.image || null);
+      setOthersColors(product?.othersColors || []);
+  }
+}, [product]);
+
   const handleGoToSingleProduct = (id) => {
     router.push(`/products/${id}`)
   }
 
-  const firstImage = product.othersColors[0]
-  const [mainImage, setMainImage] = useState(firstImage.images);
-  const otherColors = product.othersColors ? product.othersColors : []
+ 
+  // const [mainImage, setMainImage] = useState(product?.image);
+  // const otherColors = product.othersColors ? product.othersColors : []
   // Fonction pour changer l'image principale
   const changeImage = (imgSrc) => {
     setMainImage(imgSrc);
@@ -21,8 +33,8 @@ const ProductCard = ({ product }) => {
   return (
     <article className={styles.productCard} >
       <figure>
-        <img src={mainImage} alt={product.name} onClick={() => handleGoToSingleProduct(product.id)} />
-        <div onClick={() => handleGoToSingleProduct(product.id)}>
+        <img src={mainImage} alt={product.name} onClick={() => handleGoToSingleProduct(product._id)} />
+        <div onClick={() => handleGoToSingleProduct(product._id)}>
           <BiCartDownload className={styles.icon} />
           <span>Ajouter au panier</span>
         </div>
@@ -31,6 +43,7 @@ const ProductCard = ({ product }) => {
       <div className={styles.colory}>
           <ul>
             {otherColors.map(other => (
+             
               <li key={other.color}>
                 <div
                   style={{ backgroundColor: other.color }}
@@ -41,7 +54,7 @@ const ProductCard = ({ product }) => {
             ))}
           </ul>
         </div>
-        <h2 onClick={() => handleGoToSingleProduct(product.id)}>{product.name}</h2>
+        <h2 onClick={() => handleGoToSingleProduct(product._id)}>{product.name}</h2>
         <p className={styles.categoName}>{product.category}</p>
         <p className={styles.subCategoName}>{product.subCategory}</p>
         <GeneredStarRating rating={product.rating} />  

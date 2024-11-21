@@ -11,17 +11,16 @@ const OffreCard = ({ product }) => {
   }
   
 
-  const firstImage = product.othersColors[3]
-  const [mainImage] = useState(firstImage?.images);
+  const [mainImage] = useState(product?.image);
  
   return (
     <article className={styles.OffreCard} >
       <figure>
-        <img src={mainImage} alt={product.name} onClick={()=>handleGoToSingleProduct(product.id)} />
+        <img src={mainImage} alt={product.name} onClick={()=>handleGoToSingleProduct(product._id)} />
       </figure>
       <section className={styles.details}>
         <h2>{product.name}</h2>
-        <button  onClick={()=>handleGoToSingleProduct(product.id)}>Achetez maintenant</button>
+        <button  onClick={()=>handleGoToSingleProduct(product._id)}>Achetez maintenant</button>
       </section>
     </article>
   )

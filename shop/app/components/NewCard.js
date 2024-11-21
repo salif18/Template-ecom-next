@@ -10,16 +10,15 @@ const NewCard = ({product}) => {
       router.push(`/products/${id}`)
     }
 
-    const firstImage = product.othersColors[0]
-    const [mainImage] = useState(firstImage.images);
+    const [mainImage] = useState(product?.image);
 
   return (
     <article className={styles.newCard} >
       <figure>
-        <img src={mainImage} alt={product.name} onClick={() => handleGoToSingleProduct(product.id)} />
+        <img src={mainImage} alt={product.name} onClick={() => handleGoToSingleProduct(product._id)} />
       </figure>
       <section className={styles.details}>
-        <h2 onClick={() => handleGoToSingleProduct(product.id)}>{product.name}</h2>
+        <h2 onClick={() => handleGoToSingleProduct(product._id)}>{product.name}</h2>
         <p className={styles.subCategoName}>{product.subCategory}</p>  
       </section>
     </article>

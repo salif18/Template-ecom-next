@@ -1,6 +1,6 @@
 const data = [
     {
-      id: 1,
+      _id: 1,
       name: "Casquette de sport",
       category: "Accessoires",
       subCategory: "Hommes",
@@ -52,7 +52,7 @@ const data = [
       ]
     },
     {
-      id: 2,
+      _id: 2,
       name: "Chaussures de running",
       category: "Chaussures",
       subCategory: "Femmes",
@@ -104,7 +104,7 @@ const data = [
       ]
     },
     {
-      id: 3,
+      _id: 3,
       name: "Montre classique",
       category: "Accessoires",
       subCategory: "Hommes",
@@ -140,7 +140,7 @@ const data = [
       ]
     },
     {
-      id: 4,
+      _id: 4,
       name: "Sac à dos mode",
       category: "Sacs",
       subCategory: "Femmes",
@@ -176,7 +176,7 @@ const data = [
       ]
     },
     {
-      id: 5,
+      _id: 5,
       name: "Sweat à capuche",
       category: "Vetements",
       subCategory: "Enfants",
@@ -229,7 +229,7 @@ const data = [
     },
     // Ajoutez ici les produits 6 à 16 en suivant la même structure
     {
-        id: 6,
+        _id: 6,
         name: "lunette de soleil",
         category: "Accessoires",
         subCategory: "Femmes",
@@ -269,7 +269,7 @@ const data = [
         ]
       },
       {
-        id: 7,
+        _id: 7,
         name: "Pantalon joggin",
         category: "Vetements",
         subCategory: "Hommes",
@@ -321,7 +321,7 @@ const data = [
         ]
       },
       {
-        id: 8,
+        _id: 8,
         name: "Robe classique",
         category: "Vetements",
         subCategory: "Femmes",
@@ -372,7 +372,7 @@ const data = [
         ]
       },
       {
-        id: 9,
+        _id: 9,
         name: "Colliers & bracelets",
         category: "Accessoires",
         subCategory: "Femmes",
@@ -405,7 +405,7 @@ const data = [
         ]
       },
       {
-        id: 10,
+        _id: 10,
         name: "Montre ",
         category: "Accessoires",
         subCategory: "Enfants",
@@ -447,7 +447,7 @@ const data = [
         ]
       },
       {
-        id: 11,
+        _id: 11,
         name: "Sneakers classiques",
         category: "Chaussures",
         subCategory: "Enfants",
@@ -499,7 +499,7 @@ const data = [
         ]
       },
       {
-        id: 12,
+        _id: 12,
         name: "Addidas basket Montant",
         category: "Chaussures",
         subCategory: "Hommes",
@@ -565,7 +565,7 @@ const data = [
 
 
       {
-        id: 13,
+        _id: 13,
         name: "Blazers ",
         category: "Vetements",
         subCategory: "Hommes",
@@ -629,7 +629,7 @@ const data = [
         ]
       },
       {
-        id: 14,
+        _id: 14,
         name: "Blazers Femme",
         category: "Vetements",
         subCategory: "Femmes",
@@ -694,7 +694,7 @@ const data = [
       },
 
       {
-        id: 15,
+        _id: 15,
         name: "Talon Femme",
         category: "Chaussures",
         subCategory: "Femmes",
@@ -758,7 +758,7 @@ const data = [
         ]
       },
       {
-        id: 16,
+        _id: 16,
         name: "Soulier homme",
         category: "Chaussures",
         subCategory: "Hommes",
@@ -822,7 +822,7 @@ const data = [
         ]
       },
       {
-        id: 17,
+        _id: 17,
         name: "Sac bandoulière homme",
         category: "Sacs",
         subCategory: "Hommes",
@@ -886,7 +886,7 @@ const data = [
         ]
       },
       {
-        id: 18,
+        _id: 18,
         name: "Sac à main ",
         category: "Sacs",
         subCategory: "Femmes",
@@ -950,7 +950,7 @@ const data = [
         ]
       },
       {
-        id: 19,
+        _id: 19,
         name: "Ceintures ",
         category: "Accessoires",
         subCategory: "Hommes",
@@ -1014,7 +1014,7 @@ const data = [
         ]
       },
       {
-        id: 20,
+        _id: 20,
         name: "Pantalon ",
         category: "Vetements",
         subCategory: "Hommes",
@@ -1079,7 +1079,7 @@ const data = [
       },
 
       {
-        id: 21,
+        _id: 21,
         name: "Pantalon ",
         category: "Vetements",
         subCategory: "Femmes",
@@ -1144,7 +1144,7 @@ const data = [
       },
 
       {
-        id: 22,
+        _id: 22,
         name: "T-shirt ",
         category: "Vetements",
         subCategory: "Hommes",
@@ -1209,7 +1209,7 @@ const data = [
       },
 
       {
-        id: 23,
+        _id: 23,
         name: "T-shirt flamant rose",
         category: "Vetements",
         subCategory: "Femmes",
@@ -1274,7 +1274,7 @@ const data = [
       },
 
       {
-        id: 24,
+        _id: 24,
         name: " Colliers Bangle Bracelet ",
         category: "Accessoires",
         subCategory: "Femmes",

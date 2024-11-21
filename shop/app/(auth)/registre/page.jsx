@@ -1,6 +1,8 @@
 "use client"
 import { AuthContext } from '@/app/context/AuthContext'
 import LayoutPage from '@/app/layouts/Layout'
+import { formControlClasses } from '@mui/material'
+import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useContext, useEffect, useState } from 'react'
@@ -14,7 +16,7 @@ const Registre = () => {
   const [isValid , setIsValid ] = useState(true)
   const [message, setMessage] = useState("");
   const [formData ,setFormData ] = useState({
-   username:"",
+   name:"",
    numero:"",
    email:"",
    password:""
@@ -25,18 +27,30 @@ const Registre = () => {
     setFormData((prev)=>({...prev , [name]:value}))
   }
 
-  const handleSubmit=(e)=>{
+  const handleSubmit=async(e)=>{
     e.preventDefault();
     // Validation des champs
-    if (!formData.username || !formData.numero || !formData.email || !formData.password ) {
+    if (!formData.name || !formData.numero || !formData.email || !formData.password ) {
       setIsValid(false); // Affichez un message d'erreur à l'utilisateur
       setMessage("Veuillez remplir les champs!")
       return;
     }
 
-    login(formData ,new Date(),formData.numero)
-    console.log(formData)
-    router.push("/")
+    try{
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_URI}/auth/registre`,formData);
+      if(response.status == 201){
+        const {token , userId , userName } = response.data
+        login( userName, token , userId);
+        router.push("/")
+      }
+    }catch(e){
+      console.error(e.response.data.message || "erreur d'authentification",  )
+    }
+    
+
+    // login(formData ,new Date(),formData.numero)
+    // console.log(formData)
+    // router.push("/")
   }
 
   // Réinitialisation du message d'erreur après un certain temps
@@ -58,8 +72,8 @@ const Registre = () => {
           <h1>Création de compte client</h1>
        </section>
          <label htmlFor='username'>Prenom & nom</label>
-         <input id='username' className={!isValid && !formData.username && "error"}  type='text' name='username' value={formData.username} onChange={handleChange} placeholder='prénom et nom' />
-         {(!isValid && !formData.username) && <p className="errorMessage">{message}</p>}
+         <input id='username' className={!isValid && !formData.name && "error"}  type='text' name='name' value={formData.name} onChange={handleChange} placeholder='prénom et nom' />
+         {(!isValid && !formData.name) && <p className="errorMessage">{message}</p>}
          <label htmlFor='numero'>Numéro</label>
          <input id='numero' className={!isValid && !formData.numero && "error"} type='number' name='numero' value={formData.numero} onChange={handleChange} placeholder='numéro' />
          {(!isValid && !formData.numero) && <p className="errorMessage">{message}</p>}

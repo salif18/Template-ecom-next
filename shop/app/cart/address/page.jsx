@@ -6,10 +6,11 @@ import styles from "../../styles/_address.module.scss"
 import { CartContext } from '@/app/context/CartContext';
 import { useRouter } from 'next/navigation';
 import { AuthContext } from '@/app/context/AuthContext';
+import axios from 'axios';
 
 const AddressCheckOut = () => {
   const { cart, total, clearCart } = useContext(CartContext);
-  const { token } = useContext(AuthContext);
+  const { token ,userId} = useContext(AuthContext);
   const router = useRouter();
 
   const [isValid, setIsValid] = useState(true);
@@ -50,7 +51,7 @@ const AddressCheckOut = () => {
   };
 
   // Validation et soumission du formulaire
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     // Validation des champs
@@ -62,6 +63,7 @@ const AddressCheckOut = () => {
 
     // Création de l'objet de commande
     const order = {
+      userId:userId,
       user: {
         nom: formData.nom,
         numero: formData.numero,
@@ -74,7 +76,8 @@ const AddressCheckOut = () => {
       },
       payementMode: formData.payementMode,
       status: "en attente",
-      cart,
+      cart:cart.map((item)=>({producId:item._id , qty:item.qty, size:item.selectedSize, color:item.selectedColor
+      })),
       total: total + 1000,
     };
 
@@ -84,10 +87,22 @@ const AddressCheckOut = () => {
       localStorage.setItem('redirectUrl', "/cart/address")
       // Redirection en fonction de l'état de connexion
       if (token) {
-        router.push("/succes");
-        clearCart();
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_URI}/commandes`,order,{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer `,
+        },
+        });
+        if(response.status === 201){
+          
+          router.push("/succes");
+           // Enregistrement de la commande dans localStorage
+            localStorage.setItem("order", JSON.stringify(response.data.order));
+          clearCart();
+        }
+       
       } else {
-        router.push("/login");
+        router.push("/login?redirectUrl=/cart/address");
       }
     } catch (error) {
       console.error("Erreur lors de la sauvegarde de la commande :", error);
@@ -143,7 +158,7 @@ const AddressCheckOut = () => {
 
               {
                 cart.map(item => (
-                  <div className={styles.row2} key={item.id} >  {/* Utilise un div parent ou React.Fragment */}
+                  <div className={styles.row2} key={item._id} >  {/* Utilise un div parent ou React.Fragment */}
                     <p>{item.name} x{item.qty}</p>
                     <p>{item.price * item.qty} FCFA</p>
                   </div>

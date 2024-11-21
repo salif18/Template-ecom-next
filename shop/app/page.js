@@ -2,7 +2,7 @@
 import Image from "next/image";
 import styles from "./styles/_home.module.scss";
 import LayoutPage from "./layouts/Layout";
-import data from "../../shop/app/lib/data";
+// import data from "../../shop/app/lib/data";
 import marques from "../../shop/app/lib/fakemarque";
 import globe from "./assets/images/globe-free-img.png";
 import lock from "./assets/images/lock-free-img.png"
@@ -16,11 +16,34 @@ import OffreCard from "./components/OffreCard";
 import Carousel from "./components/Carousel";
 import PopulairCard from "./components/PopulairCard";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Home() {
   // État pour les produits en promotion
   const [specialOffre, setSpecialOffre] = useState({});
   const [hasPromo, setHasPromo] = useState([]);
+  const [data ,setData] = useState([]);
+
+  useEffect(()=>{
+    const getProducts =async()=>{
+      try{
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_URI}/products`,{
+         headers: {
+           'Content-Type': 'application/json',
+           'Authorization': `Bearer `,
+       },
+        });
+        if(response.status === 200){
+        setData(response?.data?.produits)
+        console.log(response?.data?.produits)
+       }
+      }catch(e){
+       console.error( e.response?.data?.message || "erreur ")
+      }
+    }
+
+    getProducts()
+ },[])
 
   useEffect(() => {
     // Filtrer les promotions
@@ -33,7 +56,7 @@ export default function Home() {
       );
 
       // Trouver toutes les autres promotions sauf le max
-      const otherPromos = promodata.filter((item) => item.id !== maxPromo.id);
+      const otherPromos = promodata.filter((item) => item._id !== maxPromo._id);
 
       // Mettre à jour l'état
       setSpecialOffre(maxPromo);
@@ -62,13 +85,14 @@ export default function Home() {
     <LayoutPage>
       <main className={styles.page}>
         {/* SECTION BANNIERE */}
-        <section className={styles.banner1}>
+         { specialOffre &&
+           <section className={styles.banner1}>
           <div className={styles.backColor}></div>
           <div className={styles.left}>
             <h2>Spécial offre de la semaine !</h2>
             <p>-{specialOffre.discount_percentage}% de réduction sur cet article</p>
             <section className={styles.btnOptions}>
-              <button className={styles.btnBuy} onClick={() => router.push(`/products/${specialOffer.id}`)} >Achetez maintenant</button>
+              <button className={styles.btnBuy} onClick={() => router.push(`/products/${specialOffre._id}`)} >Achetez maintenant</button>
               {/* <button className={styles.btnMore} onClick={()=>router.push(`/products`)}>En savoir plus</button> */}
             </section>
           </div>
@@ -76,13 +100,14 @@ export default function Home() {
             <Slider data={specialOffre} />
           </div>
         </section>
+         }
         {/* SECTION CATEGORIES */}
         <section className={styles.categoriesContainer}>
           <h2 className={styles.title}>Nos catégories vendues  </h2>
           <ul className={styles.productList}>
             {
               uniqueCategoryProducts.map((product) =>
-                <li key={product.id}><CategoryCard product={product} /></li>
+                <li key={product._id}><CategoryCard product={product} /></li>
               )
             }
           </ul>
@@ -98,7 +123,7 @@ export default function Home() {
           <ul className={styles.productList}>
             {
               data.reverse().slice(0, 5).map((product) =>
-                <li key={product.id}><PopulairCard product={product} /></li>
+                <li key={product._id}><PopulairCard product={product} /></li>
               )
             }
           </ul>
@@ -113,8 +138,9 @@ export default function Home() {
             </div>
             <ul className={styles.productList}>
               {
+                hasPromo.length > 0 &&
                 hasPromo.map((product) =>
-                  <li key={product.id}><OffreCard product={product} /></li>
+                  <li key={product._id}><OffreCard product={product} /></li>
                 )
               }
             </ul>

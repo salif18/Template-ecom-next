@@ -7,10 +7,37 @@ import { MdOutlineEmail } from "react-icons/md";
 import { SlLocationPin } from "react-icons/sl";
 import { LiaStreetViewSolid } from "react-icons/lia";
 import { FaDoorClosed } from "react-icons/fa";
+import axios from 'axios';
 
+// import data from "../lib/data"
 
 const ConfirmOrder = () => {
     const [order, setOrder] = useState({});
+    const [data ,setData] = useState([]);
+
+
+    useEffect(()=>{
+        const getProducts =async()=>{
+          try{
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_URI}/products`,{
+             headers: {
+               'Content-Type': 'application/json',
+               'Authorization': `Bearer `,
+           },
+            });
+            if(response.status === 200){
+            setData(response.data.produits)
+            console.log(response.data)
+           }
+          }catch(e){
+           console.error( e.response.data.message || "erreur ")
+          }
+        }
+   
+        getProducts()
+     },[])
+    
+   
 
     useEffect(() => {
         const orderlocal = localStorage.getItem('order');
@@ -27,6 +54,14 @@ const ConfirmOrder = () => {
     }, []);
 
     const { user = {}, address = {}, cart = [], total = 0 } = order;
+
+    const product = cart.map((item )=>{
+     const article = data.length > 0 ? data.find((prod)=> prod._id == item.producId): [] ;
+     return {...article , qty:item.qty}
+}) 
+
+
+    
     return (
         <LayoutPage>
             <main className={styles.confirmOrder}>
@@ -61,11 +96,11 @@ const ConfirmOrder = () => {
                     </div>
                    
                     {
-                        cart.map(item =>
-                            <div key={item.id} className={styles.products}>
+                        product.map(item =>
+                            <di key={item._id} className={styles.products}>
                                 <div className={styles.productsDiv}><p>{item.name} x{item.qty}</p></div>
                                 <div className={styles.productsDiv}><p>{item.price * item.qty}</p></div>
-                            </div>
+                            </di>
                         )
                     }
 

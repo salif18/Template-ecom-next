@@ -4,35 +4,55 @@ import LayoutPage from '@/app/layouts/Layout'
 import { useParams } from 'next/navigation'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import styles from "../../../styles/_single.module.scss"
-import data from "../../../lib/data"
 import GeneredStarRating from '@/app/utils/generatedStars'
 import { CartContext } from '@/app/context/CartContext'
 import { FaCheck } from 'react-icons/fa'; // Import de l'icône FaCheck
 import MyCarousel from '@/app/components/MyCarousel'
+import axios from 'axios'
 
 const SingleProduct = () => {
-    const { addToCart, isAdded } = useContext(CartContext);
     const { id } = useParams()
+    const { addToCart, isAdded } = useContext(CartContext);
+    const [product, setProduct] = useState(null)
+    const [recommandations, setRecommandations] = useState([])
+    const [otherColors , setOthersColors] = useState([])
+    const [mainImage , setMainImage] = useState(null)
+   
+
+  //recuperer le produit et les recommandations
+    useEffect(() => {
+        const getProducts = async () => {
+            try {
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_URI}/products/single/${id}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer `, // Ajoutez le token si nécessaire
+                    },
+                });
+                if (res.status === 200) {
+                    setProduct(res.data.produit);
+                    setRecommandations(res.data.recommandations);
+                    console.log(res.data.produit)
+                }
+
+            } catch (err) {
+                console.error("Erreur lors de la récupération du produit :", err);
+            }
+        };
+
+        getProducts();
+    }, [id]);
+
+    
+ // Met à jour les autres états liés au produit
+ useEffect(() => {
+    if (product) {
+        setMainImage(product.image || null);
+        setOthersColors(product?.othersColors || []);
+    }
+}, [product]);
 
 
-    const product = data.find(item => item.id == id);
-    const otherColors = product.othersColors ? product.othersColors : []
-    const firstImage = product.othersColors[0]
-
-    // Liste des termes à vérifier dans le nom du produit
-    const searchTerms = product.name.split(" "); // Diviser le nom du produit en mots individuels
-
-    const recommandations = data.filter(item =>
-        item.category.includes(product.category) &&
-        item.subCategory.includes(product.subCategory) &&
-        searchTerms.some(term =>
-            item.name.toLowerCase().includes(term.toLowerCase())
-        )
-    );
-
-    // const relatedCategory = data.filter(item => item.category.includes(product.category))
-
-    const [mainImage, setMainImage] = useState(firstImage.images);
 
     // Fonction pour changer l'image principale
     const changeImage = (imgSrc) => {
@@ -51,8 +71,7 @@ const SingleProduct = () => {
     }
 
     // RECUPERER UNIQUEMENT LES SIZE DU PRODUIT SELECTIONNER PAR SON INDEX
-    const currentColor = product.othersColors[selectedColorIndex];
-
+    const currentColor = otherColors[selectedColorIndex] || {};
 
     // États pour les menudrop cacher
     const [isCommentsOpen, setIsCommentsOpen] = useState(false);
@@ -79,8 +98,8 @@ const SingleProduct = () => {
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const [userName, setUserName] = useState("");
-    const [isValid ,setIsValid] = useState(true);
-    const [message ,setMessage ] = useState("");
+    const [isValid, setIsValid] = useState(true);
+    const [message, setMessage] = useState("");
 
     const handleClick = (value) => {
         setRating(value);
@@ -88,12 +107,12 @@ const SingleProduct = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-          // Validation des champs
-     if (!comment || !userName) {
-        setIsValid(false); // Affichez un message d'erreur à l'utilisateur
-        setMessage("Veuillez rentrer tous les champs!.")
-        return;
-      }
+        // Validation des champs
+        if (!comment || !userName) {
+            setIsValid(false); // Affichez un message d'erreur à l'utilisateur
+            setMessage("Veuillez rentrer tous les champs!.")
+            return;
+        }
 
         const avis = {
             user: userName,
@@ -106,10 +125,10 @@ const SingleProduct = () => {
 
     useEffect(() => {
         if (message) {
-          const timer = setTimeout(() => setMessage(""), 3000);
-          return () => clearTimeout(timer);
+            const timer = setTimeout(() => setMessage(""), 3000);
+            return () => clearTimeout(timer);
         }
-      }, [message]);
+    }, [message]);
 
     return (
         <LayoutPage>
@@ -129,22 +148,22 @@ const SingleProduct = () => {
                         <img src={mainImage} alt='' />
                     </div>
                     <div className={styles.right}>
-                        <span>{product.subCategory}</span>
-                        <h1>{product.name}</h1>
+                        <span>{product?.subCategory}</span>
+                        <h1>{product?.name}</h1>
 
                         <div style={{ display: "flex", gap: "10px", fontSize: "0.8em" }}>
-                            <h2 style={{ textDecoration: product.is_promo && "line-through", color: product.is_promo && "#999999" }}>{product.price} FCFA</h2>
-                            {product.is_promo && <h2 className={styles.price}>{product.promo_price} FCFA</h2>}
+                            <h2 style={{ textDecoration: product?.is_promo && "line-through", color: product?.is_promo && "#999999" }}>{product?.price} FCFA</h2>
+                            {product?.is_promo && <h2 className={styles.price}>{product?.promo_price} FCFA</h2>}
                         </div>
-                        <p>{product.description}</p>
+                        <p>{product?.description}</p>
 
                         <div className={styles.selectedOptions}>
                             {/* Options de couleur */}
-                            {otherColors.length > 0 && (
+                            {otherColors?.length > 0 && (
                                 <div className={styles.options}>
                                     <label>Couleurs disponibles </label>
                                     <div className={styles.colorContainer}>
-                                        {otherColors.map((element, index) => (
+                                        {otherColors?.map((element, index) => (
                                             <div
                                                 key={index}
                                                 className={`${styles.colorSwatch} ${selectedColor === element.color ? styles.selected : ''
@@ -161,7 +180,7 @@ const SingleProduct = () => {
                             )}
                             {/* Options de taille */}
                             <div className={styles.options}>
-                                {product.category === "Vetements" && (
+                                {product?.category === "Vêtements" && (
                                     <>
                                         <label htmlFor="vetement-size">Tailles disponibles</label>
                                         <select
@@ -169,8 +188,8 @@ const SingleProduct = () => {
                                             value={selectedSize}
                                             onChange={(e) => setSelectedSize(e.target.value)}
                                         >
-                                            {currentColor.sizes.length > 0 &&
-                                                currentColor.sizes.map((size, index) => (
+                                            {currentColor?.sizes?.length > 0 &&
+                                                currentColor?.sizes?.map((size, index) => (
                                                     <option key={index} value={size.size}>
                                                         {size.size}
                                                     </option>
@@ -179,7 +198,7 @@ const SingleProduct = () => {
                                     </>
                                 )}
 
-                                {product.category === "Chaussures" && (
+                                {product?.category === "Chaussures" && (
                                     <>
                                         <label htmlFor="chaussure-size">Pointures disponibles</label>
                                         <select
@@ -187,8 +206,8 @@ const SingleProduct = () => {
                                             value={selectedSize}
                                             onChange={(e) => setSelectedSize(e.target.value)}
                                         >
-                                            {currentColor.sizes.length > 0 &&
-                                                currentColor.sizes.map((size, index) => (
+                                            {currentColor?.sizes?.length > 0 &&
+                                                currentColor?.sizes?.map((size, index) => (
                                                     <option key={index} value={size.size}>
                                                         {size.size}
                                                     </option>
@@ -203,8 +222,8 @@ const SingleProduct = () => {
                             <button className={`${styles.btnAdd} ${isAdded ? styles.added : ''}`} onClick={() => addToCart(product, mainImage, selectedSize, selectedColor)}>{isAdded ? <>Ajouté <FaCheck /> </> : 'Ajouter au panier'}</button>
                         </div>
 
-                        <p>categorie: <span>{product.category}</span></p>
-                        <span className={styles.rating}><GeneredStarRating rating={product.rating} /></span>
+                        <p>categorie: <span>{product?.category}</span></p>
+                        <span className={styles.rating}><GeneredStarRating rating={product?.rating} /></span>
                     </div>
                 </div>
                 <div className={styles.row2}>
@@ -251,11 +270,11 @@ const SingleProduct = () => {
                                         </span>
                                     </section>
                                     <h2>Votre nom*</h2>
-                                    <input type='text' name='userName' value={userName} style={{border:!isValid && !userName && "1px solid red"}} onChange={(e) => setUserName(e.target.value)} placeholder='Nom' />
-                                    {(!isValid && !userName) && <p style={{color: !isValid && "red" , fontSize:"0.8em"}} >{message}</p>}
+                                    <input type='text' name='userName' value={userName} style={{ border: !isValid && !userName && "1px solid red" }} onChange={(e) => setUserName(e.target.value)} placeholder='Nom' />
+                                    {(!isValid && !userName) && <p style={{ color: !isValid && "red", fontSize: "0.8em" }} >{message}</p>}
                                     <h2>Votre avis *</h2>
-                                    <textarea type='text' value={comment} style={{border:!isValid && !comment && "1px solid red"}} onChange={(e) => setComment(e.target.value)} placeholder='votre commentaaire'></textarea>
-                                    {(!isValid && !comment) && <p style={{color: !isValid && "red", fontSize:"0.8em"}} >{message}</p>}
+                                    <textarea type='text' value={comment} style={{ border: !isValid && !comment && "1px solid red" }} onChange={(e) => setComment(e.target.value)} placeholder='votre commentaaire'></textarea>
+                                    {(!isValid && !comment) && <p style={{ color: !isValid && "red", fontSize: "0.8em" }} >{message}</p>}
                                     <button className={styles.btnCommenter} onClick={(e) => handleSubmit(e)}>Commenter</button>
                                 </div>
                             </div>

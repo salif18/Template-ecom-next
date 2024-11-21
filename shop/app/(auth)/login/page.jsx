@@ -1,26 +1,29 @@
 "use client"
 import { AuthContext } from '@/app/context/AuthContext'
 import LayoutPage from '@/app/layouts/Layout'
+import axios from 'axios'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import React, { useContext, useEffect, useState } from 'react'
 
 const Login = () => {
   const router = useRouter()
-  const [redirect, setRedirect] = useState(null)
+  const searchParams = useSearchParams()
+  const redirectUrl = searchParams.get("redirectUrl")
+  // const [redirect, setRedirect] = useState(null)
   const { login, user } = useContext(AuthContext);
 
-  useEffect(() => {
-    const redirectUrl = localStorage.getItem("redirectUrl")
-    if (redirectUrl) {
-      setRedirect(redirectUrl)
-    }
-  })
+  // useEffect(() => {
+  //   const redirectUrl = localStorage.getItem("redirectUrl")
+  //   if (redirectUrl) {
+  //     setRedirect(redirectUrl)
+  //   }
+  // })
 
   const [isValid, setIsValid] = useState(true)
   const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
-    contact: "",
+    contacts: "",
     password: ""
   })
 
@@ -29,19 +32,32 @@ const Login = () => {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
      // Validation des champs
-     if (!formData.contact || !formData.password ) {
+     if (!formData.contacts || !formData.password ) {
       setIsValid(false); // Affichez un message d'erreur à l'utilisateur
       setMessage("Veuillez remplir les champs!")
       return;
     }
 
-    login(user, new Date(), formData.contact)
-    console.log(formData)
-    router.push(redirect || "/")
-    localStorage.removeItem("redirectUrl")
+    
+    try{
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_URI}/auth/login`,formData);
+      if(response.status == 200){
+        const {token , userId , userName } = response.data
+        login( userName, token , userId);
+        router.push(redirectUrl || "/")
+        // localStorage.removeItem("redirectUrl")
+      }
+    }catch(e){
+      console.error(e.response.data.message || "erreur d'authentification",  )
+    }
+
+    // login(user, new Date(), formData.contact)
+    // console.log(formData)
+    // router.push(redirect || "/")
+    // localStorage.removeItem("redirectUrl")
   }
 
    // Réinitialisation du message d'erreur après un certain temps
@@ -64,8 +80,8 @@ const Login = () => {
           </section>
 
           <label htmlFor='numero'>Numéro or email</label>
-          <input id='numero' className={!isValid && !formData.contact && "error"} type='text' name='contact' value={formData.contact} onChange={handleChange} placeholder='numero / email' />
-          {(!isValid && !formData.contact) && <p className="errorMessage">{message}</p>}
+          <input id='numero' className={!isValid && !formData.contacts && "error"} type='text' name='contacts' value={formData.contacts} onChange={handleChange} placeholder='numero / email' />
+          {(!isValid && !formData.contacts) && <p className="errorMessage">{message}</p>}
           <label htmlFor='userpassword'>Mot de passe</label>
           <input id='userpassword' className={!isValid && !formData.password && "error"} type='password' name='password' value={formData.password} onChange={handleChange} placeholder='mot de passe' />
 

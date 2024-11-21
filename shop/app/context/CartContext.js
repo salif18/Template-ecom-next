@@ -16,7 +16,7 @@ export const CartProvider = (props) => {
         setCart((prevCart) => {
             // Vérifier l'existence d'un produit avec le même id, size et color dans le panier
             const existingItem = prevCart.find((itemExist) =>
-                itemExist.id === item.id &&
+                itemExist._id === item._id &&
                 itemExist.selectedSize === size &&
                 itemExist.selectedColor === color
             );
@@ -24,7 +24,7 @@ export const CartProvider = (props) => {
             if (existingItem) {
                 // Si le même produit avec la même taille et couleur existe, augmenter seulement la quantité
                 return prevCart.map((itemExist) =>
-                    itemExist.id === item.id &&
+                    itemExist._id === item._id &&
                         itemExist.selectedSize === size &&
                         itemExist.selectedColor === color
                         ? { ...itemExist, qty: itemExist.qty + 1 }
@@ -66,7 +66,7 @@ export const CartProvider = (props) => {
         setCart((prevCart) =>
             prevCart.filter(
                 (item) =>
-                    item.id !== itemId ||
+                    item._id !== itemId ||
                     item.selectedSize !== size ||
                     item.selectedColor !== color
             )
@@ -85,7 +85,7 @@ export const CartProvider = (props) => {
     const incrementQuantity = (itemId, size, color) => {
         setCart((prevCart) =>
             prevCart.map((item) =>
-                item.id === itemId &&
+                item._id === itemId &&
                     item.selectedSize === size &&
                     item.selectedColor === color
                     ? { ...item, qty: item.qty + 1 }
@@ -98,7 +98,7 @@ export const CartProvider = (props) => {
         setCart((prevCart) =>
             prevCart
                 .map((item) =>
-                    item.id === itemId &&
+                    item._id === itemId &&
                         item.selectedSize === size &&
                         item.selectedColor === color
                         ? { ...item, qty: item.qty - 1 }
