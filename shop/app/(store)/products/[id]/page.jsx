@@ -179,6 +179,7 @@ const SingleProduct = () => {
                                     <label>Couleurs disponibles </label>
                                     <div className={styles.colorContainer}>
                                         {otherColors?.map((element, index) => (
+                                            element.stock > 0 &&
                                             <div
                                                 key={index}
                                                 className={`${styles.colorSwatch} ${selectedColor === element.color ? styles.selected : ''
@@ -206,7 +207,7 @@ const SingleProduct = () => {
                                             {currentColor?.sizes?.length > 0 &&
                                                 currentColor?.sizes?.map((size, index) => (
                                                     <>
-                                                        {size.size !== 0 && <option key={index} value={size.size}>
+                                                        {size.size > 0 && <option key={index} value={size.size}>
                                                             {size.size}
                                                         </option>}
                                                     </>
