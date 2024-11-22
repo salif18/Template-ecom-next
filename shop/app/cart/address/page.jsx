@@ -102,7 +102,7 @@ const AddressCheckOut = () => {
         }
        
       } else {
-        router.push("/login?redirectUrl=/cart/address");
+        router.push("/login");
       }
     } catch (error) {
       console.error("Erreur lors de la sauvegarde de la commande :", error);

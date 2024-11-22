@@ -9,16 +9,16 @@ import React, { useContext, useEffect, useState } from 'react'
 const Login = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const redirectUrl = searchParams.get("redirectUrl")
-  // const [redirect, setRedirect] = useState(null)
+  // const redirectUrl = searchParams.get("redirectUrl")
+  const [redirect, setRedirect] = useState(null)
   const { login, user } = useContext(AuthContext);
 
-  // useEffect(() => {
-  //   const redirectUrl = localStorage.getItem("redirectUrl")
-  //   if (redirectUrl) {
-  //     setRedirect(redirectUrl)
-  //   }
-  // })
+  useEffect(() => {
+    const redirectUrl = localStorage.getItem("redirectUrl")
+    if (redirectUrl) {
+      setRedirect(redirectUrl)
+    }
+  },[])
 
   const [isValid, setIsValid] = useState(true)
   const [message, setMessage] = useState("");
@@ -47,8 +47,8 @@ const Login = () => {
       if(response.status == 200){
         const {token , userId , userName } = response.data
         login( userName, token , userId);
-        router.push(redirectUrl || "/")
-        // localStorage.removeItem("redirectUrl")
+        router.push(redirect || "/")
+        localStorage.removeItem("redirectUrl")
       }
     }catch(e){
       console.error(e.response.data.message || "erreur d'authentification",  )
