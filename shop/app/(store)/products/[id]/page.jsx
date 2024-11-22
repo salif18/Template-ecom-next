@@ -9,12 +9,16 @@ import { CartContext } from '@/app/context/CartContext'
 import { FaCheck } from 'react-icons/fa'; // Import de l'icône FaCheck
 import MyCarousel from '@/app/components/MyCarousel'
 import axios from 'axios'
+import { AuthContext } from '@/app/context/AuthContext'
+import GeneredStarUser from '@/app/utils/generedStarUser'
 
 const SingleProduct = () => {
     const { id } = useParams()
     const { addToCart, isAdded } = useContext(CartContext);
+    const { userId} = useContext(AuthContext)
     const [product, setProduct] = useState(null)
     const [recommandations, setRecommandations] = useState([])
+    const [commentaires , setCommentaires ] = useState([]);
     const [otherColors , setOthersColors] = useState([])
     const [mainImage , setMainImage] = useState(null)
    
@@ -51,7 +55,6 @@ const SingleProduct = () => {
         setOthersColors(product?.othersColors || []);
     }
 }, [product]);
-
 
 
     // Fonction pour changer l'image principale
@@ -105,7 +108,7 @@ const SingleProduct = () => {
         setRating(value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         // Validation des champs
         if (!comment || !userName) {
@@ -115,12 +118,24 @@ const SingleProduct = () => {
         }
 
         const avis = {
+            userId:userId,
             user: userName,
             rating: rating,
             commentaires: comment
         }
-
-        console.log(avis)
+        try{
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_URI}/commentaires/${id}`,avis,{
+             headers: {
+               'Content-Type': 'application/json',
+               'Authorization': `Bearer `,
+           },
+            });
+            if(response.status === 200){
+              setProduct(response?.data?.produit)
+            }
+         }catch(e){
+             console.error(e.response?.data?.message || "error")
+         }
     }
 
     useEffect(() => {
@@ -284,21 +299,14 @@ const SingleProduct = () => {
                             <div className={styles.dropdowncontent} ref={reviewsRef}>
                                 <h1>Les avis</h1>
                                 <div className={styles.commentaireContainer}>
-                                    <di className={styles.avisCard}>
-                                        <h2>★★★★</h2>
-                                        <p className={styles.date}>02/11/2024</p>
-                                        <p className={styles.text}>parfait , bon rapport qualité/prix</p>
-                                    </di>
-                                    <di className={styles.avisCard}>
-                                        <h2>★★★</h2>
-                                        <p className={styles.date}>02/11/2024</p>
-                                        <p className={styles.text}>parfait , bon rapport qualité/prix</p>
-                                    </di>
-                                    <di className={styles.avisCard}>
-                                        <h2>★★★★★</h2>
-                                        <p className={styles.date}>02/11/2024</p>
-                                        <p className={styles.text}>parfait , bon rapport qualité/prix</p>
-                                    </di>
+                                {product?.commentaires?.map((item)=>
+                                    <div className={styles.avisCard}>
+                                    <p className={styles.date}>{item.name}</p>
+                                        <h2><GeneredStarUser rating={item.rating} /></h2>
+                                        <p className={styles.date}>{item.date}</p>
+                                        <p className={styles.text}>{item.avis}</p>
+                                    </div>
+                        )}
                                 </div>
 
                             </div>
