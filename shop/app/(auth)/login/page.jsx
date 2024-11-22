@@ -3,13 +3,11 @@ import { AuthContext } from '@/app/context/AuthContext'
 import LayoutPage from '@/app/layouts/Layout'
 import axios from 'axios'
 import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter} from 'next/navigation'
 import React, { useContext, useEffect, useState } from 'react'
 
 const Login = () => {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  // const redirectUrl = searchParams.get("redirectUrl")
   const [redirect, setRedirect] = useState(null)
   const { login, user } = useContext(AuthContext);
 
@@ -53,11 +51,6 @@ const Login = () => {
     }catch(e){
       console.error(e.response.data.message || "erreur d'authentification",  )
     }
-
-    // login(user, new Date(), formData.contact)
-    // console.log(formData)
-    // router.push(redirect || "/")
-    // localStorage.removeItem("redirectUrl")
   }
 
    // Réinitialisation du message d'erreur après un certain temps
