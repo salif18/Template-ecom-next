@@ -305,7 +305,7 @@ const SingleProduct = () => {
                                 <h1>Les avis</h1>
                                 <div className={styles.commentaireContainer}>
                                     {product?.commentaires?.map((item) =>
-                                        <div className={styles.avisCard}>
+                                        <div key={item._id} className={styles.avisCard}>
                                             <p className={styles.date}>{item.name}</p>
                                             <h2><GeneredStarUser rating={item.rating} /></h2>
                                             <p className={styles.date}>{new Date(item?.date).toLocaleDateString('fr-FR', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
