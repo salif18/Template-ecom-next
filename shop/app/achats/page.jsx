@@ -49,7 +49,7 @@ const { userId , token } = useContext(AuthContext)
                     <section className="row">
                         <div className="rowCol">
                             <p>Date</p>
-                            <h2>07/11/2024</h2>
+                            <h2>{new Date(order?.createdAt).toLocaleDateString('fr-FR', { month: 'long', day: 'numeric', year: 'numeric' })}</h2>
                         </div>
                         <div className="rowCol">
                             <p>Total</p>
@@ -59,9 +59,12 @@ const { userId , token } = useContext(AuthContext)
                             <p>Mode de paiement</p>
                             <h2>{order?.payementMode}</h2>
                         </div>
+                        <div className="rowCol">
+                            <p>Status de la commande</p>
+                            <h2>{order?.status}</h2>
+                        </div>
                     </section>
                 </section>
-
                 <section className="details">
                     <div className="title">
                         <h2>Details de la commande</h2>

@@ -15,15 +15,15 @@ import GeneredStarUser from '@/app/utils/generedStarUser'
 const SingleProduct = () => {
     const { id } = useParams()
     const { addToCart, isAdded } = useContext(CartContext);
-    const { userId} = useContext(AuthContext)
+    const { userId } = useContext(AuthContext)
     const [product, setProduct] = useState(null)
     const [recommandations, setRecommandations] = useState([])
-    const [commentaires , setCommentaires ] = useState([]);
-    const [otherColors , setOthersColors] = useState([])
-    const [mainImage , setMainImage] = useState(null)
-   
+    const [commentaires, setCommentaires] = useState([]);
+    const [otherColors, setOthersColors] = useState([])
+    const [mainImage, setMainImage] = useState(null)
 
-  //recuperer le produit et les recommandations
+
+    //recuperer le produit et les recommandations
     useEffect(() => {
         const getProducts = async () => {
             try {
@@ -47,14 +47,14 @@ const SingleProduct = () => {
         getProducts();
     }, [id]);
 
-    
- // Met à jour les autres états liés au produit
- useEffect(() => {
-    if (product) {
-        setMainImage(product.image || null);
-        setOthersColors(product?.othersColors || []);
-    }
-}, [product]);
+
+    // Met à jour les autres états liés au produit
+    useEffect(() => {
+        if (product) {
+            setMainImage(product.image || null);
+            setOthersColors(product?.othersColors || []);
+        }
+    }, [product]);
 
 
     // Fonction pour changer l'image principale
@@ -108,7 +108,7 @@ const SingleProduct = () => {
         setRating(value);
     };
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // Validation des champs
         if (!comment || !userName) {
@@ -118,24 +118,24 @@ const SingleProduct = () => {
         }
 
         const avis = {
-            userId:userId,
+            userId: userId,
             user: userName,
             rating: rating,
             commentaires: comment
         }
-        try{
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_URI}/commentaires/${id}`,avis,{
-             headers: {
-               'Content-Type': 'application/json',
-               'Authorization': `Bearer `,
-           },
+        try {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_URI}/commentaires/${id}`, avis, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer `,
+                },
             });
-            if(response.status === 200){
-              setProduct(response?.data?.produit)
+            if (response.status === 200) {
+                setProduct(response?.data?.produit)
             }
-         }catch(e){
-             console.error(e.response?.data?.message || "error")
-         }
+        } catch (e) {
+            console.error(e.response?.data?.message || "error")
+        }
     }
 
     useEffect(() => {
@@ -205,9 +205,11 @@ const SingleProduct = () => {
                                         >
                                             {currentColor?.sizes?.length > 0 &&
                                                 currentColor?.sizes?.map((size, index) => (
-                                                    <option key={index} value={size.size}>
-                                                        {size.size}
-                                                    </option>
+                                                    <>
+                                                        {size.size !== 0 && <option key={index} value={size.size}>
+                                                            {size.size}
+                                                        </option>}
+                                                    </>
                                                 ))}
                                         </select>
                                     </>
@@ -223,9 +225,11 @@ const SingleProduct = () => {
                                         >
                                             {currentColor?.sizes?.length > 0 &&
                                                 currentColor?.sizes?.map((size, index) => (
-                                                    <option key={index} value={size.size}>
-                                                        {size.size}
-                                                    </option>
+                                                    <>
+                                                        {size.size !== 0 && <option key={index} value={size.size}>
+                                                            {size.size}
+                                                        </option>}
+                                                    </>
                                                 ))}
                                         </select>
                                     </>
@@ -299,14 +303,14 @@ const SingleProduct = () => {
                             <div className={styles.dropdowncontent} ref={reviewsRef}>
                                 <h1>Les avis</h1>
                                 <div className={styles.commentaireContainer}>
-                                {product?.commentaires?.map((item)=>
-                                    <div className={styles.avisCard}>
-                                    <p className={styles.date}>{item.name}</p>
-                                        <h2><GeneredStarUser rating={item.rating} /></h2>
-                                        <p className={styles.date}>{item.date}</p>
-                                        <p className={styles.text}>{item.avis}</p>
-                                    </div>
-                        )}
+                                    {product?.commentaires?.map((item) =>
+                                        <div className={styles.avisCard}>
+                                            <p className={styles.date}>{item.name}</p>
+                                            <h2><GeneredStarUser rating={item.rating} /></h2>
+                                            <p className={styles.date}>{new Date(item?.date).toLocaleDateString('fr-FR', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+                                            <p className={styles.text}>{item.avis}</p>
+                                        </div>
+                                    )}
                                 </div>
 
                             </div>
