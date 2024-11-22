@@ -43,7 +43,7 @@ const ProductCard = ({ product }) => {
       <div className={styles.colory}>
           <ul>
             {otherColors.map(other => (
-             
+              other.stock > 0 &&
               <li key={other.color}>
                 <div
                   style={{ backgroundColor: other.color }}

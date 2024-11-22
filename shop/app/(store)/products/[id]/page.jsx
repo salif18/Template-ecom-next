@@ -207,7 +207,7 @@ const SingleProduct = () => {
                                             {currentColor?.sizes?.length > 0 &&
                                                 currentColor?.sizes?.map((size, index) => (
                                                     <>
-                                                        {size.size > 0 && <option key={index} value={size.size}>
+                                                        {size.stock > 0 && <option key={index} value={size.size}>
                                                             {size.size}
                                                         </option>}
                                                     </>
@@ -227,7 +227,7 @@ const SingleProduct = () => {
                                             {currentColor?.sizes?.length > 0 &&
                                                 currentColor?.sizes?.map((size, index) => (
                                                     <>
-                                                        {size.size !== 0 && <option key={index} value={size.size}>
+                                                        {size.stock > 0 && <option key={index} value={size.size}>
                                                             {size.size}
                                                         </option>}
                                                     </>

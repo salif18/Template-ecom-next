@@ -6,6 +6,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import { useRouter } from 'next/navigation';
 import { FaOpencart } from "react-icons/fa";
+import axios from 'axios';
 const Footer = () => {
   const router = useRouter()
 
@@ -20,7 +21,7 @@ const Footer = () => {
  const [isValid ,setIsValid] = useState(true);
  const [message ,setMessage ] = useState();
 
-  const handleSubmit =(e)=>{
+  const handleSubmit =async(e)=>{
     e.preventDefault();
      // Validation des champs
      if (!abonment) {
@@ -28,7 +29,25 @@ const Footer = () => {
       setMessage("Veuillez rentrer votre email !.")
       return;
     }
-    console.log(abonment);
+
+    const abonnee ={
+      email:abonment
+    }
+
+    try{
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_URI}/newletter`,abonnee,{
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer `, // Ajoutez le token si nécessaire
+          },
+      });
+        if(res.status === 201){
+          console.log(response?.data?.message)
+        }
+    }catch(e){
+       console.log(e?.response?.data?.message || "error")
+    }
+   
   }
 
   // Réinitialisation du message d'erreur après un certain temps
