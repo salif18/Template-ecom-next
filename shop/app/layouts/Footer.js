@@ -42,7 +42,8 @@ const Footer = () => {
           },
       });
         if(res.status === 201){
-          console.log(response?.data?.message)
+          setMessage(response?.data?.message);
+          setAbonment("")
         }
     }catch(e){
        console.log(e?.response?.data?.message || "error")
@@ -86,7 +87,7 @@ const Footer = () => {
       <h2>Newsletter</h2>
       <input type='text' name='abonment' value={abonment} style={{border:!isValid && "1px solid red"}} onChange={(e)=>setAbonment(e.target.value)} placeholder='example@gmail.com' />
       {(!isValid && !abonment) && <p style={{color: !isValid && "red" , fontSize:"0.8em"}} >{message}</p>}
-      <button className={styles.btnAbonner} onClick={(e)=>handleSubmit(e)} >S'abonner</button>
+      <button className={styles.btnAbonner} onClick={(e)=>handleSubmit(e)} >{message || "S'abonner" }</button>
       </div>
     </section>
     <section className={styles.row3}>

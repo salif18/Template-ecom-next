@@ -131,7 +131,10 @@ const SingleProduct = () => {
                 },
             });
             if (response.status === 200) {
-                setProduct(response?.data?.produit)
+                setProduct(response?.data?.produit);
+                setMessage(response?.data.message);
+                setComment("");
+                setUserName("");
             }
         } catch (e) {
             console.error(e.response?.data?.message || "error")
@@ -295,7 +298,7 @@ const SingleProduct = () => {
                                     <h2>Votre avis *</h2>
                                     <textarea type='text' value={comment} style={{ border: !isValid && !comment && "1px solid red" }} onChange={(e) => setComment(e.target.value)} placeholder='votre commentaaire'></textarea>
                                     {(!isValid && !comment) && <p style={{ color: !isValid && "red", fontSize: "0.8em" }} >{message}</p>}
-                                    <button className={styles.btnCommenter} onClick={(e) => handleSubmit(e)}>Commenter</button>
+                                    <button className={styles.btnCommenter} onClick={(e) => handleSubmit(e)}>{message || "Commenter"}</button>
                                 </div>
                             </div>
                         )}
