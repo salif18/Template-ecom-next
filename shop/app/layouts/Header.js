@@ -64,7 +64,7 @@ const Header = () => {
                 <div className={styles.user}>
                   {token && <p><CiUser style={{ fontSize: "24px" }} /> {user}</p>}
                 </div>
-                {token && <Link href="/achats" style={{ textTransform:"none" }} ><BsHandbag style={{ fontSize: "24px"  }} /> Mes achats</Link>}
+                {token && <Link href="/achats"  className={styles.achats} style={{ textTransform:"none" }} ><BsHandbag style={{ fontSize: "24px"  }} /> Mes achats</Link>}
                 {!token && <button className={styles.btnAuth}
                   onClick={() => router.push("/login")}
                 >Se connecter</button>
