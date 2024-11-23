@@ -34,7 +34,7 @@ export const CartProvider = (props) => {
                 // Sinon, ajouter le produit comme un nouvel élément dans le panier
                 return [
                     ...prevCart,
-                    { ...item, qty: 1, img: mainImage, selectedSize: size, selectedColor: color }
+                    { ...item, price:item.is_promo ? item.promo_price : item.price, qty: 1, img: mainImage, selectedSize: size, selectedColor: color }
                 ];
             }
         });
