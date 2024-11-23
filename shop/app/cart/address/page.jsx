@@ -75,7 +75,7 @@ const AddressCheckOut = () => {
         logt: formData.logt,
       },
       payementMode: formData.payementMode,
-      status: "en attente",
+      status: "En attente",
       cart:cart.map((item)=>({producId:item._id , qty:item.qty, size:item.selectedSize, color:item.selectedColor
       })),
       total: total + 1000,

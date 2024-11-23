@@ -93,13 +93,7 @@
                 align-items: flex-start;
                 gap: 16px;
                 padding: 20px;
-
-
-
-
                 height: auto;
-
-
                 background-color: #ffffff;
                 border: 1px solid #d4d4d4;
                 border-radius: 15px;
@@ -273,8 +267,6 @@
         opacity: 1;
         transition: opacity 0.3s ease-in-out;
 
-
-
         li {
             position: relative;
 
@@ -330,12 +322,7 @@
                 gap: 5px;
                 padding: 20px;
                 cursor: pointer;
-
-
-
                 height: auto;
-
-
                 background-color: #ffffff;
                 border: 1px solid #d4d4d4;
                 border-radius: 15px;
@@ -500,6 +487,12 @@
                     font-size: 0.9em;
                 }
 
+                .profilDropdown{
+                    a{
+                        color: #000;
+                    }
+                }
+
                 // Hover effect removed to keep it open in responsive mode
                 &:hover .profilDropdown {
                     position: fixed;
@@ -579,6 +572,12 @@
                     width: 100%;
                     color: var(--textColorPrimary);
                     font-size: 0.9em;
+                }
+
+                .profilDropdown{
+                    a{
+                        color: #000;
+                    }
                 }
 
                 // Hover effect removed to keep it open in responsive mode

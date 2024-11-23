@@ -29,11 +29,29 @@ const { userId , token } = useContext(AuthContext)
             }
 
         } catch (err) {
-            console.error("Erreur lors de la récupération du produit :", err);
+            console.log("Erreur lors de la récupération du produit :", err);
         }
     };
     fetchData();
 }, [userId]);
+
+const Headers = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer `,
+  },
+   }
+
+    const handleChangeStatus =async(id,newStatus)=>{
+        try{
+           const response = await  axios.put(`${process.env.NEXT_PUBLIC_URI}/commandes/order/${id}/updateStatus`, {newStatus}, Headers);
+           if(response.status === 200){
+            console.log(response?.data?.message)
+           }
+        }catch(e){
+        console.log(e.response?.data?.message || "error")
+        }
+    }
 
   return (
     <LayoutPage>
@@ -44,8 +62,9 @@ const { userId , token } = useContext(AuthContext)
       <section className='list-achat'>
       {orders?.map((order)=>
       <>
-        <section className="column">
+        <section className="column" key={order?._id}>
                     <p>Merci. Votre commande a été reçue.</p>
+                    {order?.status === "En attente" && <button className='cancel' onClick={()=>handleChangeStatus(order?._id,"Annulée")}>Annuler</button> }
                     <section className="row">
                         <div className="rowCol">
                             <p>Date</p>

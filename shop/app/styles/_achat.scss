@@ -4,7 +4,7 @@
     min-height: 100vh;
     padding: 16px;
     display: flex;
-    align-items: center;
+   // align-items: center;
     justify-content: center;
     flex-direction: column;
 
@@ -44,6 +44,18 @@
             font-size: 1em;
             font-family: "Roboto";
             margin: 1em;
+        }
+
+        .cancel{
+            font-size: 0.9em;
+            border: none;
+            background: red;
+            height: 40px;
+            color: #fff;
+            font-family: "Roboto";
+            text-transform: uppercase;
+            width: 100%;
+            cursor: pointer;
         }
 
         .row {
