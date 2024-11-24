@@ -2,7 +2,6 @@
 import Image from "next/image";
 import styles from "./styles/_home.module.scss";
 import LayoutPage from "./layouts/Layout";
-// import data from "../../shop/app/lib/data";
 import marques from "../../shop/app/lib/fakemarque";
 import globe from "./assets/images/globe-free-img.png";
 import lock from "./assets/images/lock-free-img.png"
@@ -19,11 +18,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Home() {
+  const router = useRouter()
   // État pour les produits en promotion
   const [specialOffre, setSpecialOffre] = useState({});
   const [hasPromo, setHasPromo] = useState([]);
   const [data, setData] = useState([]);
 
+  // RECUPERER LES PRODUITS
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -41,11 +42,10 @@ export default function Home() {
         console.log(e.response?.data?.message || "erreur ")
       }
     }
-
     getProducts()
   }, [])
 
-
+// RECUPERER LES PRODUITS EN PROMO
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -63,12 +63,9 @@ export default function Home() {
         console.log(e.response?.data?.message || "erreur ")
       }
     }
-
     getProducts()
   }, [])
 
-
-  const router = useRouter()
 
   // nos categories
   const uniqueCategoryProducts = Array.from(

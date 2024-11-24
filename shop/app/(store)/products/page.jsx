@@ -6,7 +6,6 @@ import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ProductCard from '@/app/components/ProductCard';
-// import data from "../../lib/data";
 import Floatingbtn from '@/app/components/floatingbtn';
 import { IoMdArrowDropdown } from "react-icons/io";
 import axios from 'axios';
@@ -17,7 +16,7 @@ const Boutique = () => {
   const [data ,setData] = useState([]);
   const [categoryLocal, setCategoryLocal] = useState("");
 
-
+// RECUPERER LES PRODUITS
   useEffect(()=>{
      const getProducts =async()=>{
        try{
