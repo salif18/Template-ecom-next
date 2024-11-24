@@ -31,10 +31,18 @@ const ProductCard = ({ product }) => {
     <article className={styles.productCard} >
       <figure>
         <img src={mainImage} alt={product.name} onClick={() => handleGoToSingleProduct(product._id)} />
-        <div onClick={() => handleGoToSingleProduct(product._id)}>
+        <div className={styles.cartContainer} onClick={() => handleGoToSingleProduct(product._id)}>
           <BiCartDownload className={styles.icon} />
           <span>Ajouter au panier</span>
         </div>
+        {
+          product.is_promo &&
+          product.discount_percentage > 0 && 
+          <div className={styles.percentage}>
+          <span>-{product?.discount_percentage}</span>
+        </div>
+        }
+        
       </figure>
       <section className={styles.details}>
       <div className={styles.colory}>

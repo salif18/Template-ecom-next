@@ -17,6 +17,13 @@ const OffreCard = ({ product }) => {
     <article className={styles.OffreCard} >
       <figure>
         <img src={mainImage} alt={product.name} onClick={()=>handleGoToSingleProduct(product._id)} />
+        {
+          product.is_promo &&
+          product.discount_percentage > 0 && 
+          <div className={styles.percentage}>
+          <span>-{product?.discount_percentage}</span>
+        </div>
+        }
       </figure>
       <section className={styles.details}>
         <h2>{product.name}</h2>
