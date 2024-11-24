@@ -185,7 +185,7 @@ const AddressCheckOut = () => {
               <button type='button' className={styles.btnCommande}
                 onClick={handleSubmit}
               >Passer commande</button>
-              {serverMessage && <p>{serverMessage}</p>}
+              {serverMessage && <p style={{color:"red"}}>{serverMessage}</p>}
             </div>
           </div>
         </section>
