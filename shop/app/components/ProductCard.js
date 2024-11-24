@@ -23,9 +23,6 @@ const ProductCard = ({ product }) => {
     router.push(`/products/${id}`)
   }
 
- 
-  // const [mainImage, setMainImage] = useState(product?.image);
-  // const otherColors = product.othersColors ? product.othersColors : []
   // Fonction pour changer l'image principale
   const changeImage = (imgSrc) => {
     setMainImage(imgSrc);
@@ -57,7 +54,7 @@ const ProductCard = ({ product }) => {
         <h2 onClick={() => handleGoToSingleProduct(product._id)}>{product.name}</h2>
         <p className={styles.categoName}>{product.category}</p>
         <p className={styles.subCategoName}>{product.subCategory}</p>
-        <GeneredStarRating rating={product.rating} />  
+        {product?.rating >= 20 && <GeneredStarRating rating={product.rating} />}  
         <div style={{display:"flex", gap:"10px", fontSize:"0.8em"}}>
         <h2 className={styles.price} style={{textDecoration: product.is_promo && "line-through", color: product.is_promo && "#999999"}}>{product.price} FCFA</h2>
         {product.is_promo && <h2 className={styles.price}>{product.promo_price} FCFA</h2>}

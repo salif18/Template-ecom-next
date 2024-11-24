@@ -246,7 +246,7 @@ const SingleProduct = () => {
                         </div>
 
                         <p>categorie: <span>{product?.category}</span></p>
-                        <span className={styles.rating}><GeneredStarRating rating={product?.rating} /></span>
+                        {product?.rating >= 20 && <span className={styles.rating}><GeneredStarRating rating={product?.rating} /></span>}
                     </div>
                 </div>
                 <div className={styles.row2}>

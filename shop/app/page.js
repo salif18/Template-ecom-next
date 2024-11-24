@@ -22,50 +22,50 @@ export default function Home() {
   // État pour les produits en promotion
   const [specialOffre, setSpecialOffre] = useState({});
   const [hasPromo, setHasPromo] = useState([]);
-  const [data ,setData] = useState([]);
+  const [data, setData] = useState([]);
 
-  useEffect(()=>{
-    const getProducts =async()=>{
-      try{
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_URI}/products`,{
-         headers: {
-           'Content-Type': 'application/json',
-           'Authorization': `Bearer `,
-       },
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_URI}/products`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer `,
+          },
         });
-        if(response.status === 200){
-        setData(response?.data?.produits)
-        console.log(response?.data?.produits)
-       }
-      }catch(e){
-       console.error( e.response?.data?.message || "erreur ")
+        if (response.status === 200) {
+          setData(response?.data?.produits)
+          console.log(response?.data?.produits)
+        }
+      } catch (e) {
+        console.log(e.response?.data?.message || "erreur ")
       }
     }
 
     getProducts()
- },[])
+  }, [])
+
 
   useEffect(() => {
-    // Filtrer les promotions
-    const promodata = data.filter((item) => item.is_promo);
-
-    if (promodata.length > 0) {
-      // Trouver la promo max
-      const maxPromo = promodata.reduce((max, item) =>
-        item.discount_percentage > max.discount_percentage ? item : max
-      );
-
-      // Trouver toutes les autres promotions sauf le max
-      const otherPromos = promodata.filter((item) => item._id !== maxPromo._id);
-
-      // Mettre à jour l'état
-      setSpecialOffre(maxPromo);
-      setHasPromo(otherPromos);
-
-    } else {
-      console.log("Aucune promotion disponible.");
+    const getProducts = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_URI}/products/promo`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer `,
+          },
+        });
+        if (response.status === 200) {
+          setSpecialOffre(response?.data?.specialOffre)
+          setHasPromo(response?.data?.allOffre)
+        }
+      } catch (e) {
+        console.log(e.response?.data?.message || "erreur ")
+      }
     }
-  }, [data]);
+
+    getProducts()
+  }, [])
 
 
   const router = useRouter()
@@ -85,22 +85,28 @@ export default function Home() {
     <LayoutPage>
       <main className={styles.page}>
         {/* SECTION BANNIERE */}
-         { specialOffre &&
-           <section className={styles.banner1}>
-          <div className={styles.backColor}></div>
-          <div className={styles.left}>
-            <h2>Spécial offre de la semaine !</h2>
-            <p>-{specialOffre.discount_percentage}% de réduction sur cet article</p>
-            <section className={styles.btnOptions}>
-              <button className={styles.btnBuy} onClick={() => router.push(`/products/${specialOffre._id}`)} >Achetez maintenant</button>
-              {/* <button className={styles.btnMore} onClick={()=>router.push(`/products`)}>En savoir plus</button> */}
-            </section>
-          </div>
-          <div className={styles.right}>
-            <Slider data={specialOffre} />
-          </div>
-        </section>
-         }
+          <section className={styles.banner1}>
+            <div className={styles.backColor}></div>
+            <div className={styles.left}>
+              {specialOffre?.discount_percentage && <h2>Spécial offre de la semaine !</h2>}
+              <p>
+                {specialOffre?.discount_percentage
+                  ? `-${specialOffre.discount_percentage || 0 }% de réduction sur cet article`
+                  : "Bienvenue sur H-fashion – Votre Destination Shopping en ligne ."}
+              </p>
+
+              {specialOffre?.discount_percentage && <section className={styles.btnOptions}>
+                <button className={styles.btnBuy} onClick={() => router.push(`/products/${specialOffre._id}`)} >Achetez maintenant</button>
+                {/* <button className={styles.btnMore} onClick={()=>router.push(`/products`)}>En savoir plus</button> */}
+              </section>}
+            </div>
+            {specialOffre?.discount_percentage &&
+              <div className={styles.right}>
+                <Slider data={specialOffre} />
+              </div>
+            }
+          </section>
+        
         {/* SECTION CATEGORIES */}
         <section className={styles.categoriesContainer}>
           <h2 className={styles.title}>Nos catégories vendues  </h2>
@@ -129,12 +135,12 @@ export default function Home() {
           </ul>
         </section>
         {/* SECTION PROMOTION */}
-        <section className={styles.promotion}>
+        {hasPromo.length > 0 && <section className={styles.promotion}>
           <div className={styles.back}></div>
           <h2 className={styles.title}>Nos meilleurs offres</h2>
           <div className={styles.containerPromo}>
             <div className={styles.infoPromo}>
-              <h2 className={styles.h2}>Promos jusq’à <span>-{hasPromo[0]?.discount_percentage}% </span><br />sur ces articles de mode</h2>
+              <h2 className={styles.h2}>Promos jusq’à <span>-{hasPromo[0]?.discount_percentage || 0}% </span><br />sur ces articles de mode</h2>
             </div>
             <ul className={styles.productList}>
               {
@@ -145,7 +151,7 @@ export default function Home() {
               }
             </ul>
           </div>
-        </section>
+        </section>}
         {/* SECTION MARQUES */}
         <section className={styles.marquesContainer}>
           <h2 className={styles.title}>Nos marques vendues</h2>
