@@ -15,6 +15,7 @@ const AddressCheckOut = () => {
 
   const [isValid, setIsValid] = useState(true);
   const [message, setMessage] = useState("");
+  const [serverMessage , setServerMessage] = useState("")
   const [orderLocal, setOrderLocal] = useState({});
   const [formData, setFormData] = useState({
     nom: "",
@@ -76,7 +77,7 @@ const AddressCheckOut = () => {
       },
       payementMode: formData.payementMode,
       status: "En attente",
-      cart:cart.map((item)=>({producId:item._id ,price:item.price, qty:item.qty, size:item.selectedSize, color:item.selectedColor
+      cart:cart.map((item)=>({producId:item._id, promotion:item.promotion ,price:item.price, qty:item.qty, size:item.selectedSize, color:item.selectedColor
       })),
       total: total + 1000,
     };
@@ -105,7 +106,7 @@ const AddressCheckOut = () => {
         router.push("/login");
       }
     } catch (error) {
-      console.error("Erreur lors de la sauvegarde de la commande :", error);
+      setServerMessage(error?.response?.data?.message);
     }
   };
 
@@ -184,6 +185,7 @@ const AddressCheckOut = () => {
               <button type='button' className={styles.btnCommande}
                 onClick={handleSubmit}
               >Passer commande</button>
+              {serverMessage && <p>{serverMessage}</p>}
             </div>
           </div>
         </section>
