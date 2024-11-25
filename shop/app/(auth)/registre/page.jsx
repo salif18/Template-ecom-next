@@ -46,11 +46,7 @@ const Registre = () => {
     }catch(e){
       console.error(e.response.data.message || "erreur d'authentification",  )
     }
-    
 
-    // login(formData ,new Date(),formData.numero)
-    // console.log(formData)
-    // router.push("/")
   }
 
   // Réinitialisation du message d'erreur après un certain temps
