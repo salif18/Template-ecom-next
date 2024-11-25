@@ -98,7 +98,7 @@ const ConfirmOrder = () => {
                     {
                         product.map(item =>
                             <di key={item._id} className={styles.products}>
-                                <div className={styles.productsDiv}><p>{item.name} x{item.qty}</p></div>
+                                <div className={styles.productsDiv}><p>{item.name && item.name} x{item.qty && item.qty}</p></div>
                                 <div className={styles.productsDiv}><p>{item.price * item.qty}</p></div>
                             </di>
                         )
