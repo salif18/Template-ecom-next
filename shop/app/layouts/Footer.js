@@ -19,7 +19,7 @@ const Footer = () => {
   // abonnement
   const [abonment ,setAbonment] = useState("");
  const [isValid ,setIsValid] = useState(true);
- const [message ,setMessage ] = useState();
+ const [message ,setMessage ] = useState("");
 
   const handleSubmit =async(e)=>{
     e.preventDefault();
@@ -46,6 +46,7 @@ const Footer = () => {
           setAbonment("")
         }
     }catch(e){
+      setMessage(e?.response?.data?.message )
        console.log(e?.response?.data?.message || "error")
     }
    
