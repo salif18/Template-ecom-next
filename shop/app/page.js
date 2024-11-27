@@ -2,7 +2,7 @@
 import Image from "next/image";
 import styles from "./styles/_home.module.scss";
 import LayoutPage from "./layouts/Layout";
-import marques from "../../shop/app/lib/fakemarque";
+
 import globe from "./assets/images/globe-free-img.png";
 import lock from "./assets/images/lock-free-img.png"
 import quality from "./assets/images/quality-free-img.png"
@@ -23,6 +23,7 @@ export default function Home() {
   const [specialOffre, setSpecialOffre] = useState({});
   const [hasPromo, setHasPromo] = useState([]);
   const [data, setData] = useState([]);
+  const [marques , setMarques ] = useState([])
 
   // RECUPERER LES PRODUITS
   useEffect(() => {
@@ -64,6 +65,27 @@ export default function Home() {
       }
     }
     getProducts()
+  }, [])
+
+
+  useEffect(() => {
+    const getMarques = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_URI}/marques`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer `,
+          },
+        });
+        if (response.status === 200) {
+          setMarques(response?.data?.marques)
+         
+        }
+      } catch (e) {
+        console.log(e.response?.data?.message || "erreur ")
+      }
+    }
+    getMarques()
   }, [])
 
 
@@ -155,8 +177,8 @@ export default function Home() {
           <ul className={styles.productList}>
             {
               marques.map((product) =>
-                <li key={product.id}>
-                  <img className={styles.markImg} src={product.img} />
+                <li key={product?._id}>
+                  <img className={styles.markImg} src={product?.image} />
                 </li>
               )
             }

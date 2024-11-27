@@ -81,6 +81,27 @@
 
             }
 
+            .positionMap{
+                margin-top: 20px;
+                display: block;
+                align-items: center;
+                .position{
+                    display: flex;
+                    align-items: center;
+                    gap: 16px;
+                    font-family: "roboto";
+                    font-size: 1em;
+                    .icon1,
+                    .icon2{
+                        font-size: 1.6em;
+                    }
+                    .icon2{
+                        color: green;
+                    }
+
+                }
+            }
+
         }
 
         .right {

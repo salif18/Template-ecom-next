@@ -39,7 +39,7 @@ const ProductCard = ({ product }) => {
           product.is_promo &&
           product.discount_percentage > 0 && 
           <div className={styles.percentage}>
-          <span>-{product?.discount_percentage}</span>
+          <p className={styles.p}>-{product?.discount_percentage}</p>
         </div>
         }
         

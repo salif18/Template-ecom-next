@@ -6,7 +6,10 @@ import styles from "../../styles/_address.module.scss"
 import { CartContext } from '@/app/context/CartContext';
 import { useRouter } from 'next/navigation';
 import { AuthContext } from '@/app/context/AuthContext';
+import { MdOutlineMyLocation } from "react-icons/md";
+import { MdOutlineLocationSearching } from "react-icons/md";
 import axios from 'axios';
+
 
 const AddressCheckOut = () => {
   const { cart, total, clearCart } = useContext(CartContext);
@@ -17,6 +20,9 @@ const AddressCheckOut = () => {
   const [message, setMessage] = useState("");
   const [serverMessage , setServerMessage] = useState("")
   const [orderLocal, setOrderLocal] = useState({});
+  const [position, setPosition] = useState({ latitude: null, longitude: null });
+  const [positionActive, setPositionActive] = useState(false);
+
   const [formData, setFormData] = useState({
     nom: "",
     numero: "",
@@ -79,8 +85,14 @@ const AddressCheckOut = () => {
       status: "En attente",
       cart:cart.map((item)=>({producId:item._id,image:item.img, name:item.name, promotion:item.promotion ,price:item.price, qty:item.qty, size:item.selectedSize, color:item.selectedColor
       })),
+      location: {
+        lat: position.latitude, // Latitude
+        lng: position.longitude, // Longitude
+      },
       total: total,
     };
+
+    console.log(order)
 
     try {
       // Enregistrement de la commande dans localStorage
@@ -110,6 +122,26 @@ const AddressCheckOut = () => {
     }
   };
 
+ 
+  const getPosition = () => {
+    if (!navigator.geolocation) {
+      setPositionActive(false);
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setPosition({ latitude, longitude });
+        console.log(latitude,longitude)
+        setPositionActive(!positionActive);
+      },
+      (err) => {
+        // setError(err.message);
+      }
+    );
+  };
+
   // Réinitialisation du message d'erreur après un certain temps
   useEffect(() => {
     if (message) {
@@ -118,7 +150,12 @@ const AddressCheckOut = () => {
     }
   }, [message]);
 
+//   const handlegoMaps=()=>{
+//     window.open(`https://www.google.com/maps`, "_blank", "noopener,noreferrer");
+// }
 
+
+{/* <a href="https://www.google.com/maps" target="_blank">Choisir ma position sur Google Maps</a> */}
   return (
     <LayoutPage>
       <main className={styles.address}>
@@ -148,6 +185,12 @@ const AddressCheckOut = () => {
               <input type='number' className={!isValid && !formData.logt && styles.error} name='logt' value={formData.logt} onChange={handleChange} placeholder={formData?.logt} />
               {(!isValid && !formData.logt) && <p className={styles.errorMessage}>{message}</p>}
             </form>
+            <div className={styles.positionMap}>
+            { !positionActive ? 
+             <div className={styles.position}><MdOutlineLocationSearching className={styles.icon1} onClick={getPosition} /> Activer votre position maps</div>
+             : 
+             <div className={styles.position}><MdOutlineMyLocation className={styles.icon2} />  Votre position est activée</div>  }
+            </div>
           </div>
           <div className={styles.right}>
             <h2>Détails de commande</h2>
