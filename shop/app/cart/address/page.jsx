@@ -90,8 +90,8 @@ const AddressCheckOut = () => {
         producId: item._id, image: item.img, name: item.name, promotion: item.promotion, price: item.price, qty: item.qty, size: item.selectedSize, color: item.selectedColor
       })),
       location: {
-        lat: position.lat, // Latitude
-        lng: position.lng, // Longitude
+        lat: position?.lat, // Latitude
+        lng: position?.lng, // Longitude
       },
       total: total,
     };
