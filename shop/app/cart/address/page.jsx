@@ -127,24 +127,24 @@ const AddressCheckOut = () => {
   };
 
 
-  const getPosition = () => {
-    if (!navigator.geolocation) {
-      setPositionActive(false);
-      return;
-    }
+  // const getPosition = () => {
+  //   if (!navigator.geolocation) {
+  //     setPositionActive(false);
+  //     return;
+  //   }
 
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        setPosition({ latitude, longitude });
-        console.log(latitude, longitude)
-        setPositionActive(!positionActive);
-      },
-      (err) => {
-        // setError(err.message);
-      }
-    );
-  };
+  //   navigator.geolocation.getCurrentPosition(
+  //     (position) => {
+  //       const { latitude, longitude } = position.coords;
+  //       setPosition({ latitude, longitude });
+  //       console.log(latitude, longitude)
+  //       setPositionActive(!positionActive);
+  //     },
+  //     (err) => {
+  //       // setError(err.message);
+  //     }
+  //   );
+  // };
 
   // Réinitialisation du message d'erreur après un certain temps
   useEffect(() => {
