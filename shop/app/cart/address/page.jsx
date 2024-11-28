@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import LayoutPage from '@/app/layouts/Layout'
 import React, { useContext, useEffect, useState } from 'react';
