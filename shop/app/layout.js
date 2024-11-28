@@ -4,6 +4,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false;
 import { CartProvider } from "@/app/context/CartContext";
 import { AuthProvider } from './context/AuthContext';
+import "leaflet/dist/leaflet.css";
 
 export const metadata = {
   title: 'Hadja-fashion.vercel',

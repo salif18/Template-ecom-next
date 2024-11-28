@@ -8,19 +8,22 @@ import { useRouter } from 'next/navigation';
 import { AuthContext } from '@/app/context/AuthContext';
 import { MdOutlineMyLocation } from "react-icons/md";
 import { MdOutlineLocationSearching } from "react-icons/md";
+import { MapContainer, TileLayer, Marker, LayersControl, useMapEvents } from "react-leaflet";
 import axios from 'axios';
+
+
 
 
 const AddressCheckOut = () => {
   const { cart, total, clearCart } = useContext(CartContext);
-  const { token ,userId} = useContext(AuthContext);
+  const { token, userId } = useContext(AuthContext);
   const router = useRouter();
 
   const [isValid, setIsValid] = useState(true);
   const [message, setMessage] = useState("");
-  const [serverMessage , setServerMessage] = useState("")
+  const [serverMessage, setServerMessage] = useState("")
   const [orderLocal, setOrderLocal] = useState({});
-  const [position, setPosition] = useState({ latitude: null, longitude: null });
+  const [position, setPosition] = useState(null);
   const [positionActive, setPositionActive] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -58,7 +61,7 @@ const AddressCheckOut = () => {
   };
 
   // Validation et soumission du formulaire
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validation des champs
@@ -70,7 +73,7 @@ const AddressCheckOut = () => {
 
     // Création de l'objet de commande
     const order = {
-      userId:userId,
+      userId: userId,
       user: {
         nom: formData.nom,
         numero: formData.numero,
@@ -83,11 +86,12 @@ const AddressCheckOut = () => {
       },
       payementMode: formData.payementMode,
       status: "En attente",
-      cart:cart.map((item)=>({producId:item._id,image:item.img, name:item.name, promotion:item.promotion ,price:item.price, qty:item.qty, size:item.selectedSize, color:item.selectedColor
+      cart: cart.map((item) => ({
+        producId: item._id, image: item.img, name: item.name, promotion: item.promotion, price: item.price, qty: item.qty, size: item.selectedSize, color: item.selectedColor
       })),
       location: {
-        lat: position.latitude, // Latitude
-        lng: position.longitude, // Longitude
+        lat: position.lat, // Latitude
+        lng: position.lng, // Longitude
       },
       total: total,
     };
@@ -100,20 +104,20 @@ const AddressCheckOut = () => {
       localStorage.setItem('redirectUrl', "/cart/address")
       // Redirection en fonction de l'état de connexion
       if (token) {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_URI}/commandes`,order,{
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_URI}/commandes`, order, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer `,
-        },
+          },
         });
-        if(response.status === 201){
-          
+        if (response.status === 201) {
+
           router.push("/succes");
-           // Enregistrement de la commande dans localStorage
-            localStorage.setItem("order", JSON.stringify(response.data.order));
+          // Enregistrement de la commande dans localStorage
+          localStorage.setItem("order", JSON.stringify(response.data.order));
           clearCart();
         }
-       
+
       } else {
         router.push("/login");
       }
@@ -122,7 +126,7 @@ const AddressCheckOut = () => {
     }
   };
 
- 
+
   const getPosition = () => {
     if (!navigator.geolocation) {
       setPositionActive(false);
@@ -133,7 +137,7 @@ const AddressCheckOut = () => {
       (position) => {
         const { latitude, longitude } = position.coords;
         setPosition({ latitude, longitude });
-        console.log(latitude,longitude)
+        console.log(latitude, longitude)
         setPositionActive(!positionActive);
       },
       (err) => {
@@ -150,12 +154,20 @@ const AddressCheckOut = () => {
     }
   }, [message]);
 
-//   const handlegoMaps=()=>{
-//     window.open(`https://www.google.com/maps`, "_blank", "noopener,noreferrer");
-// }
 
+  // obtenir position depuis sur la carte
+  const LocationMarker = () => {
+    useMapEvents({
+      click(e) {
+        setPosition(e.latlng); // Capture la position lorsque l'utilisateur clique sur la carte
+      },
+    });
 
-{/* <a href="https://www.google.com/maps" target="_blank">Choisir ma position sur Google Maps</a> */}
+    return position === null ? null : (
+      <Marker position={position}></Marker>
+    );
+  };
+
   return (
     <LayoutPage>
       <main className={styles.address}>
@@ -186,12 +198,36 @@ const AddressCheckOut = () => {
               {(!isValid && !formData.logt) && <p className={styles.errorMessage}>{message}</p>}
             </form>
             <div className={styles.positionMap}>
-            { !positionActive ? 
-             <div className={styles.position}><MdOutlineLocationSearching className={styles.icon1} onClick={getPosition} /> Activer votre position maps</div>
-             : 
-             <div className={styles.position}><MdOutlineMyLocation className={styles.icon2} />  Votre position est activée</div>  }
+
+              <h1>Sélectionnez votre position <MdOutlineLocationSearching style={{ fontSize: "24px" }} /></h1>
+              <MapContainer
+                center={[12.583126, -7.929346]} // Paris comme centre par défaut
+                zoom={13}
+                style={{ height: "300px", width: "100%" }}
+              >
+                {/* Contrôle pour basculer entre les couches */}
+                <LayersControl position="topright">
+                  {/* Vue Street (OpenStreetMap) */}
+                  <LayersControl.BaseLayer name="Vue Street" checked>
+                    <TileLayer
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    />
+                  </LayersControl.BaseLayer>
+
+                  {/* Vue Satellite (Esri Satellite) */}
+                  <LayersControl.BaseLayer name="Vue Satellite">
+                    <TileLayer
+                      url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                      attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                    />
+                  </LayersControl.BaseLayer>
+                </LayersControl>
+                <LocationMarker />
+              </MapContainer>
             </div>
           </div>
+
           <div className={styles.right}>
             <h2>Détails de commande</h2>
             <div className={styles.orderDetails}>
@@ -228,7 +264,7 @@ const AddressCheckOut = () => {
               <button type='button' className={styles.btnCommande}
                 onClick={handleSubmit}
               >Passer commande</button>
-              {serverMessage && <p style={{color:"red"}}>{serverMessage}</p>}
+              {serverMessage && <p style={{ color: "red" }}>{serverMessage}</p>}
             </div>
           </div>
         </section>
