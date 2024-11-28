@@ -87,10 +87,8 @@ const AddressCheckOut = () => {
       cart: cart.map((item) => ({
         producId: item._id, image: item.img, name: item.name, promotion: item.promotion, price: item.price, qty: item.qty, size: item.selectedSize, color: item.selectedColor
       })),
-      location: {
-        lat: position?.lat, // Latitude
-        lng: position?.lng, // Longitude
-      },
+
+      location: position ? { lat: position.lat, lng: position.lng } : null, // Ajoutez une vérification ici
       total: total,
     };
 
@@ -158,13 +156,11 @@ const AddressCheckOut = () => {
   const LocationMarker = () => {
     useMapEvents({
       click(e) {
-        setPosition(e.latlng); // Capture la position lorsque l'utilisateur clique sur la carte
+        setPosition(e.latlng); // Met à jour la position lors d'un clic
       },
     });
-
-    return position === null ? null : (
-      <Marker position={position}></Marker>
-    );
+  
+    return position ? <Marker position={position} /> : null;
   };
 
   return (
