@@ -126,12 +126,13 @@ const AddressCheckOut = () => {
 
    // obtenir position depuis sur la carte
    const LocationMarker = () => {
+    if (typeof window !== "undefined") {
     useMapEvents({
       click(e) {
         setPosition(e.latlng); // Met à jour la position lors d'un clic
       },
     });
-  
+    }
     return position ? <Marker position={position} /> : null;
   };
 

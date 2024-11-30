@@ -2,7 +2,6 @@
 import Image from "next/image";
 import styles from "./styles/_home.module.scss";
 import LayoutPage from "./layouts/Layout";
-
 import globe from "./assets/images/globe-free-img.png";
 import lock from "./assets/images/lock-free-img.png"
 import quality from "./assets/images/quality-free-img.png"
