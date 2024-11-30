@@ -12,7 +12,6 @@ import axios from 'axios';
 import MyMaps from '@/app/components/MyMaps';
 import {  Marker, useMapEvents } from "react-leaflet";
 
-
 const AddressCheckOut = () => {
   const { cart, total, clearCart } = useContext(CartContext);
   const { token, userId } = useContext(AuthContext);
