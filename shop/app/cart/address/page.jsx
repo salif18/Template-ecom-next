@@ -12,6 +12,7 @@ import axios from 'axios';
 import MyMaps from '@/app/components/MyMaps';
 import {  Marker, useMapEvents } from "react-leaflet";
 
+
 const AddressCheckOut = () => {
   const { cart, total, clearCart } = useContext(CartContext);
   const { token, userId } = useContext(AuthContext);
@@ -34,6 +35,7 @@ const AddressCheckOut = () => {
     payementMode: "",
   });
 
+  
   // Récupération de la commande locale au chargement de la page
   useEffect(() => {
     const storage = localStorage.getItem("order");
@@ -122,6 +124,19 @@ const AddressCheckOut = () => {
     }
   };
 
+   // obtenir position depuis sur la carte
+   const LocationMarker = () => {
+    useMapEvents({
+      click(e) {
+        setPosition(e.latlng); // Met à jour la position lors d'un clic
+      },
+    });
+  
+    return position ? <Marker position={position} /> : null;
+  };
+
+  
+
 
   // const getPosition = () => {
   //   if (!navigator.geolocation) {
@@ -151,18 +166,6 @@ const AddressCheckOut = () => {
   }, [message]);
   
 
-
-  // obtenir position depuis sur la carte
-  const LocationMarker = () => {
-    useMapEvents({
-      click(e) {
-        setPosition(e.latlng); // Met à jour la position lors d'un clic
-      },
-    });
-  
-    return position ? <Marker position={position} /> : null;
-  };
-
   return (
     <LayoutPage>
       <main className={styles.address}>
@@ -174,26 +177,25 @@ const AddressCheckOut = () => {
             <h2>Détails de livraison</h2>
             <form>
               <label htmlFor='nom'>Nom</label>
-              <input type='text' className={!isValid && !formData.nom && styles.error} name='nom' value={formData.nom} onChange={handleChange} placeholder={formData.nom} />
+              <input type='text'  className={`${!isValid && !formData.nom ? styles.error : ""}`} name='nom' value={formData.nom} onChange={handleChange} placeholder={formData.nom} />
               {(!isValid && !formData.nom) && <p className={styles.errorMessage}>{message}</p>}
               <label htmlFor='numero'>Numéro</label>
-              <input type='number' className={!isValid && !formData.numero && styles.error} name='numero' value={formData.numero} onChange={handleChange} placeholder={formData?.numero} />
+              <input type='number' className={`${!isValid && !formData.numero ? styles.error :""}`} name='numero' value={formData.numero} onChange={handleChange} placeholder={formData?.numero} />
               {(!isValid && !formData.numero) && <p className={styles.errorMessage}>{message}</p>}
               <label htmlFor='email'>Email</label>
-              <input type='email' className={!isValid && !formData.email && styles.error} name='email' value={formData.email} onChange={handleChange} placeholder={formData?.email} />
+              <input type='email' className={`${!isValid && !formData.email ? styles.error :""}`} name='email' value={formData.email} onChange={handleChange} placeholder={formData?.email} />
               {(!isValid && !formData.email) && <p className={styles.errorMessage}>{message}</p>}
               <label htmlFor='ville'>Ville/Quartier</label>
-              <input type='text' className={!isValid && !formData.ville && styles.error} name='ville' value={formData.ville} onChange={handleChange} placeholder={formData?.ville} />
+              <input type='text' className={`${!isValid && !formData.ville ? styles.error : ""}`} name='ville' value={formData.ville} onChange={handleChange} placeholder={formData?.ville} />
               {(!isValid && !formData.ville) && <p className={styles.errorMessage}>{message}</p>}
               <label htmlFor='rue'>Rue</label>
-              <input type='number' className={!isValid && !formData.rue && styles.error} name='rue' value={formData.rue} onChange={handleChange} placeholder={formData?.rue} />
+              <input type='number' className={`${!isValid && !formData.rue ? styles.error : "" }`} name='rue' value={formData.rue} onChange={handleChange} placeholder={formData?.rue} />
               {(!isValid && !formData.rue) && <p className={styles.errorMessage}>{message}</p>}
               <label htmlFor='logt'>Logts</label>
-              <input type='number' className={!isValid && !formData.logt && styles.error} name='logt' value={formData.logt} onChange={handleChange} placeholder={formData?.logt} />
+              <input type='number' className={`${!isValid && !formData.logt ? styles.error :""}`} name='logt' value={formData.logt} onChange={handleChange} placeholder={formData?.logt} />
               {(!isValid && !formData.logt) && <p className={styles.errorMessage}>{message}</p>}
             </form>
             <div className={styles.positionMap}>
-
               <h1>Sélectionnez votre position <MdOutlineLocationSearching style={{ fontSize: "24px" }} /></h1>
               <MyMaps LocationMarker={LocationMarker} />
             </div>
@@ -245,3 +247,4 @@ const AddressCheckOut = () => {
 }
 
 export default AddressCheckOut
+

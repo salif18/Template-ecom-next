@@ -1,9 +1,9 @@
 "use client";
 
-import React from 'react'
-import { MapContainer, TileLayer, Marker, LayersControl, useMapEvents } from "react-leaflet";
+import { MapContainer, TileLayer, LayersControl } from "react-leaflet";
 
 const MyMaps = ({ LocationMarker }) => {
+
     return (
         <MapContainer
             center={[12.583126, -7.929346]} // Paris comme centre par défaut
