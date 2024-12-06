@@ -9,12 +9,11 @@ import MarkerIcon from "@/node_modules/leaflet/dist/images/marker-icon.png"
 
 const MyMaps = ({ position, setPosition }) => {
     // État pour détecter si le composant est monté
-    // const [isClient, setIsClient] = useState(false);
+    const [isClient, setIsClient] = useState(false);
 
-    // useEffect(() => {
-    //     setIsClient(true);
-
-    // }, []);
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     // obtenir position depuis sur la carte
     const LocationMarker = () => {
@@ -38,7 +37,7 @@ const MyMaps = ({ position, setPosition }) => {
        
       
         <MapContainer
-            center={[12.583126, -7.929346]} // Paris comme centre par défaut
+            center={[12.583126, -7.929346]} 
             zoom={13}
             style={{ height: "300px", width: "100%" }}
         >
