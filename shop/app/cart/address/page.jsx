@@ -196,7 +196,9 @@ const AddressCheckOut = () => {
               {(!isValid && !formData.logt) && <p className={styles.errorMessage}>{message}</p>}
             </form>
             <div className={styles.positionMap}>
-              <h1>Sélectionnez votre position <MdOutlineLocationSearching style={{ fontSize: "24px" }} /></h1>
+              {/* <h1>Sélectionnez votre position <MdOutlineLocationSearching onClick={getPosition} style={{ fontSize: "24px" }} /> </h1> */}
+              {/* <h1>Votre position  est activée <MdOutlineMyLocation style={{ fontSize: "24px" , color:"green" }} /></h1> */}
+              <h1>Sélectionnez votre position <MdOutlineLocationSearching style={{ fontSize: "24px" }} /> </h1>
               <MyMaps LocationMarker={LocationMarker} />
             </div>
           </div>
