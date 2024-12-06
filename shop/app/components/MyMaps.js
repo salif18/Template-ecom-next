@@ -1,8 +1,8 @@
 "use client";
 
-import { MapContainer, TileLayer, LayersControl } from "react-leaflet";
+import { MapContainer, TileLayer, useMapEvents, LayersControl } from "react-leaflet";
 
-const MyMaps = ({ LocationMarker ,setPosition }) => {
+const MyMaps = ({ setPosition }) => {
 
     // obtenir position depuis sur la carte
    const LocationMarker = () => {

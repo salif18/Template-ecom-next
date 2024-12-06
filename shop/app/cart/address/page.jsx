@@ -186,7 +186,7 @@ const AddressCheckOut = () => {
             {!positionActive && <h1>Sélectionnez votre position <MdOutlineLocationSearching onClick={getPosition} style={{ fontSize: "24px" }} /> </h1>}
               {positionActive && <h1> Votre position  est activée <MdOutlineMyLocation style={{ fontSize: "24px" , color:"green" }} /></h1>}
               <h1>Sélectionnez votre position <MdOutlineLocationSearching style={{ fontSize: "24px" }} /> </h1>
-              <MyMaps LocationMarker={LocationMarker} setPosition={setPosition} />
+              <MyMaps  setPosition={setPosition} />
             </div>
           </div>
 
