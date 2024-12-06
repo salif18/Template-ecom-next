@@ -1,7 +1,7 @@
 "use client";
 
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Marker, MapContainer, TileLayer, useMapEvents, LayersControl } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet"
@@ -9,19 +9,12 @@ import MarkerIcon from "@/node_modules/leaflet/dist/images/marker-icon.png"
 
 const MyMaps = ({ position, setPosition }) => {
     // État pour détecter si le composant est monté
-    const [isClient, setIsClient] = useState(false);
-    const mapRef = useRef(null);
+    // const [isClient, setIsClient] = useState(false);
 
-    useEffect(() => {
-        setIsClient(true);
-        
-        return () => {
-            if (mapRef.current && mapRef.current._leaflet_id) {
-                mapRef.current._leaflet_id = null; // Nettoyage
-            }
-        };
+    // useEffect(() => {
+    //     setIsClient(true);
 
-    }, []);
+    // }, []);
 
     // obtenir position depuis sur la carte
     const LocationMarker = () => {
@@ -41,17 +34,10 @@ const MyMaps = ({ position, setPosition }) => {
         })} position={position} /> : null;
     };
 
-
-    // if (!isClient) {
-    //     return <p>Chargement de la carte...</p>;
-    // }
-
-
     return (
-        <>
-        {!isClient ?
+       
+      
         <MapContainer
-            ref={mapRef}
             center={[12.583126, -7.929346]} // Paris comme centre par défaut
             zoom={13}
             style={{ height: "300px", width: "100%" }}
@@ -76,9 +62,6 @@ const MyMaps = ({ position, setPosition }) => {
             </LayersControl>
             <LocationMarker />
         </MapContainer>
-        : "rechargement...."
-        }
-        </>
     )
 }
 

@@ -13,7 +13,7 @@ import axios from 'axios';
 import MyMaps from '@/app/components/MyMaps';
 // import dynamic from 'next/dynamic';
 
-// const MyMaps = dynamic(()=> import("@/app/components/MyMaps"),{ssr:false})
+// const MapComponent = dynamic(() => import('@/app/components/MyMaps'), { ssr: false });
 
 const AddressCheckOut = () => {
   const { cart, total, clearCart } = useContext(CartContext);
