@@ -1,22 +1,39 @@
 "use client";
 
-import {Marker, MapContainer, TileLayer, useMapEvents, LayersControl } from "react-leaflet";
+import { Marker, MapContainer, TileLayer, useMapEvents, LayersControl } from "react-leaflet";
 
-const MyMaps = ({position, setPosition  }) => {
+import { useState, useEffect } from "react";
+
+
+const MyMaps = ({ position, setPosition }) => {
+
+
+    //   État pour détecter si le composant est monté
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
 
     // obtenir position depuis sur la carte
-   const LocationMarker = () => {
+    const LocationMarker = () => {
 
-    useMapEvents({
-      click(e) {
-        setPosition(e.latlng); // Met à jour la position lors d'un clic
-      },
-    });
-    
-    return position ? <Marker position={position} /> : null;
-  };
+        useMapEvents({
+            click(e) {
+                setPosition(e.latlng); // Met à jour la position lors d'un clic
+            },
+        });
 
-  
+        return position ? <Marker position={position} /> : null;
+    };
+
+    // useEffect(() => {
+    //     if (!isClient) {
+    //         return <p>Chargement de la carte...</p>;
+    //     }
+    // }, [])
+
 
     return (
         <MapContainer
