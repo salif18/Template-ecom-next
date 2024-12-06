@@ -1,67 +1,75 @@
 "use client";
 
-
-import { useState, useEffect } from "react";
-import { Marker, MapContainer, TileLayer, useMapEvents, LayersControl } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMap, LayersControl } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import L from "leaflet"
-import MarkerIcon from "@/node_modules/leaflet/dist/images/marker-icon.png"
+import L from "leaflet";
+import MarkerIcon from "@/node_modules/leaflet/dist/images/marker-icon.png";
+import { useEffect, useState } from "react";
 
 const MyMaps = ({ position, setPosition }) => {
-    // État pour détecter si le composant est monté
-    const [isClient, setIsClient] = useState(false);
+//   const [isClient, setIsClient] = useState(false);
 
+//   useEffect(() => {
+//     setIsClient(true);
+//   }, []);
+
+  // Custom hook to handle map events
+  const LocationMarker = () => {
+    const map = useMap(); // useMap hook to get the map instance
     useEffect(() => {
-        setIsClient(true);
-    }, []);
-
-    // obtenir position depuis sur la carte
-    const LocationMarker = () => {
-
-        useMapEvents({
-            click(e) {
-                setPosition(e.latlng); // Met à jour la position lors d'un clic
-            },
-        });
-
-        return position ? <Marker icon={L.icon({
-            iconUrl: MarkerIcon.src,
-            iconRetinaUrl: MarkerIcon.src,
-            iconSize: [25, 41],
-            iconAnchor: [12.5, 41],
-            popupAnchor: [0, -41]
-        })} position={position} /> : null;
-    };
-
-    return (
-       
+      const handleMapClick = (e) => {
+        setPosition(e.latlng); // Update position on click
+      };
       
-        <MapContainer
-            center={[12.583126, -7.929346]} 
-            zoom={13}
-            style={{ height: "300px", width: "100%" }}
-        >
-            {/* Contrôle pour basculer entre les couches */}
-            <LayersControl position="topright">
-                {/* Vue Street (OpenStreetMap) */}
-                <LayersControl.BaseLayer name="Vue Street" checked>
-                    <TileLayer
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    />
-                </LayersControl.BaseLayer>
+      // Attach click event listener to the map
+      map.on('click', handleMapClick);
 
-                {/* Vue Satellite (Esri Satellite) */}
-                <LayersControl.BaseLayer name="Vue Satellite">
-                    <TileLayer
-                        url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-                        attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-                    />
-                </LayersControl.BaseLayer>
-            </LayersControl>
-            <LocationMarker />
-        </MapContainer>
-    )
-}
+      return () => {
+        map.off('click', handleMapClick); // Cleanup listener
+      };
+    }, [map, setPosition]);
 
-export default MyMaps
+    return position ? (
+      <Marker
+        icon={L.icon({
+          iconUrl: MarkerIcon.src,
+          iconRetinaUrl: MarkerIcon.src,
+          iconSize: [25, 41],
+          iconAnchor: [12.5, 41],
+          popupAnchor: [0, -41],
+        })}
+        position={position}
+      />
+    ) : null;
+  };
+
+  // Ensure the map is only rendered on the client-side
+//  if (!isClient) return null;
+
+  return (
+    <MapContainer
+      center={[12.583126, -7.929346]}
+      zoom={13}
+      style={{ height: "300px", width: "100%" }}
+    >
+      <LayersControl position="topright">
+        <LayersControl.BaseLayer name="Vue Street" checked>
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+        </LayersControl.BaseLayer>
+
+        <LayersControl.BaseLayer name="Vue Satellite">
+          <TileLayer
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+            attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+          />
+        </LayersControl.BaseLayer>
+      </LayersControl>
+      <LocationMarker />
+    </MapContainer>
+  );
+};
+
+export default MyMaps;
