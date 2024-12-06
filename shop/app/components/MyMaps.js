@@ -48,7 +48,8 @@ const MyMaps = ({ position, setPosition }) => {
 
 
     return (
-
+        <>
+        {!isClient ?
         <MapContainer
             ref={mapRef}
             center={[12.583126, -7.929346]} // Paris comme centre par défaut
@@ -75,6 +76,9 @@ const MyMaps = ({ position, setPosition }) => {
             </LayersControl>
             <LocationMarker />
         </MapContainer>
+        : "rechargement...."
+        }
+        </>
     )
 }
 
