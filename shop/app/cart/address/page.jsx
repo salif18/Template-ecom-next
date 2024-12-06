@@ -124,16 +124,16 @@ const AddressCheckOut = () => {
   };
 
    // obtenir position depuis sur la carte
-  //  const LocationMarker = () => {
- 
-  //   useMapEvents({
-  //     click(e) {
-  //       setPosition(e.latlng); // Met à jour la position lors d'un clic
-  //     },
-  //   });
+   const LocationMarker = () => {
+
+    useMapEvents({
+      click(e) {
+        setPosition(e.latlng); // Met à jour la position lors d'un clic
+      },
+    });
     
-  //   return position ? <Marker position={position} /> : null;
-  // };
+    return position ? <Marker position={position} /> : null;
+  };
 
   
 
