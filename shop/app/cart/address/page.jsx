@@ -1,5 +1,6 @@
 "use client";
 
+
 import LayoutPage from '@/app/layouts/Layout'
 import React, { useContext, useEffect, useState } from 'react';
 import styles from "../../styles/_address.module.scss"
@@ -10,7 +11,9 @@ import { MdOutlineMyLocation } from "react-icons/md";
 import { MdOutlineLocationSearching } from "react-icons/md";
 import axios from 'axios';
 import MyMaps from '@/app/components/MyMaps';
-import {  Marker, useMapEvents } from "react-leaflet";
+// import dynamic from 'next/dynamic';
+
+// const MyMaps = dynamic(()=> import("@/app/components/MyMaps"),{ssr:false})
 
 const AddressCheckOut = () => {
   const { cart, total, clearCart } = useContext(CartContext);

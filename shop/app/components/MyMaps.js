@@ -1,20 +1,27 @@
 "use client";
 
+
+import { useState, useEffect, useRef } from "react";
 import { Marker, MapContainer, TileLayer, useMapEvents, LayersControl } from "react-leaflet";
-
-import { useState, useEffect } from "react";
-
+import "leaflet/dist/leaflet.css";
+import L from "leaflet"
+import MarkerIcon from "@/node_modules/leaflet/dist/images/marker-icon.png"
 
 const MyMaps = ({ position, setPosition }) => {
-
-
-    //   État pour détecter si le composant est monté
+    // État pour détecter si le composant est monté
     const [isClient, setIsClient] = useState(false);
+    const mapRef = useRef(null);
 
     useEffect(() => {
         setIsClient(true);
-    }, []);
+        
+        return () => {
+            if (mapRef.current && mapRef.current._leaflet_id) {
+                mapRef.current._leaflet_id = null; // Nettoyage
+            }
+        };
 
+    }, []);
 
     // obtenir position depuis sur la carte
     const LocationMarker = () => {
@@ -25,18 +32,25 @@ const MyMaps = ({ position, setPosition }) => {
             },
         });
 
-        return position ? <Marker position={position} /> : null;
+        return position ? <Marker icon={L.icon({
+            iconUrl: MarkerIcon.src,
+            iconRetinaUrl: MarkerIcon.src,
+            iconSize: [25, 41],
+            iconAnchor: [12.5, 41],
+            popupAnchor: [0, -41]
+        })} position={position} /> : null;
     };
 
-    // useEffect(() => {
-    //     if (!isClient) {
-    //         return <p>Chargement de la carte...</p>;
-    //     }
-    // }, [])
+
+    // if (!isClient) {
+    //     return <p>Chargement de la carte...</p>;
+    // }
 
 
     return (
+
         <MapContainer
+            ref={mapRef}
             center={[12.583126, -7.929346]} // Paris comme centre par défaut
             zoom={13}
             style={{ height: "300px", width: "100%" }}
