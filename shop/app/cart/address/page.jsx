@@ -9,8 +9,8 @@ import { AuthContext } from '@/app/context/AuthContext';
 import { MdOutlineMyLocation } from "react-icons/md";
 import { MdOutlineLocationSearching } from "react-icons/md";
 import axios from 'axios';
-// import MyMaps from '@/app/components/MyMaps';
-// import {  Marker, useMapEvents } from "react-leaflet";
+import MyMaps from '@/app/components/MyMaps';
+import {  Marker, useMapEvents } from "react-leaflet";
 
 const AddressCheckOut = () => {
   const { cart, total, clearCart } = useContext(CartContext);
@@ -123,20 +123,7 @@ const AddressCheckOut = () => {
     }
   };
 
-   // obtenir position depuis sur la carte
-   const LocationMarker = () => {
-
-    useMapEvents({
-      click(e) {
-        setPosition(e.latlng); // Met à jour la position lors d'un clic
-      },
-    });
-    
-    return position ? <Marker position={position} /> : null;
-  };
-
-  
-
+   
 
   const getPosition = () => {
     if (!navigator.geolocation) {
@@ -198,8 +185,8 @@ const AddressCheckOut = () => {
             <div className={styles.positionMap}>
             {!positionActive && <h1>Sélectionnez votre position <MdOutlineLocationSearching onClick={getPosition} style={{ fontSize: "24px" }} /> </h1>}
               {positionActive && <h1> Votre position  est activée <MdOutlineMyLocation style={{ fontSize: "24px" , color:"green" }} /></h1>}
-              {/* <h1>Sélectionnez votre position <MdOutlineLocationSearching style={{ fontSize: "24px" }} /> </h1>
-              <MyMaps LocationMarker={LocationMarker} /> */}
+              <h1>Sélectionnez votre position <MdOutlineLocationSearching style={{ fontSize: "24px" }} /> </h1>
+              <MyMaps LocationMarker={LocationMarker} setPosition={setPosition} />
             </div>
           </div>
 

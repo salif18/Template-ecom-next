@@ -2,7 +2,21 @@
 
 import { MapContainer, TileLayer, LayersControl } from "react-leaflet";
 
-const MyMaps = ({ LocationMarker }) => {
+const MyMaps = ({ LocationMarker ,setPosition }) => {
+
+    // obtenir position depuis sur la carte
+   const LocationMarker = () => {
+
+    useMapEvents({
+      click(e) {
+        setPosition(e.latlng); // Met à jour la position lors d'un clic
+      },
+    });
+    
+    return position ? <Marker position={position} /> : null;
+  };
+
+  
 
     return (
         <MapContainer
