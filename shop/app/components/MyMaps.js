@@ -52,7 +52,7 @@ const MyMaps = ({ position, setPosition }) => {
     <MapContainer
       center={[12.583126, -7.929346]}
       zoom={13}
-      style={{ height: "300px", width: "100%" }}
+      style={{ height: "500px", width: "100%" }}
     >
       <LayersControl position="topright">
         <LayersControl.BaseLayer name="Vue Street" checked>
