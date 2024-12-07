@@ -1,8 +1,8 @@
 "use client";
 
-
 import LayoutPage from '@/app/layouts/Layout'
 import React, { useContext, useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import styles from "../../styles/_address.module.scss"
 import { CartContext } from '@/app/context/CartContext';
 import { useRouter } from 'next/navigation';
@@ -10,9 +10,10 @@ import { AuthContext } from '@/app/context/AuthContext';
 import { MdOutlineMyLocation } from "react-icons/md";
 import { MdOutlineLocationSearching } from "react-icons/md";
 import axios from 'axios';
-import MyMaps from '@/app/components/MyMaps';
-// import dynamic from "next/dynamic";
-// const MyMaps = dynamic(() => import('@/app/components/MyMaps'), { ssr: false });
+// import MyMaps from '@/app/components/MyMaps';
+
+// Charger le composant sans SSR
+const MyMaps = dynamic(() => import("@/app/components/MyMaps"), { ssr: true });
 
 const AddressCheckOut = () => {
   const { cart, total, clearCart } = useContext(CartContext);
@@ -125,8 +126,7 @@ const AddressCheckOut = () => {
     }
   };
 
-   
-
+  
   //  const getPosition = () => {
   //   if (!navigator.geolocation) {
   //     setPositionActive(false);

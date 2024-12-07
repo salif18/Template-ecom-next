@@ -4,19 +4,18 @@ import { MapContainer, TileLayer, Marker, useMap, LayersControl } from "react-le
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import MarkerIcon from "@/node_modules/leaflet/dist/images/marker-icon.png";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const MyMaps = ({ position, setPosition }) => {
-//   const [isClient, setIsClient] = useState(false);
-
-//  useEffect(() => {
-//     setIsClient(true);
-//   }, []);
 
   // Custom hook to handle map events
+  
   const LocationMarker = () => {
     const map = useMap(); // useMap hook to get the map instance
     useEffect(() => {
+      if (typeof window !== "undefined") {
+        // Code spécifique au client
+      
       const handleMapClick = (e) => {
         setPosition(e.latlng); // Update position on click
       };
@@ -27,6 +26,7 @@ const MyMaps = ({ position, setPosition }) => {
       return () => {
         map.off('click', handleMapClick); // Cleanup listener
       };
+    }
     }, [map, setPosition]);
 
     return position ? (
@@ -44,10 +44,6 @@ const MyMaps = ({ position, setPosition }) => {
   };
 
   
-   // Ensure the map is only rendered on the client-side
-//  if (!isClient) return <p>chargement...</p>;
-
- 
   return (
     <MapContainer
       center={[12.583126, -7.929346]}
