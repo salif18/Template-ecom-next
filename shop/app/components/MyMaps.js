@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 const MyMaps = ({ position, setPosition }) => {
 //   const [isClient, setIsClient] = useState(false);
 
-//   useEffect(() => {
+//  useEffect(() => {
 //     setIsClient(true);
 //   }, []);
 
@@ -43,9 +43,11 @@ const MyMaps = ({ position, setPosition }) => {
     ) : null;
   };
 
-  // Ensure the map is only rendered on the client-side
-//  if (!isClient) return null;
+  
+   // Ensure the map is only rendered on the client-side
+//  if (!isClient) return <p>chargement...</p>;
 
+ 
   return (
     <MapContainer
       center={[12.583126, -7.929346]}
