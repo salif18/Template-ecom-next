@@ -108,6 +108,7 @@ export default function Home() {
           <section className={styles.banner1}>
             <div className={styles.backColor}></div>
             <div className={styles.left}>
+            <CompteARebours/>
               {specialOffre?.discount_percentage && <h2>Spécial offre de la semaine !</h2>}
               <p>
                 {specialOffre?.discount_percentage
@@ -119,6 +120,7 @@ export default function Home() {
                 <button className={styles.btnBuy} onClick={() => router.push(`/products/${specialOffre._id}`)} >Achetez maintenant</button>
                 {/* <button className={styles.btnMore} onClick={()=>router.push(`/products`)}>En savoir plus</button> */}
               </section>}
+             
             </div>
             {specialOffre?.discount_percentage &&
               <div className={styles.right}>
@@ -161,7 +163,7 @@ export default function Home() {
           
           <div className={styles.containerPromo}>
             <div className={styles.infoPromo}>
-            <CompteARebours intervalInDays={3} />
+            <CompteARebours />
               <h2 className={styles.h2}>Promos jusq’à <span>-{hasPromo[0]?.discount_percentage || 0}% </span><br />sur ces articles de mode</h2>
             </div>
             <ul className={styles.productList}>

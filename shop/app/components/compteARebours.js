@@ -12,7 +12,7 @@ const CompteARebours = () => {
           const { data } = await axios.get(`${process.env.NEXT_PUBLIC_URI}/active-rebourse`);
           setPromotion(data);
         } catch (error) {
-          console.error(error);
+          console.log(error);
         }
       };
   
@@ -53,8 +53,8 @@ const CompteARebours = () => {
     if (!timeLeft) return <p>Promotion terminée.</p>;
   
     return (
-      <section style={{margin:"20px 0"}}>
-        <h2 style={{color:"white", fontFamily:"Roboto"}}>Promotion : {promotion.name}</h2>
+      <section style={{margin:"20px 0" ,zIndex:555}}>
+        <h2 style={{color:"white", fontFamily:"Roboto"}}>{promotion.name}</h2>
         <p style={{color:"white", fontFamily:"Roboto"}}>
           Temps restant : {timeLeft.days} jours, {timeLeft.hours} heures,{" "}
           {timeLeft.minutes} minutes, {timeLeft.seconds} secondes
