@@ -9,8 +9,11 @@ const CompteARebours = () => {
     useEffect(() => {
       const fetchPromotion = async () => {
         try {
-          const { data } = await axios.get(`${process.env.NEXT_PUBLIC_URI}/active-rebourse`);
-          setPromotion(data);
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_URI}/active-rebourse`);
+          if(response.status === 200){
+            setPromotion(response.data);
+          }
+          
         } catch (error) {
           console.log(error);
         }

@@ -2,7 +2,7 @@
 
 import LayoutPage from '@/app/layouts/Layout'
 import React, { useContext, useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 import styles from "../../styles/_address.module.scss"
 import { CartContext } from '@/app/context/CartContext';
 import { useRouter } from 'next/navigation';
@@ -11,7 +11,7 @@ import { MdOutlineMyLocation } from "react-icons/md";
 import { MdOutlineLocationSearching } from "react-icons/md";
 import axios from 'axios';
 
-import MyMaps from '@/app/components/MyMaps';
+// import MyMaps from '@/app/components/MyMaps';
 
 // Charger le composant sans SSR
 // const MyMaps = dynamic(() => import("@/app/components/MyMaps"), { ssr: false });
@@ -93,7 +93,7 @@ const AddressCheckOut = () => {
         producId: item._id, image: item.img, name: item.name, promotion: item.promotion, price: item.price, qty: item.qty, size: item.selectedSize, color: item.selectedColor
       })),
 
-      location: position ? { lat: position.lat, lng: position.lng } : null, // Ajoutez une vérification ici
+      location: position ? { lat: position.latitude, lng: position.longitude } : null, // Ajoutez une vérification ici
       total: total,
     };
 
@@ -128,24 +128,24 @@ const AddressCheckOut = () => {
   };
 
   
-  //  const getPosition = () => {
-  //   if (!navigator.geolocation) {
-  //     setPositionActive(false);
-  //     return;
-  //   }
+   const getPosition = () => {
+    if (!navigator.geolocation) {
+      setPositionActive(false);
+      return;
+    }
 
-  //   navigator.geolocation.getCurrentPosition(
-  //     (position) => {
-  //       const { latitude, longitude } = position.coords;
-  //       setPosition({ latitude, longitude });
-  //       console.log(latitude, longitude)
-  //       setPositionActive(!positionActive);
-  //     },
-  //     (err) => {
-  //       // setError(err.message);
-  //     }
-  //   );
-  // };
+     navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setPosition({ latitude, longitude });
+        console.log(latitude, longitude)
+        setPositionActive(!positionActive);
+      },
+      (err) => {
+        // setError(err.message);
+      }
+    );
+  };
 
   // Réinitialisation du message d'erreur après un certain temps
   useEffect(() => {
@@ -186,10 +186,10 @@ const AddressCheckOut = () => {
               {(!isValid && !formData.logt) && <p className={styles.errorMessage}>{message}</p>}
             </form>
             <div className={styles.positionMap}>
-            {/* {!positionActive && <h1>Sélectionnez votre position <MdOutlineLocationSearching onClick={getPosition} style={{ fontSize: "24px" }} /> </h1>}
-              {positionActive && <h1> Votre position  est activée <MdOutlineMyLocation style={{ fontSize: "24px" , color:"green" }} /></h1>} */}
-              <h1>Sélectionnez votre position <MdOutlineLocationSearching style={{ fontSize: "24px" }} /> </h1>
-              <MyMaps position={position} setPosition={setPosition} />
+            {!positionActive && <h1>Sélectionnez votre position <MdOutlineLocationSearching onClick={getPosition} style={{ fontSize: "24px" }} /> </h1>}
+              {positionActive && <h1> Votre position  est activée <MdOutlineMyLocation style={{ fontSize: "24px" , color:"green" }} /></h1>} 
+              {/* <h1>Sélectionnez votre position <MdOutlineLocationSearching style={{ fontSize: "24px" }} /> </h1> */}
+              {/* <MyMaps position={position} setPosition={setPosition} /> */}
             </div>
           </div>
 
