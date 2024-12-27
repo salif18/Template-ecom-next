@@ -15,8 +15,10 @@ import Carousel from "./components/Carousel";
 import PopulairCard from "./components/PopulairCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import CompteARebours from "./components/compteARebours";
 
 export default function Home() {
+ 
   const router = useRouter()
   // État pour les produits en promotion
   const [specialOffre, setSpecialOffre] = useState({});
@@ -156,8 +158,10 @@ export default function Home() {
         {hasPromo.length > 0 && <section className={styles.promotion}>
           <div className={styles.back}></div>
           <h2 className={styles.title}>Nos meilleurs offres</h2>
+          
           <div className={styles.containerPromo}>
             <div className={styles.infoPromo}>
+            <CompteARebours intervalInDays={3} />
               <h2 className={styles.h2}>Promos jusq’à <span>-{hasPromo[0]?.discount_percentage || 0}% </span><br />sur ces articles de mode</h2>
             </div>
             <ul className={styles.productList}>

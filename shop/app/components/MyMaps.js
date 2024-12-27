@@ -13,8 +13,6 @@ const MyMaps = ({ position, setPosition }) => {
   const LocationMarker = () => {
     const map = useMap(); // useMap hook to get the map instance
     useEffect(() => {
-      if (typeof window !== "undefined") {
-        // Code spécifique au client
       
       const handleMapClick = (e) => {
         setPosition(e.latlng); // Update position on click
@@ -26,7 +24,7 @@ const MyMaps = ({ position, setPosition }) => {
       return () => {
         map.off('click', handleMapClick); // Cleanup listener
       };
-    }
+    
     }, [map, setPosition]);
 
     return position ? (

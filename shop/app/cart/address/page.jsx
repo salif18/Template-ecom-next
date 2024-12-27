@@ -10,10 +10,11 @@ import { AuthContext } from '@/app/context/AuthContext';
 import { MdOutlineMyLocation } from "react-icons/md";
 import { MdOutlineLocationSearching } from "react-icons/md";
 import axios from 'axios';
-// import MyMaps from '@/app/components/MyMaps';
+
+import MyMaps from '@/app/components/MyMaps';
 
 // Charger le composant sans SSR
-const MyMaps = dynamic(() => import("@/app/components/MyMaps"), { ssr: true });
+// const MyMaps = dynamic(() => import("@/app/components/MyMaps"), { ssr: false });
 
 const AddressCheckOut = () => {
   const { cart, total, clearCart } = useContext(CartContext);
