@@ -109,7 +109,7 @@ export default function Home() {
             <div className={styles.backColor}></div>
             <div className={styles.left}>
             <CompteARebours/>
-              {specialOffre?.discount_percentage && <h2>Spécial offre de la semaine !</h2>}
+              {/* {specialOffre?.discount_percentage && <h2>Spécial offre de la semaine !</h2>} */}
               <p>
                 {specialOffre?.discount_percentage
                   ? `-${specialOffre.discount_percentage || 0 }% de réduction sur cet article`

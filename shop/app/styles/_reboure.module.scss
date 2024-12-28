@@ -1,0 +1,42 @@
+.reboure{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    // padding: 1em;
+    z-index: 555;
+
+    .title{
+        font-family: "Montserrat";
+        font-size: 3em;
+        color: #fff;
+        z-index: 1;
+    }
+
+    .reboureContainer{
+        display: flex;
+        gap:1em ;
+        margin: 20px 0;
+        .card{
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background-color: aliceblue;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            p{
+                font-family: "Montserrat";
+                font-size: 2em;
+                font-weight: bolder;
+                color: black;
+            }
+            h1{
+                font-family: "Roboto";
+                font-size: 1em;
+                font-weight: bold;
+                color: black;
+        }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 "use client"
 import axios from "axios";
 import { useState, useEffect } from "react";
+import styles from "@/app/styles/_reboure.module.scss"
 
 const CompteARebours = () => {
     const [promotion, setPromotion] = useState(null);
@@ -56,12 +57,32 @@ const CompteARebours = () => {
     if (!timeLeft) return <p>Promotion terminée.</p>;
   
     return (
-      <section style={{margin:"20px 0" ,zIndex:555}}>
-        <h2 style={{color:"white", fontFamily:"Roboto"}}>{promotion.name}</h2>
-        <p style={{color:"white", fontFamily:"Roboto"}}>
+      <section className={styles.reboure}>
+        <h2 className={styles.title}>{promotion.name}</h2>
+        <div className={styles.reboureContainer}>
+
+          <div className={styles.card}>
+            <p>{timeLeft.days}</p>
+            <h1>Jours</h1>
+          </div>
+          <div className={styles.card}>
+            <p>{timeLeft.hours}</p>
+            <h1>Heures</h1>
+          </div>
+          <div className={styles.card}>
+            <p>{timeLeft.minutes}</p>
+            <h1>Minutes</h1>
+          </div>
+          <div className={styles.card}>
+            <p>{timeLeft.seconds}</p>
+            <h1>Sécondes</h1>
+          </div>
+
+        </div>
+        {/* <p style={{color:"white", fontFamily:"Roboto"}}>
           Temps restant : {timeLeft.days} jours, {timeLeft.hours} heures,{" "}
           {timeLeft.minutes} minutes, {timeLeft.seconds} secondes
-        </p>
+        </p> */}
       </section>
     );
   };
