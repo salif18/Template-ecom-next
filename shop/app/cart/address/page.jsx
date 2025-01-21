@@ -90,7 +90,7 @@ const AddressCheckOut = () => {
       payementMode: formData.payementMode,
       status: "En attente",
       cart: cart.map((item) => ({
-        producId: item._id, image: item.img, name: item.name, promotion: item.promotion, price: item.price, qty: item.qty, size: item.selectedSize, color: item.selectedColor
+        productId: item._id, image: item.img, name: item.name, promotion: item.promotion, price: item.price, qty: item.qty, size: item.selectedSize, color: item.selectedColor
       })),
 
       location: position ? { lat: position.latitude, lng: position.longitude } : null, // Ajoutez une vérification ici
