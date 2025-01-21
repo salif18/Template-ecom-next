@@ -90,7 +90,7 @@ const AddressCheckOut = () => {
       payementMode: formData.payementMode,
       status: "En attente",
       cart: cart.map((item) => ({
-        productId: item._id, 
+        producId: item._id, 
         image: item.img, 
         name: item.name, 
         promotion: item.promotion, 
