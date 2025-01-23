@@ -173,7 +173,7 @@ export default function Home() {
           <h2 className={styles.title}>Les plus populaires</h2>
           <ul className={styles.productList}>
             {
-              dataPopulaire.slice(0, 10).map((product) =>
+              dataPopulaire.slice(0, 5).map((product) =>
                 <li key={product._id}><PopulairCard product={product} /></li>
               )
             }
