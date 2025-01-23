@@ -24,6 +24,7 @@ export default function Home() {
   const [specialOffre, setSpecialOffre] = useState({});
   const [hasPromo, setHasPromo] = useState([]);
   const [data, setData] = useState([]);
+  const [dataPopulaire, setDataPopulaire] = useState([]);
   const [marques , setMarques ] = useState([])
 
   // RECUPERER LES PRODUITS
@@ -45,6 +46,28 @@ export default function Home() {
       }
     }
     getProducts()
+  }, [])
+
+
+  // RECUPERER LES PRODUITS
+  useEffect(() => {
+    const getProductsPopulaire = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_URI}/commandes/plus-achetes`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer `,
+          },
+        });
+        if (response.status === 200) {
+          setDataPopulaire(response?.data?.produitsLesPlusAchetés)
+          console.log(response?.data?.produitsLesPlusAchetés)
+        }
+      } catch (e) {
+        console.log(e.response?.data?.message || "erreur ")
+      }
+    }
+    getProductsPopulaire()
   }, [])
 
 // RECUPERER LES PRODUITS EN PROMO
@@ -150,7 +173,7 @@ export default function Home() {
           <h2 className={styles.title}>Les plus populaires</h2>
           <ul className={styles.productList}>
             {
-              data.reverse().slice(0, 5).map((product) =>
+              dataPopulaire.slice(0, 10).map((product) =>
                 <li key={product._id}><PopulairCard product={product} /></li>
               )
             }

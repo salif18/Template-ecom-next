@@ -22,18 +22,18 @@ const PopulairCard = ({product}) => {
   return (
     <article className={styles.populaireCard} >
     <figure>
-      <img src={mainImage} alt={product.name} onClick={() => handleGoToSingleProduct(product._id)} />
-      <div onClick={() => handleGoToSingleProduct(product._id)}>
+      <img src={mainImage} alt={product.name} onClick={() => handleGoToSingleProduct(product.produitId)} />
+      <div onClick={() => handleGoToSingleProduct(product.produitId)}>
         <BiCartDownload className={styles.icon} />
         <span>Ajouter au panier</span>
       </div>
     </figure>
     <section className={styles.details}>
-      <h2 onClick={() => handleGoToSingleProduct(product._id)}>{product.name}</h2>
-      <p className={styles.categoName}>{product.category}</p>
-      <p className={styles.subCategoName}>{product.subCategory}</p>
-      <h2 className={styles.price}>{product.price} FCFA</h2>
-      {product.rating >= 20 && <GeneredStarRating rating={product.rating} />}
+      <h2 onClick={() => handleGoToSingleProduct(product.produitId)}>{product.name}</h2>
+      <p className={styles.categoName}>{product.categorie}</p>
+      <p className={styles.subCategoName}>{product.sousCategorie}</p>
+      {/* <h2 className={styles.price}>{product.price} FCFA</h2>
+      {product.rating >= 20 && <GeneredStarRating rating={product.rating} />} */}
     </section>
   </article>
   )
