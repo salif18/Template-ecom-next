@@ -11,6 +11,7 @@ import MyCarousel from '@/app/components/MyCarousel'
 import axios from 'axios'
 import { AuthContext } from '@/app/context/AuthContext'
 import GeneredStarUser from '@/app/utils/generedStarUser'
+import { toast } from "react-toastify"; // Une librairie pour les notifications
 
 const SingleProduct = () => {
     const { id } = useParams()
@@ -148,6 +149,39 @@ const SingleProduct = () => {
         }
     }, [message]);
 
+    const handleAddToCart = () => {
+        // Validation pour vêtements et chaussures
+        if (product.category === "Vêtements" || product.category === "Chaussures") {
+          if (selectedColor ==="" || selectedSize ==="") {
+            window.alert(
+              "Veuillez choisir une couleur et une taille avant d'ajouter au panier.",
+            );
+            return;
+          }
+        }
+    
+        // Validation pour accessoires
+        if (product.category === "Accessoires" && selectedColor ==="") {
+          window.alert(
+            "Veuillez choisir une couleur avant d'ajouter au panier.",
+         
+          );
+          return;
+        }
+
+         // Validation pour accessoires
+         if (product.category === "Sacs" && selectedColor ==="") {
+            window.alert(
+              "Veuillez choisir une couleur avant d'ajouter au panier.",
+           
+            );
+            return;
+          }
+    
+        // Ajouter au panier si toutes les validations passent
+        addToCart(product, mainImage, selectedSize, selectedColor);
+      };
+
     return (
         <LayoutPage>
             <main className={styles.singlePage}>
@@ -242,7 +276,7 @@ const SingleProduct = () => {
                         </div>
 
                         <div className={styles.btnContainer}>
-                            <button className={`${styles.btnAdd} ${isAdded ? styles.added : ''}`} onClick={() => addToCart(product, mainImage, selectedSize, selectedColor)}>{isAdded ? <>Ajouté <FaCheck /> </> : 'Ajouter au panier'}</button>
+                            <button className={`${styles.btnAdd} ${isAdded ? styles.added : ''}`} onClick={() => handleAddToCart()}>{isAdded ? <>Ajouté <FaCheck /> </> : 'Ajouter au panier'}</button>
                         </div>
 
                         <p>categorie: <span>{product?.category}</span></p>
