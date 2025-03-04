@@ -16,7 +16,7 @@ const CategoryCard = ({ product }) => {
   
 
   const firstImage = product.othersColors[2]
-  const [mainImage] = useState(firstImage.images);
+  const [mainImage] = useState(firstImage?.images);
  
   return (
     <article className={styles.categoryCard} >
